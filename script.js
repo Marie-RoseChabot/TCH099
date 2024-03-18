@@ -10,6 +10,12 @@ var listeLivre = [
     "categorie" : "Philosophie"
     }]
 
+var listeCategorie = [ "Albums","Bande dessinée", "Contes", "Documentaire", "Journaux", "Magazines", "Mangas",
+"Nouvelles",
+"Philosophie",
+"Poésie",
+"Romans"]
+
 const afficherLivre = function(listeLivre) {
     listeLivre.forEach((livre) => {
         const parent = document.querySelector('main');
@@ -23,7 +29,23 @@ const afficherLivre = function(listeLivre) {
         baliseImage.alt = "";
         parent.appendChild(baliseArticle);
     })
+}
 
+const afficherCategorie = function(listeCategorie) {
+    listeCategorie.forEach((categorie) => {
+        const parent = document.querySelector('nav')
+        const balisteListe = parent.querySelector('ul');
+        const baliseItem = document.createElement('li');
+        const baliseNom = document.createElement('a');
+
+        baliseNom.textContent = categorie;
+        baliseNom.href = "?"+categorie;
+        
+        baliseItem.append(baliseNom);
+        balisteListe.append(baliseItem);
+        parent.appendChild(balisteListe);
+    })
 }
 
 afficherLivre(listeLivre);
+afficherCategorie(listeCategorie);
