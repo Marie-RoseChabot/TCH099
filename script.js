@@ -36,12 +36,17 @@ const afficherCategorie = function(listeCategorie) {
         const parent = document.querySelector('nav')
         const balisteListe = parent.querySelector('ul');
         const baliseItem = document.createElement('li');
-        const baliseNom = document.createElement('a');
+        const baliseBtn = document.createElement('button');
+        const baliseSpan = document.createElement('span');
 
-        baliseNom.textContent = categorie;
-        baliseNom.href = "?"+categorie;
+        baliseSpan.textContent = categorie;
+        baliseSpan.href = "?"+categorie;
+
+        baliseBtn.className = 'derriere';
+        baliseSpan.className = 'devant';
         
-        baliseItem.append(baliseNom);
+        baliseBtn.append(baliseSpan);
+        baliseItem.append(baliseBtn);
         balisteListe.append(baliseItem);
         parent.appendChild(balisteListe);
     })

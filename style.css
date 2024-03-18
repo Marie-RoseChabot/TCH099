@@ -44,7 +44,7 @@ ul {
 .categorie li {
   padding: 0.2rem;
 }
-.pesable {
+.derriere {
   background: wheat;
   border-radius: 0.8rem;
   border: none;
@@ -54,15 +54,15 @@ ul {
 }
 .devant {
   display: block;
-  padding: 0.8rem 3rem;
-  border-radius: 0.8rem;
+  padding: 1rem 3rem;
+  border-radius: 1rem;
   font-size: 1.25rem;
   background: crimson;
   color: wheat;
   transform: translateY(-0.3rem);
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.pesable:active .devant {
+.derriere:active .devant {
   transform: translateY(-0.1rem);
 }
 .principal {
