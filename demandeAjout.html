@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<title>Ajout de livre</title>
+</head>
+<body>
+    <form action="./" id="formAjout">
+        <label for="titre">Titre : </label>
+        <input type="text" name="titre" id="titre"><br>
+        <label for="auteur">Auteur : </label>
+        <input type="text" name="auteur" id="auteur"><br>
+        <label for="urlImage">Image du livre : </label>
+        <input type="text" name="urlImage" id="urlImage"><br>
+        <label for="categorie">Catégorie : </label>
+        <select name="categorie" id="categorie">
+            <option value="">Veuillez choisir une catégorie</option>
+            <option value="albums">Albums</option>
+            <option value="bd">Bande dessinée</option>
+            <option value="contes">Contes</option>
+            <option value="documentaire">Documentaire</option>
+            <option value="journaux">Journaux</option>
+            <option value="magazines">Magazines</option>
+            <option value="mangas">Mangas</option>
+            <option value="nouvelles">Nouvelles</option>
+            <option value="poesie">Poésie</option>
+            <option value="romans">Romans</option>
+        </select><br>
+        <button type="submit" id="soumettre">Soumettre</button>
+        <button type="reset" id="restart">Recommencer</button>
+        <button type="button" id="quit">Quitter</button>
+    </form>
+</body>
