@@ -20,7 +20,7 @@ const afficherLivre = function(listeLivre) {
         baliseArticle.append(baliseTitre, baliseImage);
         baliseTitre.textContent = livre.titre;
         baliseImage.src = livre.urlImage;
-        baliseImage.alt = "Harry Potter";
+        baliseImage.alt = "";
         parent.appendChild(baliseArticle);
     })
 
