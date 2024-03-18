@@ -1,6 +1,7 @@
 .conteneur {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   display: grid;
-  grid-template-rows: 10rem auto 2rem;
+  grid-template-rows: auto auto 2rem;
   grid-template-columns: 15fr 70fr 15fr;
   grid-template-areas:
     "entete   categorie  onglet"
@@ -35,9 +36,34 @@
   display: flex;
   flex-wrap: wrap;
   align-content: space-around;
+  justify-content: center;
 }
-li {
-  padding-right: 1.5rem;
+ul {
+    list-style-type: none;
+}
+.categorie li {
+  padding: 0.2rem;
+}
+.pesable {
+  background: wheat;
+  border-radius: 0.8rem;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 0.5rem;
+}
+.devant {
+  display: block;
+  padding: 0.8rem 3rem;
+  border-radius: 0.8rem;
+  font-size: 1.25rem;
+  background: crimson;
+  color: wheat;
+  transform: translateY(-0.3rem);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.pesable:active .devant {
+  transform: translateY(-0.1rem);
 }
 .principal {
   grid-area: principal;
@@ -45,7 +71,12 @@ li {
   flex-wrap: wrap;
 }
 .principal article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding-left: 2rem;
+  height: 20.5rem;
+  width: 13rem;
 }
 .principal h2 {
   width: 500rem;
@@ -58,7 +89,10 @@ li {
 .principal img {
   height: 16.5rem;
   width: 11.5rem;
-  padding-left: 1rem;
+}
+.principal h4 {
+  display: flex;
+  flex-wrap: wrap;
 }
 .bas {
   grid-area: bas;
