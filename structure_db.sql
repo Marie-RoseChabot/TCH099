@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : lun. 18 mars 2024 à 22:22
+-- Généré le : lun. 18 mars 2024 à 22:50
 -- Version du serveur : 11.2.2-MariaDB-1:11.2.2+maria~ubu2204
 -- Version de PHP : 8.2.8
 
