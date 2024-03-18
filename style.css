@@ -5,14 +5,23 @@
     grid-template-areas: 
         "entete   categorie  onglet"
         "principal   principal  principal"
-        "bas        bas         bas "
+        "bas        bas         bas ";
+    margin: 0rem;
+}
+.entete, .categorie, .onglet {
+    color: wheat;
+    background-color: crimson;
 }
 .entete { 
+    color: wheat;
     grid-area: entete;
     display: flex;
     flex-direction: column;
     align-items: baseline;
-    padding-right: 5rem;
+    padding-left: 1rem;
+    padding-top: 0.7rem;
+    font-weight: bold;
+    font-size: 4dvb;
 }
 .onglet {
     grid-area: onglet;
@@ -24,14 +33,33 @@
     display: flex;
     flex-wrap: wrap;
     align-content: space-around;
-
 }
 li {
     padding-right: 1.5rem;
 }
 .principal {
     grid-area: principal;
+    display: flex;
+    flex-wrap: wrap;
+}
+.principal article {
+    padding-left: 2rem;
+}
+.principal h2 {
+    width: 500rem;
+    height: 2rem;
+    background-color: crimson;
+    color: wheat;
+    padding-left: 1rem;
+    margin-top: 0rem;
+}
+.principal img {
+    height: 10rem;
+    width: 12rem;
+    padding-left: 1rem;
 }
 .bas {
     grid-area: bas;
+    color: wheat;
+    background-color: crimson;
 }
