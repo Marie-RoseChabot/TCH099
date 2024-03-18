@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : lun. 18 mars 2024 à 19:53
+-- Généré le : lun. 18 mars 2024 à 22:22
 -- Version du serveur : 11.2.2-MariaDB-1:11.2.2+maria~ubu2204
 -- Version de PHP : 8.2.8
 
@@ -113,6 +113,31 @@ CREATE TABLE `Emprunt` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Genre`
+--
+
+DROP TABLE IF EXISTS `Genre`;
+CREATE TABLE `Genre` (
+  `id_genre` int(10) NOT NULL,
+  `nom` varchar(30) NOT NULL,
+  `description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Genre_Livre`
+--
+
+DROP TABLE IF EXISTS `Genre_Livre`;
+CREATE TABLE `Genre_Livre` (
+  `isbn_livre` int(13) NOT NULL,
+  `id_genre` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Livre`
 --
 
@@ -193,6 +218,19 @@ ALTER TABLE `Emprunt`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_copie` (`id_copie`),
   ADD KEY `id_client` (`id_client`);
+
+--
+-- Index pour la table `Genre`
+--
+ALTER TABLE `Genre`
+  ADD PRIMARY KEY (`id_genre`);
+
+--
+-- Index pour la table `Genre_Livre`
+--
+ALTER TABLE `Genre_Livre`
+  ADD PRIMARY KEY (`isbn_livre`,`id_genre`),
+  ADD KEY `id_genre` (`id_genre`);
 
 --
 -- Index pour la table `Livre`
@@ -276,6 +314,13 @@ ALTER TABLE `Employe`
 ALTER TABLE `Emprunt`
   ADD CONSTRAINT `Emprunt_ibfk_1` FOREIGN KEY (`id_copie`) REFERENCES `Copie` (`id_copie`),
   ADD CONSTRAINT `Emprunt_ibfk_2` FOREIGN KEY (`id_client`) REFERENCES `Client` (`id`);
+
+--
+-- Contraintes pour la table `Genre_Livre`
+--
+ALTER TABLE `Genre_Livre`
+  ADD CONSTRAINT `Genre_Livre_ibfk_1` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`),
+  ADD CONSTRAINT `Genre_Livre_ibfk_2` FOREIGN KEY (`id_genre`) REFERENCES `Genre` (`id_genre`);
 
 --
 -- Contraintes pour la table `Livre`
