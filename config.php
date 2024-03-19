@@ -11,8 +11,8 @@ if($host=="localhost"){
     //Codes d'accès à la base de données de production
         $host = 'localhost';
         $db = 'mydatabase';
-        $user = 'equipe305';
-        $pass = '7RZ3x9HUSQcQZ9Wq';
+        $user = 'user'; //equipe305
+        $pass = 'password'; //7RZ3x9HUSQcQZ9Wq
 }
 $charset = 'utf8mb4';
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
