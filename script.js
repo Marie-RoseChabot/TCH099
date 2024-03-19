@@ -72,22 +72,31 @@ const afficherLivre = function(listeLivre) {
 
 const afficherType = function(listeType) {
     listeType.forEach((type) => {
-        const parent = document.querySelector('nav')
+        const parent = document.querySelector('.type');
         const balisteListe = parent.querySelector('#filtreType');
         const baliseItem = document.createElement('li');
-        const baliseNom = document.createElement('a');
+        const baliseBtn = document.createElement('button');
+        const baliseSpan = document.createElement('span');
 
-        baliseNom.textContent = type;
-        baliseNom.href = "?"+type;
+        baliseSpan.textContent = type;
+        baliseSpan.href = "?"+type;
+
+        baliseBtn.className = 'derriere';
+        baliseSpan.className = 'devant';
         
-        baliseItem.append(baliseNom);
+        baliseBtn.append(baliseSpan);
+        baliseItem.append(baliseBtn);
         balisteListe.append(baliseItem);
     })
+}
+const changerCategorie = function() {
+    const spanCat = document.querySelector('#filtreCategorie');
+    spanCat.textContent = listeCategorie[Math.floor(Math.random() * listeCategorie.length)];
 }
 
 const afficherCategorie = function(listeCategorie) {
     listeCategorie.forEach((categorie) => {
-        const parent = document.querySelector('nav')
+        const parent = document.querySelector('.categorie');
         const balisteListe = parent.querySelector('#filtreCategorie');
         const baliseItem = document.createElement('li');
         const baliseBtn = document.createElement('button');
@@ -105,6 +114,14 @@ const afficherCategorie = function(listeCategorie) {
     })
 }
 
+const attachListerner = function() {
+    const spanCat = document.querySelector('#filtreCategorie');
+    spanCat.addEventListener('click', function() {
+        changerCategorie();
+    });
+}
+
+attachListerner();
 afficherLivre(listeLivre);
 afficherType(listeType);
-afficherCategorie(listeCategorie);
+//afficherCategorie(listeCategorie);
