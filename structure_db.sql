@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : lun. 18 mars 2024 à 22:50
+-- Généré le : mar. 19 mars 2024 à 14:45
 -- Version du serveur : 11.2.2-MariaDB-1:11.2.2+maria~ubu2204
 -- Version de PHP : 8.2.8
 
@@ -86,6 +86,38 @@ CREATE TABLE `Copie` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Critique`
+--
+
+DROP TABLE IF EXISTS `Critique`;
+CREATE TABLE `Critique` (
+  `id_critique` int(10) NOT NULL,
+  `etoiles` int(1) NOT NULL,
+  `commentaire` varchar(255) NOT NULL,
+  `est_signale` varchar(3) NOT NULL,
+  `id_client` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Demande`
+--
+
+DROP TABLE IF EXISTS `Demande`;
+CREATE TABLE `Demande` (
+  `id` int(10) NOT NULL,
+  `type_demande` varchar(20) NOT NULL,
+  `date_demande` date NOT NULL,
+  `id_auteur` int(10) NOT NULL,
+  `isbn_livre` int(13) NOT NULL,
+  `employe_matricule` varchar(12) NOT NULL,
+  `id_critique` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Employe`
 --
 
@@ -154,6 +186,20 @@ CREATE TABLE `Livre` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Reservation`
+--
+
+DROP TABLE IF EXISTS `Reservation`;
+CREATE TABLE `Reservation` (
+  `id_reservation` int(10) NOT NULL,
+  `date_demande` date NOT NULL,
+  `id_client` int(10) NOT NULL,
+  `isbn_livre` int(13) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Usager`
 --
 
@@ -205,6 +251,23 @@ ALTER TABLE `Copie`
   ADD KEY `isbn_livre` (`isbn_livre`);
 
 --
+-- Index pour la table `Critique`
+--
+ALTER TABLE `Critique`
+  ADD PRIMARY KEY (`id_critique`),
+  ADD KEY `id_client` (`id_client`);
+
+--
+-- Index pour la table `Demande`
+--
+ALTER TABLE `Demande`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_auteur` (`id_auteur`),
+  ADD KEY `isbn_livre` (`isbn_livre`),
+  ADD KEY `employe_matricule` (`employe_matricule`),
+  ADD KEY `id_critique` (`id_critique`);
+
+--
 -- Index pour la table `Employe`
 --
 ALTER TABLE `Employe`
@@ -238,6 +301,14 @@ ALTER TABLE `Genre_Livre`
 ALTER TABLE `Livre`
   ADD PRIMARY KEY (`isbn`),
   ADD KEY `id_auteur` (`id_auteur`);
+
+--
+-- Index pour la table `Reservation`
+--
+ALTER TABLE `Reservation`
+  ADD PRIMARY KEY (`id_reservation`),
+  ADD KEY `id_client` (`id_client`),
+  ADD KEY `isbn_livre` (`isbn_livre`);
 
 --
 -- Index pour la table `Usager`
@@ -303,6 +374,21 @@ ALTER TABLE `Copie`
   ADD CONSTRAINT `Copie_ibfk_1` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`);
 
 --
+-- Contraintes pour la table `Critique`
+--
+ALTER TABLE `Critique`
+  ADD CONSTRAINT `Critique_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `Client` (`id`);
+
+--
+-- Contraintes pour la table `Demande`
+--
+ALTER TABLE `Demande`
+  ADD CONSTRAINT `Demande_ibfk_1` FOREIGN KEY (`id_auteur`) REFERENCES `Auteur` (`id`),
+  ADD CONSTRAINT `Demande_ibfk_2` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`),
+  ADD CONSTRAINT `Demande_ibfk_3` FOREIGN KEY (`employe_matricule`) REFERENCES `Employe` (`id`),
+  ADD CONSTRAINT `Demande_ibfk_4` FOREIGN KEY (`id_critique`) REFERENCES `Critique` (`id_critique`);
+
+--
 -- Contraintes pour la table `Employe`
 --
 ALTER TABLE `Employe`
@@ -327,6 +413,13 @@ ALTER TABLE `Genre_Livre`
 --
 ALTER TABLE `Livre`
   ADD CONSTRAINT `Livre_ibfk_1` FOREIGN KEY (`id_auteur`) REFERENCES `Auteur` (`id`);
+
+--
+-- Contraintes pour la table `Reservation`
+--
+ALTER TABLE `Reservation`
+  ADD CONSTRAINT `Reservation_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `Client` (`id`),
+  ADD CONSTRAINT `Reservation_ibfk_2` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
