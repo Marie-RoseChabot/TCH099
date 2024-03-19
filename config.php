@@ -9,10 +9,10 @@ if($host=="localhost" || $host=="tch099.ovh"){
     $pass = 'password';
 } else {
     //Codes d'accès à la base de données de production
-        $host: 'localhost';
-        $db: 'equipe305';
-        $user: 'equipe305';
-        $pass: '7RZ3x9HUSQcQZ9Wq';
+        $host = 'localhost';
+        $db = 'equipe305';
+        $user = 'equipe305';
+        $pass = '7RZ3x9HUSQcQZ9Wq';
 }
 $charset = 'utf8mb4';
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
