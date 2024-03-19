@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : mar. 19 mars 2024 à 14:45
+-- Généré le : mar. 19 mars 2024 à 20:24
 -- Version du serveur : 11.2.2-MariaDB-1:11.2.2+maria~ubu2204
 -- Version de PHP : 8.2.8
 
@@ -20,18 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `mydatabase`
 --
-
--- --------------------------------------------------------
-
---
--- Structure de la table `Auteur`
---
-
-DROP TABLE IF EXISTS `Auteur`;
-CREATE TABLE `Auteur` (
-  `id` int(10) NOT NULL,
-  `username_usager` varchar(25) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -54,33 +42,8 @@ CREATE TABLE `Categorie` (
 
 DROP TABLE IF EXISTS `Categorie_Livre`;
 CREATE TABLE `Categorie_Livre` (
-  `isbn_livre` int(10) NOT NULL,
+  `isbn_livre` bigint(30) NOT NULL,
   `id_categorie` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `Client`
---
-
-DROP TABLE IF EXISTS `Client`;
-CREATE TABLE `Client` (
-  `id` int(10) NOT NULL,
-  `est_abonne` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `Copie`
---
-
-DROP TABLE IF EXISTS `Copie`;
-CREATE TABLE `Copie` (
-  `id_copie` int(10) NOT NULL,
-  `est_dispo` tinyint(1) NOT NULL,
-  `isbn_livre` int(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -110,7 +73,7 @@ CREATE TABLE `Demande` (
   `type_demande` varchar(20) NOT NULL,
   `date_demande` date NOT NULL,
   `id_auteur` int(10) NOT NULL,
-  `isbn_livre` int(13) NOT NULL,
+  `isbn_livre` bigint(30) NOT NULL,
   `employe_matricule` varchar(12) NOT NULL,
   `id_critique` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -145,6 +108,43 @@ CREATE TABLE `Emprunt` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Client`
+--
+
+DROP TABLE IF EXISTS `Client`;
+CREATE TABLE `Client` (
+  `id` int(10) NOT NULL,
+  `est_abonne` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Copie`
+--
+
+DROP TABLE IF EXISTS `Copie`;
+CREATE TABLE `Copie` (
+  `id_copie` int(10) NOT NULL,
+  `est_dispo` tinyint(1) NOT NULL,
+  `isbn_livre` bigint(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Genre_Livre`
+--
+
+DROP TABLE IF EXISTS `Genre_Livre`;
+CREATE TABLE `Genre_Livre` (
+  `isbn_livre` bigint(30) NOT NULL,
+  `id_genre` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Genre`
 --
 
@@ -158,29 +158,30 @@ CREATE TABLE `Genre` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Genre_Livre`
---
-
-DROP TABLE IF EXISTS `Genre_Livre`;
-CREATE TABLE `Genre_Livre` (
-  `isbn_livre` int(13) NOT NULL,
-  `id_genre` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `Livre`
 --
 
 DROP TABLE IF EXISTS `Livre`;
 CREATE TABLE `Livre` (
-  `isbn` int(10) NOT NULL,
+  `isbn` bigint(30) NOT NULL,
+  `titre` varchar(100) NOT NULL,
   `maison_edition` varchar(30) DEFAULT NULL,
   `annee` int(4) DEFAULT NULL,
   `url_image` text NOT NULL,
   `description_livre` text DEFAULT NULL,
   `id_auteur` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Auteur`
+--
+
+DROP TABLE IF EXISTS `Auteur`;
+CREATE TABLE `Auteur` (
+  `id` int(10) NOT NULL,
+  `username_usager` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -194,7 +195,7 @@ CREATE TABLE `Reservation` (
   `id_reservation` int(10) NOT NULL,
   `date_demande` date NOT NULL,
   `id_client` int(10) NOT NULL,
-  `isbn_livre` int(13) NOT NULL
+  `isbn_livre` bigint(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
