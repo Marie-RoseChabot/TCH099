@@ -1,4 +1,5 @@
 <? 
+session_start();
 $host =  parse_url($_SERVER["HTTP_HOST"], PHP_URL_HOST);
 if($host=="localhost"){
     //Code d'accès à la base de données locale
