@@ -1,5 +1,4 @@
-<?
-session_start();
+<?php
 $host =  parse_url($_SERVER["HTTP_HOST"], PHP_URL_HOST);
 if($host=="localhost"){
     //Code d'accès à la base de données locale
@@ -9,10 +8,10 @@ if($host=="localhost"){
     $pass = 'password';
 } else {
     //Codes d'accès à la base de données de production
-        Host: 'localhost';
-        BD: 'equipe305';
-        User: 'equipe305';
-        Password: '7RZ3x9HUSQcQZ9Wq';
+        $host = 'localhost';
+        $db = 'equipe305';
+        $user = 'equipe305';
+        $pass = '7RZ3x9HUSQcQZ9Wq';
 }
 $charset = 'utf8mb4';
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
