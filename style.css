@@ -4,13 +4,13 @@
   grid-template-rows: auto auto 2rem;
   grid-template-columns: 15fr 70fr 15fr;
   grid-template-areas:
-    "entete   type  onglet"
+    "entete   categorie  onglet"
     "principal   principal  principal"
     "bas        bas         bas ";
   margin: 0rem;
 }
 .entete,
-.type,
+.categorie,
 .onglet {
   color: wheat;
   background-color: rgb(206, 31, 66);
@@ -26,16 +26,22 @@
   font-weight: bold;
   font-size: 4dvb;
 }
-.type {
-  grid-area: type;
+.categorie {
+  grid-area: categorie;
+  color: wheat;
+  font-weight: bold;
+  outline-width: 0.2rem;
   font-size: 2dvb;
   padding-left: 1rem;
 }
-.type ul {
+.categorie ul {
   display: flex;
   flex-wrap: wrap;
   align-content: space-around;
   justify-content: center;
+}
+.categorie li {
+  padding: 0.2rem;
 }
 .onglet {
   grid-area: onglet;
@@ -45,15 +51,6 @@ h2 {
   flex-direction: row;
   align-items: center;
   gap: 1rem;
-}
-.categorie {
-  grid-area: categorie;
-  color: wheat;
-  background-color: crimson;
-  font-weight: bold;
-  border-radius: 0.75rem;
-  outline-color: wheat;
-  outline-width: 0.2rem;
 }
 ul {
   list-style-type: none;
@@ -71,10 +68,10 @@ ul {
 }
 .devant {
   display: block;
-  padding: 1rem 3rem;
-  border-radius: 1rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.75rem;
   font-size: 1.25rem;
-  background: crimson;
+  background: rgb(206, 31, 66);
   color: wheat;
   transform: translateY(-0.3rem);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;

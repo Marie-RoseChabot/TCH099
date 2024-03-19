@@ -83,15 +83,33 @@ const afficherLivre = function(listeLivre) {
 
 const afficherType = function(listeType) {
     listeType.forEach((type) => {
-        const parent = document.querySelector('.type');
+        const parent = document.querySelector('nav');
         const balisteListe = parent.querySelector('#filtreType');
         const baliseItem = document.createElement('li');
-        const baliseNom = document.createElement('a');
+        const baliseBtn = document.createElement('button');
+        const baliseSpan = document.createElement('span');
 
-        baliseNom.textContent = type;
-        baliseNom.href = "?"+type;
+        baliseSpan.textContent = type;
+
+        baliseBtn.className = 'derriere';
+        baliseSpan.className = 'devant';
         
-        baliseItem.append(baliseNom);
+        baliseBtn.onclick = function() {
+            var filtreCategorie = [];
+            var article = document.querySelectorAll('article');
+            article.forEach((item) => {
+                item.remove();
+            })
+            listeLivre.forEach((livre) => {
+                if(livre.type == type) {
+                    filtreCategorie.push(livre);
+                }
+            })
+            afficherLivre(filtreCategorie);
+        }
+
+        baliseBtn.append(baliseSpan);
+        baliseItem.append(baliseBtn);
         balisteListe.append(baliseItem);
     })
 }
@@ -140,7 +158,7 @@ const attachListerner = function() {
     });
 }
 
-attachListerner();
+//attachListerner();
 afficherLivre(listeLivre);
 afficherType(listeType);
 afficherCategorie(listeCategorie);
