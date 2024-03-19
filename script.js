@@ -85,7 +85,7 @@ const afficherLivre = function(listeLivre) {
 
         baliseArticle.append(baliseTitre, baliseImage);
         baliseTitre.textContent = livre.titre;
-        baliseImage.src = livre.urlImage;
+        baliseImage.src = livre.url_image;
         baliseImage.alt = "";
         parent.appendChild(baliseArticle);
     })
@@ -165,18 +165,17 @@ const rechercheSoumettre = document.getElementById('submitRecherche');
 const rechercheMot = document.getElementById("recherche");
 rechercheSoumettre.onclick = function() {
     const motCle = rechercheMot.value.toUpperCase();
-    console.log(motCle);
-    var filtreType = [];
+    var filtreRecherche = [];
     var article = document.querySelectorAll('article');
     article.forEach((item) => {
         item.remove();
     })
     listeLivre.forEach((livre) => {
-        if(livre.titre.toUpperCase().indexOf(motCle) > -1 || livre.auteur.toUpperCase().indexOf(motCle) > -1) {
-            filtreType.push(livre);
+        if(livre.titre.toUpperCase().indexOf(motCle) > -1) { //|| livre.auteur.toUpperCase().indexOf(motCle) > -1) {
+            filtreRecherche.push(livre);
         }
     })
-    afficherLivre(filtreType);
+    afficherLivre(filtreRecherche);
 }
 
 const attachListerner = function() {

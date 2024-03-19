@@ -12,6 +12,9 @@ $livresJson = json_encode($livres);
   <meta charset="utf-8" />
   <link rel="stylesheet" href="style.css" />
   <title>CabinÉTS</title>
+  <script>
+      var listeLivre = <?= $livresJson ?>;
+    </script>
 </head>
 <body class="conteneur">
     <header class="entete">
@@ -20,7 +23,7 @@ $livresJson = json_encode($livres);
     </header>
     <div class="onglet">
         <ul>
-            <li><a href="./index.html">Catalogue</a></li>
+            <li><a href="./index.php">Catalogue</a></li>
             <li>Réserver</li>
             <li>Se connecter / S'inscrire</li>
             <li><input type="text" id="recherche" placeholder="Recherche"><button type="submit" id="submitRecherche">Soumettre</button></li>
