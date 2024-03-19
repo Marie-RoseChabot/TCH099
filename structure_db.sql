@@ -24,6 +24,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Paiement`
+--
+
+DROP TABLE IF EXISTS `Paiement`;
+CREATE TABLE `Paiement` (
+  `id_paiement` int(10) NOT NULL,
+  `type_paiement` enum('retard','creation_compte','bris','perte') NOT NULL,
+  `montant` double NOT NULL,
+  `date_paiement` date NOT NULL,
+  `id_client` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Categorie`
 --
 
@@ -302,6 +317,13 @@ ALTER TABLE `Genre_Livre`
 ALTER TABLE `Livre`
   ADD PRIMARY KEY (`isbn`),
   ADD KEY `id_auteur` (`id_auteur`);
+  
+--
+-- Index pour la table `Paiement`
+--
+ALTER TABLE `Paiement`
+  ADD PRIMARY KEY (`id_paiement`),
+  ADD KEY `id_client` (`id_client`);
 
 --
 -- Index pour la table `Reservation`
@@ -350,6 +372,22 @@ ALTER TABLE `Copie`
 --
 ALTER TABLE `Emprunt`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+-- AUTO_INCREMENT pour la table `Reservation`
+--
+ALTER TABLE `Reservation`
+  MODIFY `id_reservation` int(10) NOT NULL AUTO_INCREMENT;
+
+-- AUTO_INCREMENT pour la table `Demande`
+--
+ALTER TABLE `Demande`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `Paiement`
+--
+ALTER TABLE `Paiement`
+  MODIFY `id_paiement` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- Contraintes pour les tables déchargées
@@ -414,6 +452,12 @@ ALTER TABLE `Genre_Livre`
 --
 ALTER TABLE `Livre`
   ADD CONSTRAINT `Livre_ibfk_1` FOREIGN KEY (`id_auteur`) REFERENCES `Auteur` (`id`);
+
+--
+-- Contraintes pour la table `Paiement`
+--
+ALTER TABLE `Paiement`
+  ADD CONSTRAINT `Paiement_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `Client` (`id`);
 
 --
 -- Contraintes pour la table `Reservation`
