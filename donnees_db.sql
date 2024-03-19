@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : lun. 18 mars 2024 à 17:24
+-- Généré le : mar. 19 mars 2024 à 14:50
 -- Version du serveur : 11.2.2-MariaDB-1:11.2.2+maria~ubu2204
 -- Version de PHP : 8.2.8
 
@@ -26,21 +26,18 @@ SET time_zone = "+00:00";
 --
 
 INSERT INTO `Auteur` (`id`, `username_usager`) VALUES
-(1, 'test');
-
---
--- Déchargement des données de la table `Client`
---
-
-INSERT INTO `Client` (`id`, `est_abonne`) VALUES
-(1, 1);
+(3, 'antoinedestexupery'),
+(1, 'jkrowling'),
+(2, 'jrrtolkien');
 
 --
 -- Déchargement des données de la table `Usager`
 --
 
 INSERT INTO `Usager` (`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`) VALUES
-('test', 'test', 'test', 'test', 'test', '2024-03-01');
+('antoinedestexupery', 'password', NULL, 'de Saint-Exupéry', 'Antoine', '1900-06-20'),
+('jkrowling', 'password', NULL, 'Rowling', 'J.K.', '1965-07-31'),
+('jrrtolkien', 'password', NULL, 'Tolkien', 'J.R.R.', '1892-01-03');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
