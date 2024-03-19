@@ -1,7 +1,7 @@
 <?php
 session_start();
 $host =  parse_url($_SERVER["HTTP_HOST"], PHP_URL_HOST);
-if($host=="localhost" || $host=="equipe305.tch099.ovh"){
+if($host=="localhost" || $host=="tch099.ovh"){
     //Code d'accès à la base de données locale
     $host = 'db';
     $db   = 'mydatabase';
