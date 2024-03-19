@@ -10,7 +10,7 @@ if($host=="localhost"){
 } else {
     //Codes d'accès à la base de données de production
         $host = 'localhost';
-        $db = 'equipe305';
+        $db = 'mydatabase';
         $user = 'equipe305';
         $pass = '7RZ3x9HUSQcQZ9Wq';
 }
