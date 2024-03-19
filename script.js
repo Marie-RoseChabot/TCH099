@@ -1,4 +1,4 @@
-var listeLivre = [
+/*var listeLivre = [
     {
     "titre" : "Harry Potter à l'école des sorciers",
     "auteur" : "J. K. Rowling",
@@ -69,7 +69,7 @@ var listeLivre = [
     "urlImage" : "https://m.media-amazon.com/images/I/61njB87x6-L._SY425_.jpg",
     "type" : "Essais",
     "categorie" : "Philosophie"
-    }]
+    }]*/
 
 var listeType = ["Albums","Bande dessinée", "Contes", "Documentaire", "Essais", "Journaux",
                         "Magazines", "Mangas", "Nouvelles", "Philosophie", "Poésie", "Romans"]

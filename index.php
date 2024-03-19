@@ -1,3 +1,11 @@
+<?php
+require_once __DIR__.'/config.php';
+
+$stmt = $pdo->prepare('SELECT * FROM Livre');
+$livres = $stmt->fetchAll();
+
+$livresJson = json_encode($livres);
+?>
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8" />
