@@ -30,6 +30,7 @@
 }
 .categorie {
   grid-area: categorie;
+  font-size: 1.5dvb;
 }
 .categorie ul {
   display: flex;
