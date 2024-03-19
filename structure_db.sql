@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : lun. 18 mars 2024 à 17:23
+-- Généré le : lun. 18 mars 2024 à 22:50
 -- Version du serveur : 11.2.2-MariaDB-1:11.2.2+maria~ubu2204
 -- Version de PHP : 8.2.8
 
@@ -36,6 +36,31 @@ CREATE TABLE `Auteur` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Categorie`
+--
+
+DROP TABLE IF EXISTS `Categorie`;
+CREATE TABLE `Categorie` (
+  `id_categorie` int(10) NOT NULL,
+  `nom` varchar(30) NOT NULL,
+  `description_cat` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Categorie_Livre`
+--
+
+DROP TABLE IF EXISTS `Categorie_Livre`;
+CREATE TABLE `Categorie_Livre` (
+  `isbn_livre` int(10) NOT NULL,
+  `id_categorie` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Client`
 --
 
@@ -43,6 +68,19 @@ DROP TABLE IF EXISTS `Client`;
 CREATE TABLE `Client` (
   `id` int(10) NOT NULL,
   `est_abonne` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Copie`
+--
+
+DROP TABLE IF EXISTS `Copie`;
+CREATE TABLE `Copie` (
+  `id_copie` int(10) NOT NULL,
+  `est_dispo` tinyint(1) NOT NULL,
+  `isbn_livre` int(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -60,6 +98,62 @@ CREATE TABLE `Employe` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Emprunt`
+--
+
+DROP TABLE IF EXISTS `Emprunt`;
+CREATE TABLE `Emprunt` (
+  `id` int(10) NOT NULL,
+  `date_emprunt` date NOT NULL,
+  `date_retour` date NOT NULL,
+  `id_client` int(10) DEFAULT NULL,
+  `id_copie` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Genre`
+--
+
+DROP TABLE IF EXISTS `Genre`;
+CREATE TABLE `Genre` (
+  `id_genre` int(10) NOT NULL,
+  `nom` varchar(30) NOT NULL,
+  `description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Genre_Livre`
+--
+
+DROP TABLE IF EXISTS `Genre_Livre`;
+CREATE TABLE `Genre_Livre` (
+  `isbn_livre` int(13) NOT NULL,
+  `id_genre` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Livre`
+--
+
+DROP TABLE IF EXISTS `Livre`;
+CREATE TABLE `Livre` (
+  `isbn` int(10) NOT NULL,
+  `maison_edition` varchar(30) DEFAULT NULL,
+  `annee` int(4) DEFAULT NULL,
+  `url_image` text NOT NULL,
+  `description_livre` text DEFAULT NULL,
+  `id_auteur` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Usager`
 --
 
@@ -67,7 +161,7 @@ DROP TABLE IF EXISTS `Usager`;
 CREATE TABLE `Usager` (
   `username` varchar(25) NOT NULL,
   `password` varchar(25) NOT NULL,
-  `courriel` varchar(50) NOT NULL,
+  `courriel` varchar(50) DEFAULT NULL,
   `nom` varchar(25) NOT NULL,
   `prenom` varchar(25) DEFAULT NULL,
   `date_naissance` date DEFAULT NULL
@@ -85,10 +179,30 @@ ALTER TABLE `Auteur`
   ADD KEY `username_usager` (`username_usager`);
 
 --
+-- Index pour la table `Categorie`
+--
+ALTER TABLE `Categorie`
+  ADD PRIMARY KEY (`id_categorie`);
+
+--
+-- Index pour la table `Categorie_Livre`
+--
+ALTER TABLE `Categorie_Livre`
+  ADD PRIMARY KEY (`isbn_livre`,`id_categorie`),
+  ADD KEY `id_categorie` (`id_categorie`);
+
+--
 -- Index pour la table `Client`
 --
 ALTER TABLE `Client`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `Copie`
+--
+ALTER TABLE `Copie`
+  ADD PRIMARY KEY (`id_copie`),
+  ADD KEY `isbn_livre` (`isbn_livre`);
 
 --
 -- Index pour la table `Employe`
@@ -96,6 +210,34 @@ ALTER TABLE `Client`
 ALTER TABLE `Employe`
   ADD PRIMARY KEY (`id`),
   ADD KEY `username_usager` (`username_usager`);
+
+--
+-- Index pour la table `Emprunt`
+--
+ALTER TABLE `Emprunt`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_copie` (`id_copie`),
+  ADD KEY `id_client` (`id_client`);
+
+--
+-- Index pour la table `Genre`
+--
+ALTER TABLE `Genre`
+  ADD PRIMARY KEY (`id_genre`);
+
+--
+-- Index pour la table `Genre_Livre`
+--
+ALTER TABLE `Genre_Livre`
+  ADD PRIMARY KEY (`isbn_livre`,`id_genre`),
+  ADD KEY `id_genre` (`id_genre`);
+
+--
+-- Index pour la table `Livre`
+--
+ALTER TABLE `Livre`
+  ADD PRIMARY KEY (`isbn`),
+  ADD KEY `id_auteur` (`id_auteur`);
 
 --
 -- Index pour la table `Usager`
@@ -114,9 +256,27 @@ ALTER TABLE `Auteur`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `Categorie`
+--
+ALTER TABLE `Categorie`
+  MODIFY `id_categorie` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `Client`
 --
 ALTER TABLE `Client`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `Copie`
+--
+ALTER TABLE `Copie`
+  MODIFY `id_copie` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `Emprunt`
+--
+ALTER TABLE `Emprunt`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
@@ -130,10 +290,43 @@ ALTER TABLE `Auteur`
   ADD CONSTRAINT `Auteur_ibfk_1` FOREIGN KEY (`username_usager`) REFERENCES `Usager` (`username`);
 
 --
+-- Contraintes pour la table `Categorie_Livre`
+--
+ALTER TABLE `Categorie_Livre`
+  ADD CONSTRAINT `Categorie_Livre_ibfk_1` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`),
+  ADD CONSTRAINT `Categorie_Livre_ibfk_2` FOREIGN KEY (`id_categorie`) REFERENCES `Categorie` (`id_categorie`);
+
+--
+-- Contraintes pour la table `Copie`
+--
+ALTER TABLE `Copie`
+  ADD CONSTRAINT `Copie_ibfk_1` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`);
+
+--
 -- Contraintes pour la table `Employe`
 --
 ALTER TABLE `Employe`
   ADD CONSTRAINT `Employe_ibfk_1` FOREIGN KEY (`username_usager`) REFERENCES `Usager` (`username`);
+
+--
+-- Contraintes pour la table `Emprunt`
+--
+ALTER TABLE `Emprunt`
+  ADD CONSTRAINT `Emprunt_ibfk_1` FOREIGN KEY (`id_copie`) REFERENCES `Copie` (`id_copie`),
+  ADD CONSTRAINT `Emprunt_ibfk_2` FOREIGN KEY (`id_client`) REFERENCES `Client` (`id`);
+
+--
+-- Contraintes pour la table `Genre_Livre`
+--
+ALTER TABLE `Genre_Livre`
+  ADD CONSTRAINT `Genre_Livre_ibfk_1` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`),
+  ADD CONSTRAINT `Genre_Livre_ibfk_2` FOREIGN KEY (`id_genre`) REFERENCES `Genre` (`id_genre`);
+
+--
+-- Contraintes pour la table `Livre`
+--
+ALTER TABLE `Livre`
+  ADD CONSTRAINT `Livre_ibfk_1` FOREIGN KEY (`id_auteur`) REFERENCES `Auteur` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
