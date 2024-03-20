@@ -42,7 +42,7 @@ $auteursJson = json_encode($auteurs);
     <main class="principal">
     <h2 id="filtreCategorie">Catalogue
             <span id="fleche">></span>
-            <span id="cat">Catégorie</span>
+            <span id="headerCategorie">Catégorie</span>
         </h2>
         <div class="background" id="parchemin"></div>
     </main>

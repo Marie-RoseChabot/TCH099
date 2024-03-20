@@ -166,7 +166,7 @@ rechercheSoumettre.onclick = function() {
     afficherLivre(filtreRecherche);
 }
 const scrollCategorie = function() {
-    const spanCat = document.querySelector('#cat');
+    const spanCat = document.querySelector('#headerCategorie');
     const spanFleche = document.querySelector('#fleche');
     spanCat.addEventListener('click', function() {
         spanFleche.style.transition = 'transform 0.5s';
@@ -203,7 +203,7 @@ const scrollCategorie = function() {
 }
 
 const unscrollCategorie = function() {
-    const spanCat = document.querySelector('#cat');
+    const spanCat = document.querySelector('#headerCategorie');
     const spanFleche = document.querySelector('#fleche');
     spanCat.addEventListener('click', function() {
         spanFleche.style.transition = 'transform 0.5s';
