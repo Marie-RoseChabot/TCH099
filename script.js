@@ -170,11 +170,15 @@ rechercheSoumettre.onclick = function() {
     article.forEach((item) => {
         item.remove();
     })
+    console.log(motCle);
     listeLivre.forEach((livre) => {
-        if(livre.titre.toUpperCase().indexOf(motCle) > -1) {
+        if (livre.titre.toUpperCase().indexOf(motCle) > -1) {
+            filtreRecherche.push(livre);
+        } else if (String(livre.isbn).indexOf(motCle) > -1) {
             filtreRecherche.push(livre);
         }
     })
+
     listeAuteur.forEach((auteur) => {
         if(auteur.username_usager.toUpperCase().indexOf(motCle) > -1) {
             listeLivre.forEach((livre) => {
