@@ -123,42 +123,16 @@ const afficherType = function(listeType) {
         balisteListe.append(baliseItem);
     })
 }
-const changerCategorie = function() {
-    const spanCat = document.querySelector('#filtreCategorie');
-    spanCat.textContent = listeCategorie[Math.floor(Math.random() * listeCategorie.length)];
-}
-
 const afficherCategorie = function(listeCategorie) {
-    listeCategorie.forEach((categorie) => {
-        const parent = document.querySelector('nav')
-        const balisteListe = parent.querySelector('#filtreCategorie');
-        const baliseItem = document.createElement('li');
-        const baliseBtn = document.createElement('button');
+    const spanCat = document.querySelector('#filtreCategorie');
+    listeCategorie.forEach((cat, index) => {
         const baliseSpan = document.createElement('span');
-
-        baliseSpan.textContent = categorie;
-
-        baliseBtn.className = 'derriere';
-        baliseSpan.className = 'devant';
-
-        baliseBtn.onclick = function() {
-            var filtreType = [];
-            var article = document.querySelectorAll('article');
-            article.forEach((item) => {
-                item.remove();
-            })
-            listeLivre.forEach((livre) => {
-                if(livre.categorie == categorie) {
-                    filtreType.push(livre);
-                }
-            })
-            afficherLivre(filtreType);
-        }
-        
-        baliseBtn.append(baliseSpan);
-        baliseItem.append(baliseBtn);
-        balisteListe.append(baliseItem);
-    })
+        baliseSpan.id = 'cat'+index;
+        baliseSpan.className = 'categorie';
+        baliseSpan.textContent = listeCategorie[index];
+        baliseSpan.style.visibility = 'hidden';
+        spanCat.append(baliseSpan);
+    });
 }
 
 const rechercheSoumettre = document.getElementById('submitRecherche');
@@ -191,15 +165,67 @@ rechercheSoumettre.onclick = function() {
 
     afficherLivre(filtreRecherche);
 }
-
-const attachListerner = function() {
-    const spanCat = document.querySelector('#filtreCategorie');
+const scrollCategorie = function() {
+    const spanCat = document.querySelector('#cat');
+    const spanFleche = document.querySelector('#fleche');
     spanCat.addEventListener('click', function() {
-        changerCategorie();
+        spanFleche.style.transition = 'transform 0.5s';
+        spanFleche.style.transform = 'translate(7.5rem)';
+        spanCat.style.transition = 'transform 0.5s';
+        spanCat.style.transform = 'translate(-2rem)';
+        const categorie = document.querySelectorAll('.categorie');
+        categorie.forEach((cat, index) => {
+            cat.style.visibility = 'visible';
+            const delai = index * 50;
+            cat.style.transition = `opacity 0.375s ${delai}ms`;
+            setTimeout(() => {
+                cat.style.opacity = 1;
+            }, delai);
+        });
+        unscrollCategorie();
+    });
+    const categorie = document.querySelectorAll('.categorie');
+    categorie.forEach((cat) => {
+        cat.onclick = function() {
+            var filtreType = [];
+            var article = document.querySelectorAll('article');
+            article.forEach((item) => {
+                item.remove();
+            })
+            listeLivre.forEach((livre) => {
+                if(livre.categorie == cat.textContent) {
+                    filtreType.push(livre);
+                }
+            })
+            afficherLivre(filtreType);
+        }
     });
 }
 
-//attachListerner();
+const unscrollCategorie = function() {
+    const spanCat = document.querySelector('#cat');
+    const spanFleche = document.querySelector('#fleche');
+    spanCat.addEventListener('click', function() {
+        spanFleche.style.transition = 'transform 0.5s';
+        spanFleche.style.transform = 'translate(0rem)';
+        spanCat.style.transition = 'transform 0.375s';
+        spanCat.style.transform = 'translate(0rem)';
+        const categorie = document.querySelectorAll('.categorie');
+        categorie.forEach((cat, index) => {
+            const delai = index * 50;
+            cat.style.transition = `opacity 0.50s ${delai}ms`;
+            setTimeout(() => {
+                cat.style.opacity = 0;
+            }, delai);
+        });
+        setTimeout(() => {
+            cat.style.visibility = 'hidden';
+        }, 1500);
+        scrollCategorie();
+    });
+}
+
 afficherLivre(listeLivre);
 afficherType(listeType);
 afficherCategorie(listeCategorie);
+scrollCategorie();

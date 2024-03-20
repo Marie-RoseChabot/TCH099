@@ -35,14 +35,15 @@ $auteursJson = json_encode($auteurs);
             <li><input type="text" id="recherche" placeholder="Recherche"><button type="submit" id="submitRecherche">Soumettre</button></li>
         </ul>
     </div>
-    <nav class="categorie">
+    <nav class="type">
         <h3>Type de document</h3>
         <ul id="filtreType"></ul>
-        <h3>Catégorie</h3>
-        <ul id="filtreCategorie"></ul>
     </nav>
     <main class="principal">
-        <h2>Catalogue</h2>
+    <h2 id="filtreCategorie">Catalogue
+            <span id="fleche">></span>
+            <span id="cat">Catégorie</span>
+        </h2>
         <div class="background" id="parchemin"></div>
     </main>
     <footer class="bas">

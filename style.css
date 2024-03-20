@@ -4,16 +4,16 @@
   grid-template-rows: auto auto 2rem;
   grid-template-columns: 15fr 70fr 15fr;
   grid-template-areas:
-    "entete   categorie  onglet"
+    "entete   type  onglet"
     "principal   principal  principal"
     "bas        bas         bas ";
   margin: 0rem;
 }
 .entete,
-.categorie,
+.type,
 .onglet {
   color: wheat;
-  background-color: rgb(206, 31, 66);
+  background-color: crimson;
 }
 .entete {
   color: wheat;
@@ -26,22 +26,31 @@
   font-weight: bold;
   font-size: 4dvb;
 }
-.categorie {
-  grid-area: categorie;
+.type {
+  grid-area: type;
   color: wheat;
   font-weight: bold;
   outline-width: 0.2rem;
   font-size: 2dvb;
   padding-left: 1rem;
 }
-.categorie ul {
+.type ul {
   display: flex;
   flex-wrap: wrap;
   align-content: space-around;
   justify-content: center;
 }
-.categorie li {
+.type li {
   padding: 0.2rem;
+}
+.principal #cat {
+  border: 0.1rem solid wheat;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+}
+.principal .categorie {
+  font-size: 2dvb;
+  opacity: 0;
 }
 .onglet {
   grid-area: onglet;
@@ -71,7 +80,7 @@ ul {
   padding: 0.5rem 1.5rem;
   border-radius: 0.75rem;
   font-size: 1.25rem;
-  background: rgb(206, 31, 66);
+  background: crimson;
   color: wheat;
   transform: translateY(-0.3rem);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
@@ -95,7 +104,7 @@ ul {
 .principal h2 {
   width: 500rem;
   height: 2rem;
-  background-color: rgb(206, 31, 66);
+  background-color: crimson;
   color: wheat;
   padding-left: 1rem;
   margin-top: 0rem;
@@ -114,7 +123,7 @@ ul {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: rgb(206, 31, 66);
+  background-color: crimson;
   color: wheat;
   text-align: center;
 }
