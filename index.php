@@ -5,7 +5,12 @@ $stmt = $pdo->prepare('SELECT * FROM Livre');
 $stmt->execute();
 $livres = $stmt->fetchAll();
 
+$stmt = $pdo->prepare('SELECT * FROM Auteur');
+$stmt->execute();
+$auteurs = $stmt->fetchAll();
+
 $livresJson = json_encode($livres);
+$auteursJson = json_encode($auteurs);
 ?>
 <!DOCTYPE html>
 <head>
@@ -14,6 +19,7 @@ $livresJson = json_encode($livres);
   <title>CabinÉTS</title>
   <script>
       var listeLivre = <?= $livresJson ?>;
+      var listeAuteur = <?= $auteursJson ?>;
     </script>
 </head>
 <body class="conteneur">

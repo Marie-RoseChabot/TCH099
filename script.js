@@ -171,10 +171,20 @@ rechercheSoumettre.onclick = function() {
         item.remove();
     })
     listeLivre.forEach((livre) => {
-        if(livre.titre.toUpperCase().indexOf(motCle) > -1) { //|| livre.auteur.toUpperCase().indexOf(motCle) > -1) {
+        if(livre.titre.toUpperCase().indexOf(motCle) > -1) {
             filtreRecherche.push(livre);
         }
     })
+    listeAuteur.forEach((auteur) => {
+        if(auteur.username_usager.toUpperCase().indexOf(motCle) > -1) {
+            listeLivre.forEach((livre) => {
+                if(auteur.id == livre.id_auteur) {
+                    filtreRecherche.push(livre);
+                }
+            })
+        }
+    })
+
     afficherLivre(filtreRecherche);
 }
 
