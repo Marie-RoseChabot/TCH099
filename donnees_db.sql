@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db
--- Généré le : mar. 19 mars 2024 à 20:22
+-- Généré le : ven. 22 mars 2024 à 01:17
 -- Version du serveur : 11.2.2-MariaDB-1:11.2.2+maria~ubu2204
 -- Version de PHP : 8.2.8
 
@@ -69,6 +69,85 @@ INSERT INTO `Livre` (`isbn`, `titre`, `maison_edition`, `annee`, `url_image`, `d
 (9782253146698, 'Marie-Antoinette', 'Le Livre de Poche', 1932, 'https://images.renaud-bray.com/images/PG/7/7525-gf.jpg?404=404RB.gif', 'Marie-Antoinette, la dernière reine de France, est célèbre pour l\'opinion négatif que le peuple français avait pour elle. Cependant, sa manière d\'agir et sa personnalités sont beaucoup moins connues. Cette biographie historique les met à jour grâce à une correspondance qu\'elle entretenait avec un Compte Suédois dénommé Axel de Fersen.', 9),
 (9782372490917, 'Les Misérables - Édition intégrale', 'Limbroglio', 1862, 'https://m.media-amazon.com/images/I/41nGZ1bdfFL._SY466_.jpg', 'Un des plus grands livres de critique sociale de l\'histoire écrit par le fameux Victor Hugo. Cet ouvrage est donne un coup d\'œil sur le XIXe siècle d\'un point de vue beaucoup plus rapproché que celui des livres historiques contemporains.', 11),
 (9782756020037, 'Bilbo le Hobbit', 'Delcourt', 1937, 'https://images.renaud-bray.com/images/PG/1052/1052684-gf.jpg?404=404RB.gif', 'Dans ce roman, la vie tranquille de Bilbo le Hobbit est chamboulé par le mage Gandalf le Gris et un groupe de Nains qui l\'amènent à l\'aventure. Ils ont besoin de son aide afin de mettre la main sur un trésor gardé de près par un redoutable dragon.', 2);
+
+--
+-- Déchargement des données de la table `Categorie`
+--
+
+INSERT INTO `Categorie` (`id_categorie`, `nom`) VALUES
+(1, 'Aventure'),
+(2, 'Biographique'),
+(3, 'Jeunesse'),
+(4, 'Fantastique'),
+(5, 'Historique'),
+(6, 'Policier'),
+(7, 'Romance'),
+(8, 'Science-Fiction'),
+(9, 'Horreur'),
+(10, 'Suspense'),
+(11, 'Action'),
+(12, 'Tragédie');
+
+--
+-- Déchargement des données de la table `Categorie_Livre`
+--
+
+INSERT INTO `Categorie_Livre` (`isbn_livre`, `id_categorie`) VALUES
+(9782012101388, 1),
+(9782070612888, 1),
+(9782756020037, 1),
+(9782253146698, 2),
+(9782012101388, 3),
+(9782070408504, 3),
+(9782070584628, 3),
+(9782070408504, 4),
+(9782070584628, 4),
+(9782070612888, 4),
+(9782756020037, 4),
+(9782253146698, 5),
+(9782253010210, 6),
+(9782070338665, 7),
+(9782072878497, 8),
+(9782072878497, 10),
+(9782012101388, 11),
+(9782070612888, 11),
+(9782756020037, 11),
+(9782372490917, 12);
+
+--
+-- Déchargement des données de la table `Type`
+--
+
+INSERT INTO `Type` (`id_type`, `nom`) VALUES
+(1, 'Bandes dessinées'),
+(2, 'Contes'),
+(3, 'Documentaires'),
+(4, 'Essais'),
+(5, 'Journaux'),
+(6, 'Magazines'),
+(7, 'Mangas'),
+(8, 'Ouvrages de référence'),
+(9, 'Nouvelles'),
+(10, 'Philosophie'),
+(11, 'Poésie'),
+(12, 'Romans');
+
+--
+-- Déchargement des données de la table `Type_Livre`
+--
+
+INSERT INTO `Type_Livre` (`isbn_livre`, `id_type`) VALUES
+(9782012101388, 1),
+(9782253146698, 3),
+(9782100856404, 10),
+(9782070338665, 12),
+(9782070408504, 12),
+(9782070584628, 12),
+(9782072878497, 12),
+(9782253010210, 12),
+(9782253146698, 12),
+(9782372490917, 12),
+(9782756020037, 12);
 
 COMMIT;
 

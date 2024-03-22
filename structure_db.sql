@@ -26,7 +26,8 @@ SET time_zone = "+00:00";
 --
 -- Structure de la table `Paiement`
 --
-
+DROP TABLE IF EXISTS Genre_Livre;
+DROP TABLE IF EXISTS Genre;
 DROP TABLE IF EXISTS `Paiement`;
 CREATE TABLE `Paiement` (
   `id_paiement` int(10) NOT NULL,
@@ -34,6 +35,20 @@ CREATE TABLE `Paiement` (
   `montant` double NOT NULL,
   `date_paiement` date NOT NULL,
   `id_client` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Categorie_Livre`
+--
+
+DROP TABLE IF EXISTS `Categorie_Livre`;
+CREATE TABLE `Categorie_Livre` (
+  `isbn_livre` bigint(30) NOT NULL,
+  `id_categorie` int(10) NOT NULL,
+  UNIQUE(isbn_livre, id_categorie)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -45,37 +60,8 @@ CREATE TABLE `Paiement` (
 DROP TABLE IF EXISTS `Categorie`;
 CREATE TABLE `Categorie` (
   `id_categorie` int(10) NOT NULL,
-  `nom` varchar(30) NOT NULL,
-  `description_cat` text NOT NULL
+  `nom` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `Categorie_Livre`
---
-
-DROP TABLE IF EXISTS `Categorie_Livre`;
-CREATE TABLE `Categorie_Livre` (
-  `isbn_livre` bigint(30) NOT NULL,
-  `id_categorie` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `Critique`
---
-
-DROP TABLE IF EXISTS `Critique`;
-CREATE TABLE `Critique` (
-  `id_critique` int(10) NOT NULL,
-  `etoiles` int(1) NOT NULL,
-  `commentaire` varchar(255) NOT NULL,
-  `est_signale` varchar(3) NOT NULL,
-  `id_client` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 -- --------------------------------------------------------
 
 --
@@ -89,8 +75,24 @@ CREATE TABLE `Demande` (
   `date_demande` date NOT NULL,
   `id_auteur` int(10) NOT NULL,
   `isbn_livre` bigint(30) NOT NULL,
-  `employe_matricule` varchar(12) NOT NULL,
+  `employe_matricule` varchar(12),
   `id_critique` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+
+--
+-- Structure de la table `Critique`
+--
+
+DROP TABLE IF EXISTS `Critique`;
+CREATE TABLE `Critique` (
+  `id_critique` int(10) NOT NULL,
+  `etoiles` int(1) NOT NULL,
+  `commentaire` varchar(255) NOT NULL,
+  `est_signale` varchar(3) NOT NULL,
+  `id_client` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -123,18 +125,6 @@ CREATE TABLE `Emprunt` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Client`
---
-
-DROP TABLE IF EXISTS `Client`;
-CREATE TABLE `Client` (
-  `id` int(10) NOT NULL,
-  `est_abonne` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `Copie`
 --
 
@@ -148,26 +138,51 @@ CREATE TABLE `Copie` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Genre_Livre`
+-- Structure de la table `Type_Livre`
 --
 
-DROP TABLE IF EXISTS `Genre_Livre`;
-CREATE TABLE `Genre_Livre` (
+DROP TABLE IF EXISTS `Type_Livre`;
+CREATE TABLE `Type_Livre` (
   `isbn_livre` bigint(30) NOT NULL,
-  `id_genre` int(10) NOT NULL
+  `id_type` int(10) NOT NULL, 
+  UNIQUE(isbn_livre, id_type)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Genre`
+-- Structure de la table `Type`
 --
 
-DROP TABLE IF EXISTS `Genre`;
-CREATE TABLE `Genre` (
-  `id_genre` int(10) NOT NULL,
-  `nom` varchar(30) NOT NULL,
-  `description` text DEFAULT NULL
+DROP TABLE IF EXISTS `Type`;
+CREATE TABLE `Type` (
+  `id_type` int(10) NOT NULL,
+  `nom` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Reservation`
+--
+
+DROP TABLE IF EXISTS `Reservation`;
+CREATE TABLE `Reservation` (
+  `id_reservation` int(10) NOT NULL,
+  `date_demande` date NOT NULL,
+  `id_client` int(10) NOT NULL,
+  `isbn_livre` bigint(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+--
+-- Structure de la table `Client`
+--
+
+DROP TABLE IF EXISTS `Client`;
+CREATE TABLE `Client` (
+  `id` int(10) NOT NULL,
+  `est_abonne` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -197,20 +212,6 @@ DROP TABLE IF EXISTS `Auteur`;
 CREATE TABLE `Auteur` (
   `id` int(10) NOT NULL,
   `username_usager` varchar(25) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `Reservation`
---
-
-DROP TABLE IF EXISTS `Reservation`;
-CREATE TABLE `Reservation` (
-  `id_reservation` int(10) NOT NULL,
-  `date_demande` date NOT NULL,
-  `id_client` int(10) NOT NULL,
-  `isbn_livre` bigint(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -299,17 +300,17 @@ ALTER TABLE `Emprunt`
   ADD KEY `id_client` (`id_client`);
 
 --
--- Index pour la table `Genre`
+-- Index pour la table `Type`
 --
-ALTER TABLE `Genre`
-  ADD PRIMARY KEY (`id_genre`);
+ALTER TABLE `Type`
+  ADD PRIMARY KEY (`id_type`);
 
 --
--- Index pour la table `Genre_Livre`
+-- Index pour la table `Type_Livre`
 --
-ALTER TABLE `Genre_Livre`
-  ADD PRIMARY KEY (`isbn_livre`,`id_genre`),
-  ADD KEY `id_genre` (`id_genre`);
+ALTER TABLE `Type_Livre`
+  ADD PRIMARY KEY (`isbn_livre`,`id_type`),
+  ADD KEY `id_type` (`id_type`);
 
 --
 -- Index pour la table `Livre`
@@ -390,6 +391,11 @@ ALTER TABLE `Paiement`
   MODIFY `id_paiement` int(10) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `Type`
+--
+ALTER TABLE `Type`
+  MODIFY `id_type` int(10) NOT NULL AUTO_INCREMENT;
+--
 -- Contraintes pour les tables déchargées
 --
 
@@ -441,11 +447,11 @@ ALTER TABLE `Emprunt`
   ADD CONSTRAINT `Emprunt_ibfk_2` FOREIGN KEY (`id_client`) REFERENCES `Client` (`id`);
 
 --
--- Contraintes pour la table `Genre_Livre`
+-- Contraintes pour la table `Type_Livre`
 --
-ALTER TABLE `Genre_Livre`
-  ADD CONSTRAINT `Genre_Livre_ibfk_1` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`),
-  ADD CONSTRAINT `Genre_Livre_ibfk_2` FOREIGN KEY (`id_genre`) REFERENCES `Genre` (`id_genre`);
+ALTER TABLE `Type_Livre`
+  ADD CONSTRAINT `Type_Livre_ibfk_1` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`),
+  ADD CONSTRAINT `Type_Livre_ibfk_2` FOREIGN KEY (`id_type`) REFERENCES `Type` (`id_type`);
 
 --
 -- Contraintes pour la table `Livre`
