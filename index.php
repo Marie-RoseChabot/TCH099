@@ -9,8 +9,28 @@ $stmt = $pdo->prepare('SELECT * FROM Auteur');
 $stmt->execute();
 $auteurs = $stmt->fetchAll();
 
+$stmt = $pdo->prepare('SELECT * FROM Categorie_Livre');
+$stmt->execute();
+$categorieLivre = $stmt->fetchAll();
+
+$stmt = $pdo->prepare('SELECT * FROM Categorie');
+$stmt->execute();
+$categorie = $stmt->fetchAll();
+
+$stmt = $pdo->prepare('SELECT * FROM Type_Livre');
+$stmt->execute();
+$typeLivre = $stmt->fetchAll();
+
+$stmt = $pdo->prepare('SELECT * FROM Type');
+$stmt->execute();
+$type = $stmt->fetchAll();
+
 $livresJson = json_encode($livres);
 $auteursJson = json_encode($auteurs);
+$categorieLivreJson = json_encode($categorieLivre);
+$categorieJson = json_encode($categorie);
+$typeLivreJson = json_encode($typeLivre);
+$typeJson = json_encode($type);
 ?>
 <!DOCTYPE html>
 <head>
@@ -20,6 +40,10 @@ $auteursJson = json_encode($auteurs);
   <script>
       var listeLivre = <?= $livresJson ?>;
       var listeAuteur = <?= $auteursJson ?>;
+      var categorieLivre = <?= $categorieLivreJson ?>;
+      var listeCategorie = <?= $categorieJson ?>;
+      var typeLivre = <?= $typeLivreJson ?>;
+      var listeType = <?= $typeJson ?>;
     </script>
 </head>
 <body class="conteneur">
