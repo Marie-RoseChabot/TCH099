@@ -43,6 +43,9 @@
 .type li {
   padding: 0.2rem;
 }
+#headerCategorie:hover, .categorie:hover {
+  cursor: pointer;
+}
 .principal #headerCategorie {
   border: 0.1rem solid wheat;
   padding-left: 0.1rem;
@@ -101,6 +104,11 @@ ul {
   height: 20.5rem;
   width: 13rem;
 }
+/*.principal article:hover {
+  width: 26rem;
+  display: flex;
+  justify-content: flex-start;
+}*/
 .principal h2 {
   width: 500rem;
   height: 2rem;

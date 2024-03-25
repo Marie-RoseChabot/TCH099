@@ -59,25 +59,6 @@ const afficherCategorie = function(listeCategorie) {
         baliseSpan.textContent = index.nom;
         baliseSpan.style.visibility = 'hidden';
         spanCat.append(baliseSpan);
-
-        baliseSpan.onclick = function() {
-            var filtreCategorie = [];
-            var article = document.querySelectorAll('article');
-            console.log(index);
-            article.forEach((item) => {
-                item.remove();
-            })
-            categorieLivre.forEach((livreId) => {
-                if(livreId.id_categorie == index.id_categorie) {
-                    for (let i = 0; i < listeLivre.length; i++) {
-                        if (listeLivre[i].isbn == livreId.isbn_livre) {
-                            filtreCategorie.push(listeLivre[i]);
-                        }
-                    }
-                }
-            })
-            afficherLivre(filtreCategorie);
-        }
     });
 }
 
@@ -127,30 +108,49 @@ const scrollCategorie = function() {
             setTimeout(() => {
                 cat.style.opacity = 1;
             }, delai);
+            cat.onclick = function() {
+                var filtreCategorie = [];
+                var article = document.querySelectorAll('article');
+                article.forEach((item) => {
+                    item.remove();
+                })
+                categorieLivre.forEach((livreId) => {
+                    if(livreId.id_categorie == index+1) {
+                        for (let i = 0; i < listeLivre.length; i++) {
+                            if (listeLivre[i].isbn == livreId.isbn_livre) {
+                                filtreCategorie.push(listeLivre[i]);
+                            }
+                        }
+                    }
+                })
+                afficherLivre(filtreCategorie);
+            }
         });
-        unscrollCategorie();
+    unscrollCategorie();
     });
 }
 
 const unscrollCategorie = function() {
     const spanCat = document.querySelector('#headerCategorie');
     const spanFleche = document.querySelector('#fleche');
+    const categorie = document.querySelectorAll('.categorie');
     spanCat.addEventListener('click', function() {
         spanFleche.style.transition = 'transform 0.5s';
         spanFleche.style.transform = 'translate(0rem)';
         spanCat.style.transition = 'transform 0.375s';
         spanCat.style.transform = 'translate(0rem)';
-        const categorie = document.querySelectorAll('.categorie');
         categorie.forEach((cat, index) => {
+            cat.addEventListener('mouseover', function() {
+                if (cat.style.opacity == 0) {
+                    cat.style.visibility = 'hidden';
+                }
+            });
             const delai = index * 50;
             cat.style.transition = `opacity 0.50s ${delai}ms`;
             setTimeout(() => {
                 cat.style.opacity = 0;
             }, delai);
         });
-        setTimeout(() => {
-            cat.style.visibility = 'hidden';
-        }, 1500);
         scrollCategorie();
     });
 }
