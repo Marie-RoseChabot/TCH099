@@ -39,17 +39,20 @@
   flex-wrap: wrap;
   align-content: space-around;
   justify-content: center;
+  margin: 1rem;
 }
 .type li {
   padding: 0.2rem;
 }
-#headerCategorie:hover, .categorie:hover {
-  cursor: pointer;
-}
 .principal #headerCategorie {
+  border-radius: 0.75rem;
   border: 0.1rem solid wheat;
   padding-left: 0.1rem;
   padding-right: 0.1rem;
+  box-shadow: inset 0rem 6.125rem 1rem -6rem whitesmoke;
+}
+#headerCategorie:hover, .categorie:hover {
+  cursor: pointer;
 }
 .principal .categorie {
   font-size: 2dvb;
