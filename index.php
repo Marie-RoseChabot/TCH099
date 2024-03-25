@@ -64,10 +64,12 @@ $typeJson = json_encode($type);
         <ul id="filtreType"></ul>
     </nav>
     <main class="principal">
-    <h2 id="filtreCategorie">Catalogue
+        <h2 id="filtreCategorie">Catalogue
             <span id="fleche">></span>
             <span id="headerCategorie">Catégorie</span>
         </h2>
+        <dialog id="dialogDescription"><p id="description"></p>
+        </dialog>
         <div class="background" id="parchemin"></div>
     </main>
     <footer class="bas">

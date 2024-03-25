@@ -5,11 +5,21 @@ const afficherLivre = function(listeLivre) {
         const baliseArticle = document.createElement('article');
         const baliseTitre = document.createElement('h4');
         const baliseImage = document.createElement('img');
+        const dialog = document.querySelector('#dialogDescription');
+        const baliseDesc = document.querySelector('#description');
 
         baliseArticle.append(baliseTitre, baliseImage);
         baliseTitre.textContent = livre.titre;
         baliseImage.src = livre.url_image;
         baliseImage.alt = "";
+
+        baliseArticle.addEventListener('click', function() {
+            baliseDesc.textContent = livre.description_livre;
+            dialog.showModal();
+            dialog.addEventListener('click', function() {
+                dialog.close();
+            });
+        });
         parent.appendChild(baliseArticle);
     })
 }
