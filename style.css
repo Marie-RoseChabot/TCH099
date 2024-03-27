@@ -39,14 +39,20 @@
   flex-wrap: wrap;
   align-content: space-around;
   justify-content: center;
+  margin: 1rem;
 }
 .type li {
   padding: 0.2rem;
 }
-.principal #cat {
+.principal #headerCategorie {
+  border-radius: 0.75rem;
   border: 0.1rem solid wheat;
   padding-left: 0.1rem;
   padding-right: 0.1rem;
+  box-shadow: inset 0rem 6.125rem 1rem -6rem whitesmoke;
+}
+#headerCategorie:hover, .categorie:hover {
+  cursor: pointer;
 }
 .principal .categorie {
   font-size: 2dvb;
@@ -113,9 +119,26 @@ ul {
   height: 16.5rem;
   width: 11.5rem;
 }
+.principal img:hover {
+  box-shadow: 0rem 0rem 6.25rem 0rem crimson;
+}
 .principal h4 {
   display: flex;
   flex-wrap: wrap;
+}
+#dialogDescription {
+  border-radius: 0.75rem;
+  width: 15rem;
+  background-color: wheat;
+  outline-color: crimson;
+}
+#dialogDescription::backdrop {
+  background-color: crimson;
+  opacity: 0.1;
+}
+#description {
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 .bas {
   grid-area: bas;
