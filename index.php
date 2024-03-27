@@ -52,12 +52,23 @@ $typeJson = json_encode($type);
         CabinÉTS
     </header>
     <div class="onglet">
-        <ul>
-            <li><a href="./index.php">Catalogue</a></li>
-            <li>Réserver</li>
-            <li>Se connecter / S'inscrire</li>
-            <li><input type="text" id="recherche" placeholder="Recherche"><button type="submit" id="submitRecherche">Soumettre</button></li>
-        </ul>
+
+        <p><a href="./index.php">Catalogue</a></p>
+        <?php
+        // Ce qui s'affiche si l'utilisateur est connecté
+        if(isset($connecte) && $connecte != 0){
+            echo "<p>Réserver</p>";
+            echo "<p>Se déconnecter</p>";
+        }
+
+        // Ce qui s'affiche s'il n'est pas connecté
+        else{
+            echo"<p><a href = './login.php'>Se connecter</a></p>";
+            echo "<p><a href = './register.php'>S'inscrire</a></p>";
+        }
+        ?>
+        <p><input type="text" id="recherche" placeholder="Recherche"><button type="submit" id="submitRecherche">Soumettre</button></p>
+
     </div>
     <nav class="type">
         <h3>Type de document</h3>

@@ -22,36 +22,20 @@ SET time_zone = "+00:00";
 --
 
 --
--- Déchargement des données de la table `Usager`
---
-
-INSERT INTO `Usager` (`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`) VALUES
-('agathachristie', 'password', NULL, 'Agatha', 'Christie', '1890-09-15'),
-('antoinedestexupery', 'password', NULL, 'de Saint-Exupéry', 'Antoine', '1900-06-20'),
-('georgeorwell', 'password', NULL, 'Orwell', 'George', '1903-06-25'),
-('janeausten', 'password', NULL, 'Austen', 'Jane', '1775-12-16'),
-('jkrowling', 'password', NULL, 'Rowling', 'J.K.', '1965-07-31'),
-('jrrtolkien', 'password', NULL, 'Tolkien', 'J.R.R.', '1892-01-03'),
-('renedescartes', 'password', NULL, 'René', 'Descartes', '1596-03-30'),
-('renegoscinny', 'password', NULL, 'Goscinny', 'René', '1926-08-14'),
-('stefanzweig', 'password', NULL, 'Zweig', 'Stefan', '1881-11-27'),
-('victorhugo', 'password', NULL, 'Hugo', 'Victor', '1802-02-26');
-
---
 -- Déchargement des données de la table `Auteur`
 --
 
-INSERT INTO `Auteur` (`id`, `username_usager`) VALUES
-(13, 'agathachristie'),
-(3, 'antoinedestexupery'),
-(7, 'georgeorwell'),
-(8, 'janeausten'),
-(1, 'jkrowling'),
-(2, 'jrrtolkien'),
-(10, 'renedescartes'),
-(12, 'renegoscinny'),
-(9, 'stefanzweig'),
-(11, 'victorhugo');
+INSERT INTO `Auteur` (`id`, `nom`, `prenom`, `date_naissance`, `date_deces`) VALUES
+(13, 'Agatha', 'Christie', '1890-09-15', '1976-01-12'),
+(3, 'de Saint-Exupéry', 'Antoine', '1900-06-20', '1944-07-31'),
+(7, 'Orwell', 'George', '1903-06-25', '1950-01-21'),
+(8, 'Austen', 'Jane', '1775-12-16', '1817-07-18'),
+(1, 'Rowling', 'J.K.', '1965-07-31', NULL),
+(2, 'Tolkien', 'J.R.R.', '1892-01-03', '1973-09-02' ),
+(10, 'René', 'Descartes', '1596-03-30', '1650-02-11'),
+(12, 'Goscinny', 'René', '1926-08-14', '1977-11-05'),
+(9, 'Zweig', 'Stefan', '1881-11-27', '1942-02-22'),
+(11, 'Hugo', 'Victor', '1802-02-26', '1885-05-22');
 
 --
 -- Déchargement des données de la table `Livre`

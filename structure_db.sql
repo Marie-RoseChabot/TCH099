@@ -34,7 +34,7 @@ CREATE TABLE `Paiement` (
   `type_paiement` enum('retard','creation_compte','bris','perte') NOT NULL,
   `montant` double NOT NULL,
   `date_paiement` date NOT NULL,
-  `id_client` int(10) NOT NULL
+  `username_client` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -75,7 +75,8 @@ CREATE TABLE `Demande` (
   `date_demande` date NOT NULL,
   `id_auteur` int(10) NOT NULL,
   `isbn_livre` bigint(30) NOT NULL,
-  `employe_matricule` varchar(12),
+  `username_employe` varchar(25),
+  `username_editeur` varchar(25),
   `id_critique` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -92,7 +93,7 @@ CREATE TABLE `Critique` (
   `etoiles` int(1) NOT NULL,
   `commentaire` varchar(255) NOT NULL,
   `est_signale` varchar(3) NOT NULL,
-  `id_client` int(10) NOT NULL
+  `username_client` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -102,10 +103,10 @@ CREATE TABLE `Critique` (
 --
 
 DROP TABLE IF EXISTS `Employe`;
-CREATE TABLE `Employe` (
-  `id` varchar(12) NOT NULL,
-  `username_usager` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- CREATE TABLE `Employe` (
+--   `id` varchar(12) NOT NULL,
+--   `username_usager` varchar(25) NOT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -118,7 +119,7 @@ CREATE TABLE `Emprunt` (
   `id` int(10) NOT NULL,
   `date_emprunt` date NOT NULL,
   `date_retour` date NOT NULL,
-  `id_client` int(10) DEFAULT NULL,
+  `username_client` varchar(25) DEFAULT NULL,
   `id_copie` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -170,7 +171,7 @@ DROP TABLE IF EXISTS `Reservation`;
 CREATE TABLE `Reservation` (
   `id_reservation` int(10) NOT NULL,
   `date_demande` date NOT NULL,
-  `id_client` int(10) NOT NULL,
+  `username_client` varchar(25) NOT NULL,
   `isbn_livre` bigint(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -180,10 +181,10 @@ CREATE TABLE `Reservation` (
 --
 
 DROP TABLE IF EXISTS `Client`;
-CREATE TABLE `Client` (
-  `id` int(10) NOT NULL,
-  `est_abonne` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- CREATE TABLE `Client` (
+--   `id` int(10) NOT NULL,
+--   `est_abonne` tinyint(1) NOT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -211,7 +212,10 @@ CREATE TABLE `Livre` (
 DROP TABLE IF EXISTS `Auteur`;
 CREATE TABLE `Auteur` (
   `id` int(10) NOT NULL,
-  `username_usager` varchar(25) DEFAULT NULL
+  `nom` varchar(25) NOT NULL,
+  `prenom` varchar(25) DEFAULT NULL,
+  `date_naissance` date DEFAULT NULL, 
+  `date_deces` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -226,8 +230,9 @@ CREATE TABLE `Usager` (
   `password` varchar(25) NOT NULL,
   `courriel` varchar(50) DEFAULT NULL,
   `nom` varchar(25) NOT NULL,
-  `prenom` varchar(25) DEFAULT NULL,
-  `date_naissance` date DEFAULT NULL
+  `prenom` varchar(25) NOT NULL,
+  `date_naissance` date DEFAULT NULL,
+  `type_usager` enum('client', 'employe', 'editeur') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -238,8 +243,7 @@ CREATE TABLE `Usager` (
 -- Index pour la table `Auteur`
 --
 ALTER TABLE `Auteur`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `username_usager` (`username_usager`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `Categorie`
@@ -257,8 +261,8 @@ ALTER TABLE `Categorie_Livre`
 --
 -- Index pour la table `Client`
 --
-ALTER TABLE `Client`
-  ADD PRIMARY KEY (`id`);
+-- ALTER TABLE `Client`
+--   ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `Copie`
@@ -272,7 +276,7 @@ ALTER TABLE `Copie`
 --
 ALTER TABLE `Critique`
   ADD PRIMARY KEY (`id_critique`),
-  ADD KEY `id_client` (`id_client`);
+  ADD KEY `username_client` (`username_client`);
 
 --
 -- Index pour la table `Demande`
@@ -281,15 +285,16 @@ ALTER TABLE `Demande`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_auteur` (`id_auteur`),
   ADD KEY `isbn_livre` (`isbn_livre`),
-  ADD KEY `employe_matricule` (`employe_matricule`),
+  ADD KEY `username_employe` (`username_employe`),
+  ADD KEY `username_editeur` (`username_editeur`),
   ADD KEY `id_critique` (`id_critique`);
 
 --
 -- Index pour la table `Employe`
 --
-ALTER TABLE `Employe`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `username_usager` (`username_usager`);
+-- ALTER TABLE `Employe`
+--   ADD PRIMARY KEY (`id`),
+--   ADD KEY `username_usager` (`username_usager`);
 
 --
 -- Index pour la table `Emprunt`
@@ -297,7 +302,7 @@ ALTER TABLE `Employe`
 ALTER TABLE `Emprunt`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_copie` (`id_copie`),
-  ADD KEY `id_client` (`id_client`);
+  ADD KEY `username_client` (`username_client`);
 
 --
 -- Index pour la table `Type`
@@ -324,14 +329,14 @@ ALTER TABLE `Livre`
 --
 ALTER TABLE `Paiement`
   ADD PRIMARY KEY (`id_paiement`),
-  ADD KEY `id_client` (`id_client`);
+  ADD KEY `username_client` (`username_client`);
 
 --
 -- Index pour la table `Reservation`
 --
 ALTER TABLE `Reservation`
   ADD PRIMARY KEY (`id_reservation`),
-  ADD KEY `id_client` (`id_client`),
+  ADD KEY `username_client` (`username_client`),
   ADD KEY `isbn_livre` (`isbn_livre`);
 
 --
@@ -359,8 +364,8 @@ ALTER TABLE `Categorie`
 --
 -- AUTO_INCREMENT pour la table `Client`
 --
-ALTER TABLE `Client`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+-- ALTER TABLE `Client`
+--   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `Copie`
@@ -402,8 +407,8 @@ ALTER TABLE `Type`
 --
 -- Contraintes pour la table `Auteur`
 --
-ALTER TABLE `Auteur`
-  ADD CONSTRAINT `Auteur_ibfk_1` FOREIGN KEY (`username_usager`) REFERENCES `Usager` (`username`);
+-- ALTER TABLE `Auteur`
+--   ADD CONSTRAINT `Auteur_ibfk_1` FOREIGN KEY (`username_usager`) REFERENCES `Usager` (`username`);
 
 --
 -- Contraintes pour la table `Categorie_Livre`
@@ -422,29 +427,29 @@ ALTER TABLE `Copie`
 -- Contraintes pour la table `Critique`
 --
 ALTER TABLE `Critique`
-  ADD CONSTRAINT `Critique_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `Client` (`id`);
+  ADD CONSTRAINT `Critique_ibfk_1` FOREIGN KEY (`username_client`) REFERENCES `Usager` (`username`);
 
 --
 -- Contraintes pour la table `Demande`
 --
 ALTER TABLE `Demande`
-  ADD CONSTRAINT `Demande_ibfk_1` FOREIGN KEY (`id_auteur`) REFERENCES `Auteur` (`id`),
-  ADD CONSTRAINT `Demande_ibfk_2` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`),
-  ADD CONSTRAINT `Demande_ibfk_3` FOREIGN KEY (`employe_matricule`) REFERENCES `Employe` (`id`),
+  ADD CONSTRAINT `Demande_ibfk_1` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`),
+  ADD CONSTRAINT `Demande_ibfk_2` FOREIGN KEY (`username_employe`) REFERENCES `Usager` (`username`),
+  ADD CONSTRAINT `Demande_ibfk_3` FOREIGN KEY (`username_editeur`) REFERENCES `Usager` (`username`),
   ADD CONSTRAINT `Demande_ibfk_4` FOREIGN KEY (`id_critique`) REFERENCES `Critique` (`id_critique`);
 
 --
 -- Contraintes pour la table `Employe`
 --
-ALTER TABLE `Employe`
-  ADD CONSTRAINT `Employe_ibfk_1` FOREIGN KEY (`username_usager`) REFERENCES `Usager` (`username`);
+-- ALTER TABLE `Employe`
+--   ADD CONSTRAINT `Employe_ibfk_1` FOREIGN KEY (`username_usager`) REFERENCES `Usager` (`username`);
 
 --
 -- Contraintes pour la table `Emprunt`
 --
 ALTER TABLE `Emprunt`
   ADD CONSTRAINT `Emprunt_ibfk_1` FOREIGN KEY (`id_copie`) REFERENCES `Copie` (`id_copie`),
-  ADD CONSTRAINT `Emprunt_ibfk_2` FOREIGN KEY (`id_client`) REFERENCES `Client` (`id`);
+  ADD CONSTRAINT `Emprunt_ibfk_2` FOREIGN KEY (`username_client`) REFERENCES `Usager` (`username`);
 
 --
 -- Contraintes pour la table `Type_Livre`
@@ -463,13 +468,13 @@ ALTER TABLE `Livre`
 -- Contraintes pour la table `Paiement`
 --
 ALTER TABLE `Paiement`
-  ADD CONSTRAINT `Paiement_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `Client` (`id`);
+  ADD CONSTRAINT `Paiement_ibfk_1` FOREIGN KEY (`username_client`) REFERENCES `Usager` (`username`);
 
 --
 -- Contraintes pour la table `Reservation`
 --
 ALTER TABLE `Reservation`
-  ADD CONSTRAINT `Reservation_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `Client` (`id`),
+  ADD CONSTRAINT `Reservation_ibfk_1` FOREIGN KEY (`username_client`) REFERENCES `Usager` (`username`),
   ADD CONSTRAINT `Reservation_ibfk_2` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`);
 COMMIT;
 
