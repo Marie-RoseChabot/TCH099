@@ -1,3 +1,4 @@
+const livresApiUrl = "/api/livres/";
 
 const afficherLivre = function(listeLivre) {
     listeLivre.forEach((livre) => {
