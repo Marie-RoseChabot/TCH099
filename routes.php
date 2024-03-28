@@ -4,6 +4,9 @@ require_once __DIR__.'/router.php';
 
 // Routes statiques
 get('/', 'index.php');
+get('/index.php', 'index.php');
+any('/login.php', 'login.php');
+any('/register.php', 'register.php');
 
 // Routes de l'API (statiques et dynamique)
 get('/api/livres', '/api/livres/getLivres.php');

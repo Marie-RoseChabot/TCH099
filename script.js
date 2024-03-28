@@ -76,6 +76,7 @@ const afficherCategorie = function(listeCategorie) {
 const rechercheSoumettre = document.getElementById('submitRecherche');
 const rechercheMot = document.getElementById("recherche");
 rechercheSoumettre.onclick = function() {
+    console.log("test");
     const motCle = rechercheMot.value.toUpperCase();
     var filtreRecherche = [];
     var article = document.querySelectorAll('article');
@@ -91,7 +92,7 @@ rechercheSoumettre.onclick = function() {
     })
 
     listeAuteur.forEach((auteur) => {
-        if(auteur.username_usager.toUpperCase().indexOf(motCle) > -1) {
+        if(auteur.nom.toUpperCase().indexOf(motCle) > -1) {
             listeLivre.forEach((livre) => {
                 if(auteur.id == livre.id_auteur) {
                     filtreRecherche.push(livre);

@@ -8,8 +8,9 @@ if(isset($isbn) && filter_var($isbn, FILTER_VALIDATE_INT)){
 
     $livre = $stmt->fetch();
 } else {
-    $livre = ["error"=>"Identifiant invalide"];
+    $livre = ["error"=>"Code ISBN invalide"];
 }
+
 
 if($livre){
     header('Content-Type: application/json; charset=utf-8');
