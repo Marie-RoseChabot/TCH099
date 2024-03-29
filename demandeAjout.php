@@ -5,6 +5,8 @@
 </head>
 <body>
     <form action="./" id="formAjout">
+        <label for="isbn">ISBN : </label>
+        <input type="text" name="isbn" id="isbn"><br>
         <label for="titre">Titre : </label>
         <input type="text" name="titre" id="titre"><br>
         <label for="auteur">Auteur : </label>

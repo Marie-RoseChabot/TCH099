@@ -7,6 +7,7 @@ get('/', 'index.php');
 get('/index.php', 'index.php');
 any('/login.php', 'login.php');
 any('/register.php', 'register.php');
+any('/demandeAjout.php', 'demandeAjout.php');
 
 // Routes de l'API (statiques et dynamique)
 get('/api/livres', '/api/livres/getLivres.php');
