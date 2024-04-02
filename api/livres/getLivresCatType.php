@@ -1,25 +1,15 @@
 <?php
 require_once __DIR__."/../../config.php";
 
-$conditions = [];
 
 
-if (isset($categorie) && $categorie !== "-") {
-    $conditions[] = "Categorie_Livre.id_categorie = :categorie"; 
-}
 
-if (isset($type) && $type !== "-") {
-    $conditions[] = "Type_Livre.id_type = :type"; 
-}
 
 $sql = "SELECT * 
         FROM Livre
         JOIN Type_Livre ON Livre.ISBN = Type_Livre.isbn_livre 
-        JOIN Categorie_Livre ON Livre.ISBN = Categorie_Livre.isbn_livre";
-
-if (!empty($conditions)) {
-    $sql .= " WHERE " . implode(" AND ", $conditions);
-}
+        JOIN Categorie_Livre ON Livre.ISBN = Categorie_Livre.isbn_livre
+        WHERE (:categorie=Categorie_Livre.id_categorie OR :type=Type_Livre.id_type)";
 
 
 $stmt = $pdo->prepare($sql);
