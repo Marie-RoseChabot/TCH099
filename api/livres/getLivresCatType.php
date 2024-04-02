@@ -11,13 +11,13 @@ $sql = "SELECT *
 
 $stmt = $pdo->prepare($sql);
 
+
 if (isset($categorie) && $categorie !== "-") {
     $stmt->bindParam(":categorie", $categorie);
 }
 if (isset($type) && $type !== "-") {
     $stmt->bindParam(":type", $type);
 }
-
 
 $stmt->execute();
 
