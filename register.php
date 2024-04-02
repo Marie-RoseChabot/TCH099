@@ -13,22 +13,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $dateNaissance = $_POST['dateNaissance'];
   $username = $_POST['username'];
   $password = $_POST['motDePasse'];
+  $typeUsager = $_POST['typeCompte'];
+  $confirmPass = $_POST['confirmerMdp'];
 
+  if($password == $confirmPass) {
     // Vérifier si l'utilisateur existe déjà
-    $stmt = $pdo->prepare('SELECT * FROM Usager');
-    
+    $stmt = $pdo->prepare('SELECT * FROM Usager WHERE username = ?');
+    $stmt->execute([$username]);
+    if ($stmt->fetch()){
+        $error = 'Ce nom d\'utilisateur est déjà pris.';
+    } else {
         // Hasher le mot de passe
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
         // Insérer le nouvel utilisateur
-        $stmt = $pdo->prepare('INSERT INTO Usager (username, password, courriel, nom, prenom, date_naissance) VALUES (?, ?, ?, ?, ?, ?)');
-        if ($stmt->execute([$username, $passwordHash, $courriel, $nom, $prenom, $dateNaissance])) {
+        $stmt = $pdo->prepare('INSERT INTO Usager (`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`, `type_usager`) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        if ($stmt->execute([$username, $passwordHash, $courriel, $nom, $prenom, $dateNaissance, $typeUsager])) {
             header("Location: login.php");
             exit;
         } else {
             $message = 'Erreur lors de la création du compte.';
         }
-    }
+      }
+  } else {
+        $message = 'Erreur lors de la confirmation du mot de passe.';
+  }
+  echo $message;
+}
 ?>
 
 <!DOCTYPE html>
@@ -68,11 +79,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="username">Nom d'utilisateur : </label>
         <input type="text" name="username" id="username" required maxlength="25"/>
         <label for="motDePasse">Mot de passe : </label>
-        <input type="password" name="motDePasse" id="motDePasse" required maxlength="25"/>
+        <input type="password" name="motDePasse" id="motDePasse" required/>
         <!-- API REST : si le mot de passe confirmé est différent, il faut empêcher l'utilisateur
         de poursuivre en générant une erreur. -->
         <label for="confirmerMdp">Confirmer votre mot de passe : </label>
-        <input type="password" name="confirmerMdp" id="confirmerMdp" required maxlength="25"/>
+        <input type="password" name="confirmerMdp" id="confirmerMdp" required/>
 
         <input
           type="submit"
