@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__."/../../config.php";
 
-$sql = "SELECT DISTINCT Livre.isbn 
+$sql = "SELECT SELECT DISTINCT Livre.*
         FROM Livre
         JOIN Type_Livre ON Livre.ISBN = Type_Livre.isbn_livre 
         JOIN Categorie_Livre ON Livre.ISBN = Categorie_Livre.isbn_livre
