@@ -6,7 +6,8 @@ if ((isset($categorie) && $categorie !== "-") || (isset($type) && $type !== "-")
             FROM Livre
             JOIN Type_Livre ON Livre.ISBN = Type_Livre.ISBN 
             JOIN Categorie_Livre ON Livre.ISBN = Categorie_Livre.ISBN
-            WHERE ";
+            WHERE (:categorie = '-' OR Categorie_Livre.categorie = :categorie)
+        AND (:type = '-' OR Type_Livre.type = :type)";
     
     $conditions = [];
     if (isset($categorie) && $categorie !== "-") {
