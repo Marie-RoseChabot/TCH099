@@ -1,6 +1,35 @@
 <?php
 require_once __DIR__.'/config.php';
+
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+  $username = $_POST['username'];
+  $password = $_POST['motDePasse'];
+  
+  if(str_contains($username, "@")){
+    $stmtEmail = $pdo->prepare('SELECT * FROM Usager WHERE courriel = ?');
+    $stmtEmail->execute([$username]);
+    $user = $stmtEmail->fetch();
+  } else {
+    $stmtUsername = $pdo->prepare('SELECT * FROM Usager WHERE username = ?');
+    $stmtUsername->execute([$username]);
+    $user = $stmtUsername->fetch();
+  }
+
+
+  if($user && password_verify($password, $user['password'])){
+    $_SESSION['usager'] = $user['id'];
+    $connecte = 1;
+    header("Location: /index.php");
+    exit;
+  } else {
+    $error = "Nom d'utilisateur ou mot de passe invalide.";
+  }
+
+
+}
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
