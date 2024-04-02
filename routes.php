@@ -14,6 +14,7 @@ get('/api/livres', '/api/livres/getLivres.php');
 get('/api/categories', '/api/livres/getCategorie.php');
 get('/api/types', '/api/livres/getTypes.php');
 get('/api/livres/$isbn', '/api/livres/getLivre.php');
+get('/api/livres/$Categorie/$Type', '/api/livres/getLivresCatType.php');
 put('/api/livres/$isbn', '/api/livres/putLivres.php');
 post('/api/livres', '/api/livres/postLivre.php');
 
