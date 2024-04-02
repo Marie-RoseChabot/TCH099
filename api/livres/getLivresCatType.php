@@ -6,7 +6,7 @@ $sql = "SELECT *
         FROM Livre
         JOIN Type_Livre ON Livre.ISBN = Type_Livre.isbn_livre 
         JOIN Categorie_Livre ON Livre.ISBN = Categorie_Livre.isbn_livre
-        WHERE(Categorie_Livre.id_categorie = :categorie OR   0=:categorie) AND (Type_Livre.id_type = :type OR 0=:type)";
+        WHERE (Categorie_Livre.id_categorie = :categorie OR :categorie = 0) AND (Type_Livre.id_type = :typ OR :typ = 0)";
 
 
 $stmt = $pdo->prepare($sql);
@@ -16,7 +16,7 @@ if (isset($categorie)) {
     $stmt->bindParam(":categorie", $categorie);
 }
 if (isset($type)) {
-    $stmt->bindParam(":type", $type);
+    $stmt->bindParam(":typ", $type);
 }
 
 $stmt->execute();
