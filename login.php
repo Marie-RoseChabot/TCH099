@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__.'/config.php';
-
+$error = '';
 if($_SERVER["REQUEST_METHOD"] == "POST") {
   $username = $_POST['username'];
   $password = $_POST['motDePasse'];
@@ -25,6 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $error = "Nom d'utilisateur ou mot de passe invalide.";
   }
 
+  echo "Erreur : " . $error;
 
 }
 
