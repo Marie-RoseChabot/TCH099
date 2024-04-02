@@ -25,7 +25,7 @@ if ($livres) {
     echo json_encode($livres);
     exit;
 } else {
-    echo json_encode("");
+    echo json_encode();
     exit;
 }
 ?>
