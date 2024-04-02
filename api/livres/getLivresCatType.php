@@ -20,12 +20,9 @@ $stmt->execute();
 
 $livres = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-if ($livres) {
+
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($livres);
     exit;
-} else {
-    header("HTTP/1.0 404 Not Found");
-    exit;
-}
+
 ?>
