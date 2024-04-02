@@ -14,12 +14,15 @@ const afficherLivre = function(listeLivre) {
         baliseImage.src = livre.url_image;
         baliseImage.alt = "";
 
-        baliseArticle.addEventListener('click', function() {
+        /*baliseArticle.addEventListener('click', function() {
             baliseDesc.textContent = livre.description_livre;
             dialog.showModal();
             dialog.addEventListener('click', function() {
                 dialog.close();
             });
+        });*/
+        baliseArticle.addEventListener('click', function() {
+            
         });
         parent.appendChild(baliseArticle);
     })
@@ -103,16 +106,16 @@ rechercheSoumettre.onclick = function() {
 
     afficherLivre(filtreRecherche);
 }
-
+var clicked = [];
 const scrollCategorie = function() {
-    const spanCat = document.querySelector('#headerCategorie');
-    const spanFleche = document.querySelector('#fleche');
+    const spanCat = document.querySelector('.headerCategorie');
+    const spanFleche = document.querySelector('.fleche');
+    const categorie = document.querySelectorAll('.categorie');
     spanCat.addEventListener('click', function() {
         spanFleche.style.transition = 'transform 0.5s';
         spanFleche.style.transform = 'translate(7.5rem)';
         spanCat.style.transition = 'transform 0.5s';
         spanCat.style.transform = 'translate(-2rem)';
-        const categorie = document.querySelectorAll('.categorie');
         categorie.forEach((cat, index) => {
             cat.style.visibility = 'visible';
             const delai = index * 50;
@@ -121,6 +124,16 @@ const scrollCategorie = function() {
                 cat.style.opacity = 1;
             }, delai);
             cat.onclick = function() {
+                cat.style.transition = 'font-size 0.175s';
+                cat.style.fontSize = '2.25dvb';
+                setTimeout(() => {
+                    cat.style.transition = 'font-size 0.175s';
+                    cat.style.fontSize = '2.5dvb';
+                }, 175);
+                categorie.forEach((c) => {
+                    c.style.border = 'none';
+                });
+                cat.style.border = '0.1rem solid wheat';
                 var filtreCategorie = [];
                 var article = document.querySelectorAll('article');
                 article.forEach((item) => {
@@ -143,8 +156,8 @@ const scrollCategorie = function() {
 }
 
 const unscrollCategorie = function() {
-    const spanCat = document.querySelector('#headerCategorie');
-    const spanFleche = document.querySelector('#fleche');
+    const spanCat = document.querySelector('.headerCategorie');
+    const spanFleche = document.querySelector('.fleche');
     const categorie = document.querySelectorAll('.categorie');
     spanCat.addEventListener('click', function() {
         spanFleche.style.transition = 'transform 0.5s';
@@ -166,8 +179,3 @@ const unscrollCategorie = function() {
         scrollCategorie();
     });
 }
-
-afficherLivre(listeLivre);
-afficherType(listeType);
-afficherCategorie(listeCategorie);
-scrollCategorie();

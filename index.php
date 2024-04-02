@@ -76,15 +76,53 @@ $typeJson = json_encode($type);
     </nav>
     <main class="principal">
         <h2 id="filtreCategorie">Catalogue
-            <span id="fleche">></span>
-            <span id="headerCategorie">Catégorie</span>
+            <span class="fleche">></span>
+            <span class="headerCategorie">Catégorie</span>
         </h2>
-        <dialog id="dialogDescription"><p id="description"></p>
-        </dialog>
         <div class="background" id="parchemin"></div>
+        <!--<dialog id="dialogDescription"><p id="description"></p>
+    
+        <div class="onglet">
+        <ul>
+            <li><a href="./index.php">Catalogue</a></li>
+            <li>Réserver</li>
+            <li>Se connecter / S'inscrire</li>
+            <li><input type="text" id="recherche" placeholder="Recherche"><button type="submit" id="submitRecherche">Soumettre</button></li>
+        </ul>
+        <dialog id="bouton">
+          <button id="close">Fermer</button>
+          <button id="send" type="submit" onclick="addJeu()">Envoyer</button>
+          <p>Veuillez entrez les informations suivante pour donnez une critique a un livre</p>
+          <form id="backdrop">
+            <fieldset>
+              <select name="choix" id="choix">
+              <option value="option">Veuillez sélectionner le livre</option>
+              <option value="ccm">CCM</option> 
+              <option value="bauer">BAUER</option>
+              <option value="true">TRUE</option>
+              </select>
+              <label for="etoiles">Veuillez donnez votre avis entre 1 et 5 étoiles</label>
+            <div class="rating">
+              <input type="range" min="0" max="5" step="1" value="0" class="slider" id="starRating">
+              <output for="starRating" id="output"></output>
+            </div>  
+            <label for="avis">Veuillez donnez votre avis écris</label>
+            <input type="text" id="avis" name="avis" />         
+            </fieldset>
+          </form>
+        </dialog>
+        <button id="ouvrirDialog">Critique</button>
+    </div>
+        </dialog>-->
     </main>
     <footer class="bas">
         <strong>© 2024 - Équipe E</strong>
     </footer>
     <script type="text/javascript" src="./script.js"></script>
+    <script>
+        afficherLivre(listeLivre);
+        afficherType(listeType);
+        afficherCategorie(listeCategorie);
+        scrollCategorie();
+    </script>
 </body>
