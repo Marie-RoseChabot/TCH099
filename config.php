@@ -1,4 +1,14 @@
 <?php
+
+// Démarrage de la session
+session_start();
+
+if(isset($_GET["deconnexion"])){
+    unset($_SESSION['connecte']);
+    header("Location: index.php");
+    $gPublic = 1;
+    exit;
+}
 $host =  parse_url($_SERVER["HTTP_HOST"], PHP_URL_HOST);
 if($host=="localhost"){
     //Code d'accès à la base de données locale

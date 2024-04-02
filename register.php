@@ -1,40 +1,44 @@
 <?php
 require_once __DIR__.'/config.php';
-$error = '';
+$gPublic = true;
+
+$message = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['motDePasse'];
-    $confirmPass = $_POST['confirmerMdp'];
-    $email = $_POST['courriel'];
-    $typeUsager = $_POST['typeCompte'];
-    $dateNaissance = $_POST['dateNaissance'];
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
 
-    if($password == $confirmPass) {
+  // récupère valeurs du formulaire
+  $prenom = $_POST['prenom'];
+  $nom = $_POST['nom'];
+  $courriel = $_POST['courriel'];
+  $dateNaissance = $_POST['dateNaissance'];
+  $username = $_POST['username'];
+  $password = $_POST['motDePasse'];
+  $typeUsager = $_POST['typeCompte'];
+  $confirmPass = $_POST['confirmerMdp'];
 
-    $stmt = $pdo->prepare('SELECT * FROM Usager WHERE username =?');
+  if($password == $confirmPass) {
+    // Vérifier si l'utilisateur existe déjà
+    $stmt = $pdo->prepare('SELECT * FROM Usager WHERE username = ?');
     $stmt->execute([$username]);
     if ($stmt->fetch()){
         $error = 'Ce nom d\'utilisateur est déjà pris.';
     } else {
+        // Hasher le mot de passe
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $pdo->prepare('INSERT INTO `Usager` (`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`, `type_usager`) VALUES (?, ?, ?, ?, ?, ?, ?)');
-        
-        if($stmt->execute([$username, $passwordHash, $email, $nom, $prenom, $dateNaissance, $typeUsager])){
+
+        // Insérer le nouvel utilisateur
+        $stmt = $pdo->prepare('INSERT INTO Usager (`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`, `type_usager`) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        if ($stmt->execute([$username, $passwordHash, $courriel, $nom, $prenom, $dateNaissance, $typeUsager])) {
             header("Location: login.php");
             exit;
         } else {
-            $error = 'Erreur lors de la création du compte.';
+            $message = 'Erreur lors de la création du compte.';
         }
-    }
+      }
   } else {
-    $error = 'Erreur lors de la confirmation du mot de passe.';
-    
+        $message = 'Erreur lors de la confirmation du mot de passe.';
   }
-  echo $error;
-  $error = '';
+  echo $message;
 }
 ?>
 
@@ -45,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Saisir le lien du css ici -->
     <link rel="stylesheet" href="style.css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
     <title>Inscription</title>
   </head>
   <body>
