@@ -8,12 +8,13 @@ require_once __DIR__.'/config.php';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Saisir le lien du css ici -->
+    <link rel="stylesheet" href="style.css" />
     <title>Inscription</title>
   </head>
   <body>
     <main>
       <form id="formRegister" class="formulaires" action="./register.php" method="post">
-        <h2>Entrez vos informations pour créer un compte</h2>
+        <h2 id="enteteRegister">Entrez vos informations pour créer un compte</h2>
         <select name="typeCompte" id="typeCompte">          
           <option value="">--Veuillez choisir le type de compte désiré--</option>
           <option value="client">Client</option>

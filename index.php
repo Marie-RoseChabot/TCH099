@@ -76,8 +76,8 @@ $typeJson = json_encode($type);
     </nav>
     <main class="principal">
         <h2 id="filtreCategorie">Catalogue
-            <span id="fleche">></span>
-            <span id="headerCategorie">Catégorie</span>
+            <span class="fleche">></span>
+            <span class="headerCategorie">Catégorie</span>
         </h2>
         <dialog id="dialogDescription"><p id="description"></p>
         </dialog>
@@ -87,4 +87,10 @@ $typeJson = json_encode($type);
         <strong>© 2024 - Équipe E</strong>
     </footer>
     <script type="text/javascript" src="./script.js"></script>
+    <script>
+        afficherLivre(listeLivre);
+        afficherType(listeType);
+        afficherCategorie(listeCategorie);
+        scrollCategorie();
+    </script>
 </body>
