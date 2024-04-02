@@ -55,10 +55,10 @@
   cursor: pointer;
 }
 .categorie:hover {
-  transform: scale(1.1);
+  transform: scale(1.175);
 }
 .principal .categorie {
-  font-size: 2dvb;
+  font-size: 2.5dvb;
   opacity: 0;
 }
 .onglet {

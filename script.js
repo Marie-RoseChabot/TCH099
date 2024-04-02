@@ -14,12 +14,15 @@ const afficherLivre = function(listeLivre) {
         baliseImage.src = livre.url_image;
         baliseImage.alt = "";
 
-        baliseArticle.addEventListener('click', function() {
+        /*baliseArticle.addEventListener('click', function() {
             baliseDesc.textContent = livre.description_livre;
             dialog.showModal();
             dialog.addEventListener('click', function() {
                 dialog.close();
             });
+        });*/
+        baliseArticle.addEventListener('click', function() {
+            
         });
         parent.appendChild(baliseArticle);
     })
@@ -121,12 +124,12 @@ const scrollCategorie = function() {
                 cat.style.opacity = 1;
             }, delai);
             cat.onclick = function() {
-                cat.style.transition = 'font-size 0.25s';
-                cat.style.fontSize = '1.8dvb';
+                cat.style.transition = 'font-size 0.175s';
+                cat.style.fontSize = '2.25dvb';
                 setTimeout(() => {
-                    cat.style.transition = 'font-size 0.25s';
-                    cat.style.fontSize = '2dvb';
-                }, 250);
+                    cat.style.transition = 'font-size 0.175s';
+                    cat.style.fontSize = '2.5dvb';
+                }, 175);
                 categorie.forEach((c) => {
                     c.style.border = 'none';
                 });
