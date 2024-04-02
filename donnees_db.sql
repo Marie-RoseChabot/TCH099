@@ -59,6 +59,7 @@ INSERT INTO `Livre` (`isbn`, `titre`, `maison_edition`, `annee`, `url_image`, `d
 --
 
 INSERT INTO `Categorie` (`id_categorie`, `nom`) VALUES
+(0, 'Tous'),
 (1, 'Aventure'),
 (2, 'Biographique'),
 (3, 'Jeunesse'),
@@ -103,6 +104,7 @@ INSERT INTO `Categorie_Livre` (`isbn_livre`, `id_categorie`) VALUES
 --
 
 INSERT INTO `Type` (`id_type`, `nom`) VALUES
+(0, 'Tous'),
 (1, 'Bandes dessinées'),
 (2, 'Contes'),
 (3, 'Documentaires'),
