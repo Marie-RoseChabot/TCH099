@@ -3,8 +3,14 @@
 // Démarrage de la session
 session_start();
 
+if(isset($_SESSION["usager"])) {
+    $gUserId = $_SESSION["usager"];
+} else {
+    $gUserId = 0;
+}
+
 if(isset($_GET["deconnexion"])){
-    unset($_SESSION['connecte']);
+    unset($_SESSION["usager"]);
     header("Location: index.php");
     $gPublic = 1;
     exit;
