@@ -1,25 +1,49 @@
-
+<?php
 require_once __DIR__."/../../config.php";
 
-
-$sql = "SELECT * 
+if ((isset($categorie) && $categorie !== "-") || (isset($type) && $type !== "-")) {
+    $sql = "SELECT * 
+            FROM Livre
+            JOIN Type_Livre ON Livre.ISBN = Type_Livre.ISBN 
+            JOIN Categorie_Livre ON Livre.ISBN = Categorie_Livre.ISBN
+            WHERE ";
+    
+    $conditions = [];
+    if (isset($categorie) && $categorie !== "-") {
+        $conditions[] = "Categorie_Livre.categorie = :categorie";
+    }
+    if (isset($type) && $type !== "-") {
+        $conditions[] = "Type_Livre.type = :type";
+    }
+    
+    $sql .= implode(" AND ", $conditions);
+    
+    $stmt = $pdo->prepare($sql);
+    
+    if (isset($categorie) && $categorie !== "-") {
+        $stmt->bindParam(":categorie", $categorie);
+    }
+    if (isset($type) && $type !== "-") {
+        $stmt->bindParam(":type", $type);
+    }
+} else {
+    $stmt = $pdo->prepare("
+        SELECT * 
         FROM Livre
-        JOIN Type_Livre ON Livre.ISBN = Type_Livre.isbn_livre 
-        JOIN Categorie_Livre ON Livre.ISBN = Categorie_Livre.isbn_livre
-        WHERE (:categorie=Categorie_Livre.id_categorie OR :type=Type_Livre.id_type)";
-        WHERE (Categorie_Livre.id_categorie = :categorie OR Type_Livre.id_type = :type)";
+    ");
+}
 
+$stmt->execute();
 
-$stmt = $pdo->prepare($sql);
-
+$livres = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if ($livres) {
-
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($livres);
     exit;
 } else {
-
     header("HTTP/1.0 404 Not Found");
     exit;
 }
+?>
+
