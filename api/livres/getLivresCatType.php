@@ -1,9 +1,7 @@
 <?php
 require_once __DIR__."/../../config.php";
 
-// Check if either $categorie or $type is provided and not equal to '-'
 if ((isset($categorie) && $categorie !== "-") || (isset($type) && $type !== "-")) {
-    // Construct a SQL query to filter by category and/or type if provided
     $sql = "SELECT * 
             FROM Livre
             JOIN Type_Livre ON Livre.ISBN = Type_Livre.ISBN 
@@ -22,7 +20,6 @@ if ((isset($categorie) && $categorie !== "-") || (isset($type) && $type !== "-")
     
     $stmt = $pdo->prepare($sql);
     
-    // Bind parameters if they are provided
     if (isset($categorie) && $categorie !== "-") {
         $stmt->bindParam(":categorie", $categorie);
     }
@@ -30,7 +27,6 @@ if ((isset($categorie) && $categorie !== "-") || (isset($type) && $type !== "-")
         $stmt->bindParam(":type", $type);
     }
 } else {
-    // If neither $categorie nor $type is provided, fetch all books without filtering
     $stmt = $pdo->prepare("
         SELECT * 
         FROM Livre
