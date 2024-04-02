@@ -1,5 +1,41 @@
 <?php
 require_once __DIR__.'/config.php';
+$error = '';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['motDePasse'];
+    $confirmPass = $_POST['confirmerMdp'];
+    $email = $_POST['courriel'];
+    $typeUsager = $_POST['typeCompte'];
+    $dateNaissance = $_POST['dateNaissance'];
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+
+    if($password == $confirmPass) {
+
+    $stmt = $pdo->prepare('SELECT * FROM Usager WHERE username =?');
+    $stmt->execute([$username]);
+    if ($stmt->fetch()){
+        $error = 'Ce nom d\'utilisateur est déjà pris.';
+    } else {
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $pdo->prepare('INSERT INTO `Usager` (`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`, `type_usager`) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        
+        if($stmt->execute([$username, $passwordHash, $email, $nom, $prenom, $dateNaissance, $typeUsager])){
+            header("Location: login.php");
+            exit;
+        } else {
+            $error = 'Erreur lors de la création du compte.';
+        }
+    }
+  } else {
+    $error = 'Erreur lors de la confirmation du mot de passe.';
+    
+  }
+  echo $error;
+  $error = '';
+}
 ?>
 
 <!DOCTYPE html>
@@ -38,11 +74,11 @@ require_once __DIR__.'/config.php';
         <label for="username">Nom d'utilisateur : </label>
         <input type="text" name="username" id="username" required maxlength="25"/>
         <label for="motDePasse">Mot de passe : </label>
-        <input type="password" name="motDePasse" id="motDePasse" required maxlength="25"/>
+        <input type="password" name="motDePasse" id="motDePasse" required/>
         <!-- API REST : si le mot de passe confirmé est différent, il faut empêcher l'utilisateur
         de poursuivre en générant une erreur. -->
         <label for="confirmerMdp">Confirmer votre mot de passe : </label>
-        <input type="password" name="confirmerMdp" id="confirmerMdp" required maxlength="25"/>
+        <input type="password" name="confirmerMdp" id="confirmerMdp" required/>
 
         <input
           type="submit"
