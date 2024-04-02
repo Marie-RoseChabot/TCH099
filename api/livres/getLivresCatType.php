@@ -5,7 +5,7 @@ $sql = "SELECT *
         FROM Livre
         JOIN Type_Livre ON Livre.ISBN = Type_Livre.isbn_livre 
         JOIN Categorie_Livre ON Livre.ISBN = Categorie_Livre.isbn_livre
-        WHERE (Categorie_Livre.id_categorie = if(:categorie=0,Categorie_Livre.id_categorie,:categorie) ) AND (Type_Livre.id_type = :type)";
+        WHERE (Categorie_Livre.id_categorie = :categorie) AND (Type_Livre.id_type = :type)";
 
 $stmt = $pdo->prepare($sql);
 
