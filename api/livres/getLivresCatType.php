@@ -6,16 +6,16 @@ $sql = "SELECT *
         FROM Livre
         JOIN Type_Livre ON Livre.ISBN = Type_Livre.isbn_livre 
         JOIN Categorie_Livre ON Livre.ISBN = Categorie_Livre.isbn_livre
-        WHERE (Categorie_Livre.id_categorie = :categorie OR Type_Livre.id_type = :type)";
+        WHERE ((Categorie_Livre.id_categorie = :categorie) OR(:categorie="-")  AND (Type_Livre.id_type = :type OR(:type="-")) )";
 
 
 $stmt = $pdo->prepare($sql);
 
 
-if (isset($categorie) && $categorie !== "-") {
+if (isset($categorie)) {
     $stmt->bindParam(":categorie", $categorie);
 }
-if (isset($type) && $type !== "-") {
+if (isset($type)) {
     $stmt->bindParam(":type", $type);
 }
 
