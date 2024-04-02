@@ -14,8 +14,8 @@ if (isset($type) && $type !== "-") {
 
 $sql = "SELECT * 
         FROM Livre
-        JOIN Type_Livre ON Livre.ISBN = Type_Livre.ISBN 
-        JOIN Categorie_Livre ON Livre.ISBN = Categorie_Livre.ISBN";
+        JOIN Type_Livre ON Livre.isbn = Type_Livre.isbn_livre
+        JOIN Categorie_Livre ON Livre.isbn = Categorie_Livre.isbn_livre";
 
 if (!empty($conditions)) {
     $sql .= " WHERE " . implode(" AND ", $conditions);
