@@ -1,5 +1,34 @@
 <?php
 require_once __DIR__.'/config.php';
+$gPublic = true;
+
+$message = '';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  // récupère valeurs du formulaire
+  $prenom = $_POST['prenom'];
+  $nom = $_POST['nom'];
+  $courriel = $_POST['courriel'];
+  $dateNaissance = $_POST['dateNaissance'];
+  $username = $_POST['username'];
+  $password = $_POST['motDePasse'];
+
+    // Vérifier si l'utilisateur existe déjà
+    $stmt = $pdo->prepare('SELECT * FROM Usager');
+    
+        // Hasher le mot de passe
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+        // Insérer le nouvel utilisateur
+        $stmt = $pdo->prepare('INSERT INTO Usager (username, password, courriel, nom, prenom, date_naissance) VALUES (?, ?, ?, ?, ?, ?)');
+        if ($stmt->execute([$username, $passwordHash, $courriel, $nom, $prenom, $dateNaissance])) {
+            header("Location: login.php");
+            exit;
+        } else {
+            $message = 'Erreur lors de la création du compte.';
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -9,6 +38,7 @@ require_once __DIR__.'/config.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Saisir le lien du css ici -->
     <link rel="stylesheet" href="style.css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
     <title>Inscription</title>
   </head>
   <body>
