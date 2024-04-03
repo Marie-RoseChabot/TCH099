@@ -105,7 +105,7 @@ ul {
   display: flex;
   flex-wrap: wrap;
 }
-.principal article {
+.principal .livre {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -114,10 +114,57 @@ ul {
   height: 20.5rem;
   width: 12.5rem;
 }
-.principal article:hover {
+.principal .livre:hover {
   transition: transform 0.25s;
   transform: scale(1.1);
   cursor: pointer;
+}
+.principal .livreChoisi {
+  padding-left: 7.5rem;
+  padding-top: 5rem;
+  width: 40rem;
+  transform: scale(1.375);
+  display: grid;
+  gap: 1rem;
+  grid-template-areas:
+    "img   titre  vide  reservation"
+    "img   desc   desc  critique";
+}
+.principal .livreChoisi img {
+  grid-area: img;
+}
+.principal .livreChoisi h4 {
+  grid-area: titre;
+  font-size: 3dvb;
+  border-right: 0.1rem solid crimson;
+  border-bottom: 0.1rem solid crimson;
+  width: max-content;
+  height: max-content;
+  margin: 0;
+}
+.principal .livreChoisi p {
+  grid-area: desc;
+  margin: 0;
+}
+.principal .livreChoisi #reservation {
+  grid-area: reservation;
+}
+.principal .livreChoisi #btnCritique {
+  grid-area: critique;
+  width: 2rem;
+  height: 2rem;
+  margin-left: 2.50rem;
+  color: wheat;
+  background: crimson;
+  padding: 0.625rem 1.5rem;
+  box-shadow: crimson 0rem 0rem 0rem 0rem;
+  border-radius: 3.125rem;
+  border: 0.1rem solid crimson;
+  cursor: pointer;
+}
+.principal .livreChoisi #btnCritique:hover{
+  transition : 0.5s;
+  background: linear-gradient(90deg, wheat 0%, crimson 100%);
 }
 .principal h2 {
   width: 500rem;
