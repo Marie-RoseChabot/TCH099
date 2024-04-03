@@ -56,9 +56,9 @@ $typeJson = json_encode($type);
         <p><a href="./index.php">Catalogue</a></p>
         <?php
         // Ce qui s'affiche si l'utilisateur est connecté
-        if(isset($connecte) && $connecte != 0){
+        if(isset($_SESSION["usager"])){
             echo "<p>Réserver</p>";
-            echo "<p>Se déconnecter</p>";
+            echo '<a href = "./index.php?deconnexion"> Se déconnecter</a>';
         }
 
         // Ce qui s'affiche s'il n'est pas connecté

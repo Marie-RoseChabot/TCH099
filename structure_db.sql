@@ -227,7 +227,7 @@ CREATE TABLE `Auteur` (
 DROP TABLE IF EXISTS `Usager`;
 CREATE TABLE `Usager` (
   `username` varchar(25) NOT NULL,
-  `password` varchar(25) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `courriel` varchar(50) DEFAULT NULL,
   `nom` varchar(25) NOT NULL,
   `prenom` varchar(25) NOT NULL,
