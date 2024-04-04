@@ -1,11 +1,11 @@
 <?php
 require_once __DIR__."/../../config.php";
 
-$motCle = isset($_GET['motCle']) ? $_GET['motCle'] : null;
+
 
 if(isset($motCle)){
-    $stmt = $pdo->prepare("SELECT * FROM Livre 
-    WHERE upper(titre) like upper(:motCle);");
+    $stmt = $pdo->prepare("SELECT * FROM Livre ");
+    --WHERE upper(titre) like upper(:motCle)");
 
     $motCleParam = "%$motCle%";
     $stmt->bindParam(":motCle", $motCleParam);
