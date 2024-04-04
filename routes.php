@@ -13,6 +13,7 @@ any('/demandeAjout.php', 'demandeAjout.php');
 get('/api/livres', '/api/livres/getLivres.php');
 get('/api/categories', '/api/livres/getCategorie.php');
 get('/api/types', '/api/livres/getTypes.php');
+get('/api/auteur/$id','/api/livres/getAuteurs.php');
 get('/api/livres/$isbn', '/api/livres/getLivre.php');
 get('/api/livres/$categorie/$type', '/api/livres/getLivresCatType.php');
 put('/api/livres/$isbn', '/api/livres/putLivres.php');
