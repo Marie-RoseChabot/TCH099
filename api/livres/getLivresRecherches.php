@@ -1,21 +1,23 @@
 <?php
 require_once __DIR__."/../../config.php";
 
-if(isset($motCle) && filter_var($motCle, FILTER_VALIDATE_INT)){
-    $stmt = $pdo->prepare("SELECT * FROM `Livre` 
-    WHERE upper(Livre.titre) like upper('%'||$motCle||'%')
-    ");
-    $stmt->bindParam(":motCle", $motCle);
+
+$motCle = isset($_GET['motCle']) ? $_GET['motCle'] : null;
+
+if($motCle !== null ){
+    
+    $stmt = $pdo->prepare("SELECT * FROM `Livre` WHERE UPPER(Livre.titre) LIKE ?");
+    
+    $motCle = '%' . $motCle . '%';
+    
+    
+    $stmt->bindValue(1, $motCle, PDO::PARAM_STR);
     $stmt->execute();
 
-    $livre = $stmt->fetch();
+    $livres = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
-    $livre = ["error"=>"invalide"];
+    $livres = ["error" => "invalid keyword"];
 }
 
-
-if($livre){
-    header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($livre);
-    exit;
-}
+header('Content-Type: application/json; charset=utf-8');
+echo json_encode($livres);
