@@ -2,7 +2,7 @@
 require_once __DIR__."/../../config.php";
 
 if(isset($motCle)){
-    $motCle = "%$motCle%";
+    $motCle = '%$motCle%';
     $stmt = $pdo->prepare("SELECT * FROM Livre 
     LEFT OUTER JOIN Auteur ON Livre.id_auteur = Auteur.id
     WHERE (UPPER(Livre.titre) LIKE UPPER(:motCle)
