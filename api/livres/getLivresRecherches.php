@@ -8,7 +8,7 @@ if(isset($motCle)){
     //WHERE upper(titre) like upper(:motCle)");
 
     $motCleParam = "%$motCle%";
-    $stmt->bindParam(":motCle", $motCleParam);
+    $stmt->bindParam(":motCle", $motCle);
     $stmt->execute();
 
     $livres = $stmt->fetchAll(PDO::FETCH_ASSOC);
