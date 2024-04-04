@@ -12,7 +12,7 @@ if(isset($motCle)){
     OR upper(Auteur.prenom) like upper(:motCle) 
     OR upper(Livre.isbn) like upper(:motCle))");
     $stmt->bindParam(":motCle", $motCleParam);
-    $stmt->bindParam(":motCle", $motCleParam);
+  
     $stmt->execute();
 
     $livres = $stmt->fetchAll(PDO::FETCH_ASSOC);
