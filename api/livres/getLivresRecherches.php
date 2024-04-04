@@ -6,11 +6,11 @@ if(isset($motCle)){
     $motCleParam = "%$motCle%";
     $stmt = $pdo->prepare("SELECT * FROM Livre 
     left outer JOIN Auteur on Livre.id_auteur=auteur.id
-    WHERE (upper(livretitre) like upper(:motCle)
+    WHERE (upper(Livre.titre) like upper(:motCle)
     OR UPPER(CONCAT(Auteur.prenom, ' ', Auteur.nom)) LIKE UPPER(:motCle) 
-    OR upper(auteur.nom) like upper(:motCle) 
-    OR upper(auteur.prenom) like upper(:motCle) 
-    OR upper(livre.isbn) like upper(:motCle))");
+    OR upper(Auteur.nom) like upper(:motCle) 
+    OR upper(Auteur.prenom) like upper(:motCle) 
+    OR upper(Livre.isbn) like upper(:motCle))");
     $stmt->bindParam(":motCle", $motCleParam);
     $stmt->execute();
 
