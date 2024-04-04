@@ -1,21 +1,20 @@
 <?php
 require_once __DIR__."/../../config.php";
 
+$motCle = isset($_GET['motCle']) ? $_GET['motCle'] : null;
+
 if(isset($motCle)){
     $stmt = $pdo->prepare("SELECT * FROM Livre 
-    WHERE upper(titre) like upper('%'||$motCle||'%');");
-   
-   $stmt->bindParam(":motCle", $motCle);
+    WHERE upper(titre) like upper(:motCle);");
+
+    $motCleParam = "%$motCle%";
+    $stmt->bindParam(":motCle", $motCleParam);
     $stmt->execute();
 
-    $livre = $stmt->fetch();
+    $livres = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
-    $livre = ["error"=>"invalide"];
+    $livres = ["error" => "invalide"];
 }
 
-
-if($livre){
-    header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($livre);
-    exit;
-}
+header('Content-Type: application/json; charset=utf-8');
+echo json_encode($livres);
