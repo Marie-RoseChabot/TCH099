@@ -2,10 +2,10 @@
 require_once __DIR__."/../../config.php";
 
 if(isset($motCle)){
-    $stmt = $pdo->prepare("SELECT * FROM `Livre` 
-    
-    WHERE upper(Titre) like upper('%'||$motCle||'%');");
-    $stmt->bindParam(":motCle", $motCle);
+    $stmt = $pdo->prepare("SELECT * FROM Livre 
+    WHERE upper(titre) like upper('%'||$motCle||'%');");
+   
+   $stmt->bindParam(":motCle", $motCle);
     $stmt->execute();
 
     $livre = $stmt->fetch();
