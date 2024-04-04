@@ -5,7 +5,7 @@ require_once __DIR__."/../../config.php";
 if(isset($motCle)){
     $motCleParam = "%$motCle%";
     $stmt = $pdo->prepare("SELECT * FROM Livre 
-    left outer JOIN Auteur on Livre.id_auteur=auteur.id
+    left outer JOIN Auteur on Livre.id_auteur=Auteur.id
     WHERE (upper(Livre.titre) like upper(:motCle)
     OR UPPER(CONCAT(Auteur.prenom, ' ', Auteur.nom)) LIKE UPPER(:motCle) 
     OR upper(Auteur.nom) like upper(:motCle) 
