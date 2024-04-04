@@ -12,8 +12,8 @@ if(isset($id) && filter_var($id, FILTER_VALIDATE_INT)){
 }
 
 
-if($lauteur){
+if($auteur){
     header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($livre);
+    echo json_encode($auteur);
     exit;
 }
