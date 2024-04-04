@@ -9,10 +9,8 @@ if(isset($motCle) ){
     $stmt->bindParam(":motCle", $motCle);
     $stmt->execute();
 
-    $livre = $stmt->fetchAll();
-} else {
-    $livre = ["error"=>"invalide"];
-}
+    $livre = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} 
 
 
 if($livre){
