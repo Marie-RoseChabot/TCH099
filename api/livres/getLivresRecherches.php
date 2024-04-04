@@ -9,6 +9,7 @@ if(isset($motCle)){
     WHERE (upper(Livre.titre) like upper(CONCAT('%',:motCle,'%')))
     OR (upper(Livre.titre) like upper(CONCAT('%',:motCle2,'%')))");
 
+    $conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
     $stmt->bindParam(":motCle", $motCle,PDO::PARAM_STR);
     $stmt->bindParam(":motCle2", $motCle,PDO::PARAM_STR);
 
