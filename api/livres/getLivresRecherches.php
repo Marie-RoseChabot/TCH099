@@ -2,7 +2,7 @@
 require_once __DIR__."/../../config.php";
 
 if(isset($motCle)){
-    $motCleParam = "%$motCle%";
+    $motCle = "%$motCle%";
     $stmt = $pdo->prepare("SELECT * FROM Livre 
     LEFT OUTER JOIN Auteur ON Livre.id_auteur = Auteur.id
     WHERE (UPPER(Livre.titre) LIKE UPPER(:motCle)
@@ -10,7 +10,7 @@ if(isset($motCle)){
     OR UPPER(Auteur.nom) LIKE UPPER(:motCle) 
     OR UPPER(Auteur.prenom) LIKE UPPER(:motCle) 
     OR UPPER(Livre.isbn) LIKE UPPER(:motCle))");
-    $stmt->bindParam(":motCle", $motCleParam, PDO::PARAM_STR);
+    $stmt->bindParam(":motCle", $motCle, PDO::PARAM_STR);
     $stmt->execute();
 
     $livres = $stmt->fetchAll(PDO::FETCH_ASSOC);
