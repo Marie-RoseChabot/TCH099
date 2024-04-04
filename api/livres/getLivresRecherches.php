@@ -6,7 +6,8 @@ if(isset($motCle)){
     
     $stmt = $pdo->prepare("SELECT * FROM Livre 
     
-    WHERE (upper(Livre.titre) like upper(CONCAT('%',:motCle,'%')))");
+    WHERE (upper(Livre.titre) like upper(CONCAT('%',:motCle,'%')))
+    OR (upper(Livre.titre) like upper(CONCAT('%',:motCle,'%')))");
 
     $stmt->bindParam(":motCle", $motCle,PDO::PARAM_STR);
     $stmt->execute();
