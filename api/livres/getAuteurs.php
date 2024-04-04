@@ -1,9 +1,19 @@
 <?php
 require_once __DIR__."/../../config.php";
-$stmt = $pdo->prepare('SELECT * FROM Auteur');
-$stmt->execute();
 
-$auteur = $stmt->fetchAll();
+if(isset($id) && filter_var($id, FILTER_VALIDATE_INT)){
+    $stmt = $pdo->prepare("SELECT * FROM `Auteur` WHERE `id`=:id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
 
-header('Content-Type: application/json; charset=utf-8');
-echo json_encode($auteur);
+    $auteur = $stmt->fetch();
+} else {
+    $auteur = ["error"=>"Code id invalide"];
+}
+
+
+if($lauteur){
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($livre);
+    exit;
+}
