@@ -2,12 +2,15 @@
 require_once __DIR__."/../../config.php";
 
 
-
 if(isset($motCle)){
-    $stmt = $pdo->prepare("SELECT * FROM Livre ");
-    //WHERE upper(titre) like upper(:motCle)");
-
     $motCleParam = "%$motCle%";
+    $stmt = $pdo->prepare("SELECT * FROM Livre 
+    left outer JOIN Auteur on Livre.id_auteur=auteur.id
+    WHERE (upper(Livre.titre) like upper(:motCle)
+    OR UPPER(CONCAT(Auteur.prenom, ' ', Auteur.nom)) LIKE UPPER(:motCle) 
+    OR upper(Auteur.nom) like upper(:motCle) 
+    OR upper(Auteur.prenom) like upper(:motCle) 
+    OR upper(Livre.isbn) like upper(:motCle))");
     $stmt->bindParam(":motCle", $motCleParam);
     $stmt->execute();
 
@@ -18,3 +21,4 @@ if(isset($motCle)){
 
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode($livres);
+?>
