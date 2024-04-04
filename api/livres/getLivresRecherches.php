@@ -3,10 +3,10 @@ require_once __DIR__."/../../config.php";
 
 
 if(isset($motCle)){
-    $motCleParam = "%$motCle%";
+    
     $stmt = $pdo->prepare("SELECT * FROM Livre 
     
-    WHERE (upper(Livre.titre) like upper(:motCle)
+    WHERE (upper(Livre.titre) like upper(CONCAT('%',:motCle,'%')))
    ");
     $stmt->bindParam(":motCle", $motCleParam);
     $stmt->execute();
