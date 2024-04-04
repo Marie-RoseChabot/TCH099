@@ -1,5 +1,6 @@
 const livresApiUrl = "/api/livres/";
 
+let numArticle = 0;
 const afficherLivre = function(listeLivre) {
     listeLivre.forEach((livre) => {
         const parent = document.querySelector('main');
@@ -8,24 +9,41 @@ const afficherLivre = function(listeLivre) {
         const baliseImage = document.createElement('img');
         const dialog = document.querySelector('#dialogDescription');
         const baliseDesc = document.querySelector('#description');
+        const baliseA = document.createElement('a');
 
-        baliseArticle.append(baliseTitre, baliseImage);
+        baliseArticle.append(baliseTitre, baliseImage, baliseA);
+        baliseA.href = livre.isbn;//fonctionne pas
+        baliseArticle.className = 'livre';
         baliseTitre.textContent = livre.titre;
         baliseImage.src = livre.url_image;
         baliseImage.alt = "";
 
-        /*baliseArticle.addEventListener('click', function() {
-            baliseDesc.textContent = livre.description_livre;
-            dialog.showModal();
-            dialog.addEventListener('click', function() {
-                dialog.close();
-            });
-        });*/
         baliseArticle.addEventListener('click', function() {
+            const articleChoisI = baliseArticle;
+            const baliseParagraph = document.createElement('p');
+            const baliseCritique = document.createElement('dialog');
+            const baliseBtnCritique = document.createElement('button');
+
+            while (parent.lastChild.id != 'parchemin') {
+                parent.removeChild(parent.lastChild);
+            }
+            articleChoisI.className = 'livreChoisi';
+            baliseArticle.append(baliseParagraph, baliseBtnCritique, baliseCritique);
+            baliseParagraph.textContent = livre.description_livre;
+            baliseBtnCritique.id = 'btnCritique';
+            baliseCritique.id = 'critique';
+
+            parent.appendChild(articleChoisI);
             
         });
         parent.appendChild(baliseArticle);
     })
+}
+
+const mouseoverBtn = function(btn) {
+    btn.addEventListener('mouseover', function() {
+        
+    });
 }
 
 const afficherType = function(listeType) {
@@ -144,14 +162,16 @@ const scrollCategorie = function() {
                         for (let i = 0; i < listeLivre.length; i++) {
                             if (listeLivre[i].isbn == livreId.isbn_livre) {
                                 filtreCategorie.push(listeLivre[i]);
-                            }
+                        }
                         }
                     }
                 })
                 afficherLivre(filtreCategorie);
             }
         });
-    unscrollCategorie();
+        setTimeout(() => {
+            unscrollCategorie();
+        }, 750);
     });
 }
 
@@ -176,6 +196,8 @@ const unscrollCategorie = function() {
                 cat.style.opacity = 0;
             }, delai);
         });
-        scrollCategorie();
+        setTimeout(() => {
+            scrollCategorie();
+        }, 750);
     });
 }

@@ -93,6 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         />
       </form>
       <div class="connecter">Vous avez déjà un compte ? Connectez-vous <a href="./login.php">ici</a>!
+      <div><a href="./index.php">Retour au catalogue</a></div>
     </main>
     
     </div>

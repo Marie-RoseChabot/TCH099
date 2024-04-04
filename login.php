@@ -57,6 +57,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         />
       </form>
       <div class="inscrire">Vous n'avez pas de compte ? Inscrivez-vous <a href="./register.php">ici</a>!
+      <div><a href="./index.php">Retour au catalogue</a></div>
       </div>
     </main>
   </body>
