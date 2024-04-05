@@ -3,7 +3,7 @@
 // Démarrage de la session
 session_start();
 
-require_once __DIR__."C:\Users\Dell\Documents\Uni\Bac\Session4\projet\Web\TCH099\vendor\php_jwt/JWTExceptionWithPayloadInterface.php";
+require_once __DIR__."C:\Users\Dell\Documents\Uni\Bac\Session4\projet\Web\TCH099/vendor\php_jwt/JWTExceptionWithPayloadInterface.php";
 require_once __DIR__."/vendor/php-jwt/BeforeValidException.php";
 require_once __DIR__."/vendor/php-jwt/CachedKeySet.php";
 require_once __DIR__."/vendor/php-jwt/ExpiredException.php";
