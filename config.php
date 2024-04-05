@@ -3,14 +3,16 @@
 // Démarrage de la session
 session_start();
 
-require_once __DIR__."C:\Users\Dell\Documents\Uni\Bac\Session4\projet\Web\TCH099/vendor\php_jwt/JWTExceptionWithPayloadInterface.php";
-require_once __DIR__."/vendor/php-jwt/BeforeValidException.php";
-require_once __DIR__."/vendor/php-jwt/CachedKeySet.php";
-require_once __DIR__."/vendor/php-jwt/ExpiredException.php";
-require_once __DIR__."/vendor/php-jwt/JWK.php";
-require_once __DIR__."/vendor/php-jwt/JWT.php";
-require_once __DIR__."/vendor/php-jwt/Key.php";
-require_once __DIR__."/vendor/php-jwt/SignatureInvalidException.php";
+
+
+require_once dirname(__FILE__) . "/vendor/php-jwt/JWTExceptionWithPayloadInterface.php";
+require_once dirname(__FILE__) . "/vendor/php-jwt/BeforeValidException.php";
+require_once dirname(__FILE__) . "/vendor/php-jwt/CachedKeySet.php";
+require_once dirname(__FILE__) . "/vendor/php-jwt/ExpiredException.php";
+require_once dirname(__FILE__) . "/vendor/php-jwt/JWK.php";
+require_once dirname(__FILE__) . "/vendor/php-jwt/JWT.php";
+require_once dirname(__FILE__) . "/vendor/php-jwt/Key.php";
+require_once dirname(__FILE__) . "/vendor/php-jwt/SignatureInvalidException.php";
 
 
 global $API_SECRET;
