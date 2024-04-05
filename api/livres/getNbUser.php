@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__."/../../config.php";
-
+echo($user);
 if(isset($user) ){
     $stmt = $pdo->prepare("SELECT COUNT(username) as count FROM `Usager` WHERE `username`=:user");
     $stmt->bindParam(":user", $user);
