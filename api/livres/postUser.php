@@ -4,14 +4,13 @@ $message="";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    $prenom = "a";
-    $nom = "a";
-    $courriel = "a";
-    $dateNaissance = "2024-03-31";
-    $username = "a";
-    $password = "a";
-    $typeUsager = "client";
-    $confirmPass = "a";
+    $prenom = $_POST['prenom'] ?? '';
+    $nom = $_POST['nom'] ?? '';
+    $courriel = $_POST['courriel'] ?? '';
+    $dateNaissance = $_POST['dateNaissance'] ?? '';
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['motDePasse'] ?? '';
+    $typeUsager = $_POST['typeCompte'] ?? '';
    
     // Vérifier si toutes les données sont fournies
     if (!empty($prenom) && !empty($nom) && !empty($courriel) && !empty($dateNaissance) && !empty($username) && !empty($password) && !empty($typeUsager)) {
