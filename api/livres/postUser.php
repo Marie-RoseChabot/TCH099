@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__."/../../config.php";
-
+$message='';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $prenom = $_POST['prenom'];
   $nom = $_POST['nom'];
   $courriel = $_POST['courriel'];
@@ -21,4 +22,6 @@ $prenom = $_POST['prenom'];
  } else {
      $message = 'Erreur lors de la création du compte.';
  }
+ echo $message;
+}
 ?>
