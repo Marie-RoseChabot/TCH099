@@ -2,7 +2,7 @@
 require_once __DIR__."/../../config.php";
 
 if(isset($email) ){
-    $stmt = $pdo->prepare("SELECT COUNT(email) FROM `Usager` WHERE `courriel`=:email");
+    $stmt = $pdo->prepare("SELECT COUNT(courriel) FROM `Usager` WHERE `courriel`=:email");
     $stmt->bindParam(":email", $email);
     $stmt->execute();
 
