@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__."/../../config.php";
-$message='';
+$message="";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $prenom = $_POST['prenom'];
   $nom = $_POST['nom'];
