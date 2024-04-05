@@ -13,4 +13,4 @@ if(isset($email) ){
 }
 
 
-echo json_encode(["count" => $count]);
+echo json_encode([$count]);
