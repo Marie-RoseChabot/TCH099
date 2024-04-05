@@ -2,22 +2,15 @@
 require_once __DIR__."/../../config.php";
 
 if(isset($email) ){
-    $stmt = $pdo->prepare("SELECT COUNT(courriel) FROM `Usager` WHERE `courriel`=:email");
+    $stmt = $pdo->prepare("SELECT COUNT(courriel) as count FROM `Usager` WHERE `courriel`=:email");
     $stmt->bindParam(":email", $email);
     $stmt->execute();
 
-    $emailCount = $stmt->fetch();
+    $emailCount = $stmt->fetch(PDO::FETCH_ASSOC);
+    $count = $emailCount['count'];
 } else {
-    $emailCount = ["error"=>"Code ISBN invalide"];
+    $count = 0; 
 }
 
 
-if($emailCount){
-    header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($emailCount);
-    exit;
-} else {
-    echo json_encode("AUCUN");
-    exit;
-}
-
+echo json_encode(["count" => $count]);
