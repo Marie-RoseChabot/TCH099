@@ -12,8 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['motDePasse'] ?? '';
     $typeUsager = $_POST['typeCompte'] ?? '';
     $confirmPass = $_POST['confirmerMdp'] ?? '';
-    echo($nom $courriel $dateNaissance $username $password $typeUsager);
-    
+    echo $nom . " " . $courriel . " " . $dateNaissance . " " . $username . " " . $password . " " . $typeUsager;    
     // Vérifier si toutes les données sont fournies
     if (!empty($prenom) && !empty($nom) && !empty($courriel) && !empty($dateNaissance) && !empty($username) && !empty($password) && !empty($typeUsager)) {
 
