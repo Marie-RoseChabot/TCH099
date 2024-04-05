@@ -31,5 +31,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = 'La méthode de requête n\'est pas valide.';
 }
 
-echo $message;
+//echo $message;
 ?>
