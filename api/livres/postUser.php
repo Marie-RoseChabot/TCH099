@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $prenom = "a";
     $nom = "a";
     $courriel = "a";
-    $dateNaissance = "A";
+    $dateNaissance = "2024-03-31";
     $username = "a";
     $password = "a";
     $typeUsager = "a";
