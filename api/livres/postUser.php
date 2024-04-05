@@ -9,8 +9,8 @@ if (!isset($_SERVER["CONTENT_TYPE"]) || $_SERVER["CONTENT_TYPE"] != 'application
 $body = json_decode(file_get_contents("php://input"));
 
 try {
-    $stmt = $pdo->prepare("INSERT INTO `Usager` (`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`, `type_usager`) 
-    VALUES (:username, :mdp, :courriel, :nom, :prenom, :dateNaissance, 'client')");
+    $stmt = $pdo->prepare("INSERT INTO `Usager`(`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`, `type_usager`)
+     VALUES (:username, :mdp, :courriel, :nom, :prenom, :dateNaissance, 'client')");
 
     $stmt->bindParam(':username', $body->username);
     $stmt->bindParam(':mdp', $body->password);
@@ -20,6 +20,8 @@ try {
     $stmt->bindParam(':dateNaissance', $body->dateNaissance);
 
     $stmt->execute();
+
+    
 
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode(["success" => true]);
