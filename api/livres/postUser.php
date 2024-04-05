@@ -4,13 +4,15 @@ $message="";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    $prenom = $_POST['prenom'] ?? '';
-    $nom = $_POST['nom'] ?? '';
-    $courriel = $_POST['courriel'] ?? '';
-    $dateNaissance = $_POST['dateNaissance'] ?? '';
-    $username = $_POST['username'] ?? '';
-    $password = $_POST['motDePasse'] ?? '';
-    $typeUsager = $_POST['typeCompte'] ?? '';
+    $body = json_decode(file_get_contents("php://input"));
+
+    $prenom =$body->prenom;
+    $nom = $body->nom;
+    $courriel = $body->courriel;
+    $dateNaissance = $body->dateNaissance;
+    $username = $body->username;
+    $password = $body->password;
+    $typeUsager = $body->typeUsager;
    
     // Vérifier si toutes les données sont fournies
     if (!empty($prenom) && !empty($nom) && !empty($courriel) && !empty($dateNaissance) && !empty($username) && !empty($password) && !empty($typeUsager)) {
