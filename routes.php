@@ -21,7 +21,7 @@ get('/api/email/$email','/api/livres/getNbEmail.php');
 get('/api/user/$username','/api/livres/getNbUser.php');
 put('/api/livres/$isbn', '/api/livres/putLivres.php');
 post('/api/livres', '/api/livres/postLivre.php');
-post('/api/usager', '.api/livres/postUser.php');
+post('/api/usager', '/api/livres/postUser.php');
 
 
 // Route introuvable
