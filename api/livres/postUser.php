@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     $message = 'La méthode de requête n\'est pas valide.';
 }
-  
+echo $nom . " " . $courriel . " " . $dateNaissance . " " . $username . " " . $password . " " . $typeUsager;
+
 echo $message;
 ?>
