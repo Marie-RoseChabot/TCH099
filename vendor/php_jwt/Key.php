@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Firebase\JWT;
 
 use InvalidArgumentException;
