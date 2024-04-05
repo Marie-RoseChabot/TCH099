@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dateNaissance = "2024-03-31";
     $username = "a";
     $password = "a";
-    $typeUsager = "a";
+    $typeUsager = "client";
     $confirmPass = "a";
    
     // Vérifier si toutes les données sont fournies
