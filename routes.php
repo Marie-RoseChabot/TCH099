@@ -18,6 +18,7 @@ get('/api/livres/$isbn', '/api/livres/getLivre.php');
 get('/api/livres/$categorie/$type', '/api/livres/getLivresCatType.php');
 get('/api/recherche/$motCle','/api/livres/getLivresRecherches.php');
 get('/api/email/$email','/api/livres/getNbEmail.php');
+get('/api/user/$user','/api/livres/getNbUser.php');
 put('/api/livres/$isbn', '/api/livres/putLivres.php');
 post('/api/livres', '/api/livres/postLivre.php');
 
