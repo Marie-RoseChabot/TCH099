@@ -4,6 +4,7 @@ $message="";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $prenom = $_POST['prenom'] ?? '';
+
     $nom = $_POST['nom'] ?? '';
     $courriel = $_POST['courriel'] ?? '';
     $dateNaissance = $_POST['dateNaissance'] ?? '';
@@ -11,10 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['motDePasse'] ?? '';
     $typeUsager = $_POST['typeCompte'] ?? '';
     $confirmPass = $_POST['confirmerMdp'] ?? '';
+    echo($nom $courriel $dateNaissance $username $password $typeUsager);
     
     // Vérifier si toutes les données sont fournies
     if (!empty($prenom) && !empty($nom) && !empty($courriel) && !empty($dateNaissance) && !empty($username) && !empty($password) && !empty($typeUsager)) {
-        
+
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $pdo->prepare('INSERT INTO Usager (`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`, `type_usager`) VALUES (?, ?, ?, ?, ?, ?, ?)');
         if ($stmt->execute([$username, $passwordHash, $courriel, $nom, $prenom, $dateNaissance, $typeUsager])) {
