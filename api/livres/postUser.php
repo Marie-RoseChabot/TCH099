@@ -10,11 +10,11 @@ $prenom = $_POST['prenom'];
   $typeUsager = $_POST['typeCompte'];
   $confirmPass = $_POST['confirmerMdp'];
 
- // Hasher le mot de passe
  $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
- // Insérer le nouvel utilisateur
- $stmt = $pdo->prepare('INSERT INTO Usager (`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`, `type_usager`) VALUES (?, ?, ?, ?, ?, ?, ?)');
+
+ $stmt = $pdo->prepare('INSERT INTO Usager (`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`, `type_usager`) 
+ VALUES ($username, $passwordHash, $courriel, $nom, $prenom, $dateNaissance, 'client')');
  if ($stmt->execute([$username, $passwordHash, $courriel, $nom, $prenom, $dateNaissance, $typeUsager])) {
      header("Location: login.php");
      exit;
