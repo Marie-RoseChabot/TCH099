@@ -3,16 +3,16 @@ require_once __DIR__."/../../config.php";
 $message="";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $prenom = $_POST['prenom'] ?? '';
-
-    $nom = $_POST['nom'] ?? '';
-    $courriel = $_POST['courriel'] ?? '';
-    $dateNaissance = $_POST['dateNaissance'] ?? '';
-    $username = $_POST['username'] ?? '';
-    $password = $_POST['motDePasse'] ?? '';
-    $typeUsager = $_POST['typeCompte'] ?? '';
-    $confirmPass = $_POST['confirmerMdp'] ?? '';
-    echo $nom . " " . $courriel . " " . $dateNaissance . " " . $username . " " . $password . " " . $typeUsager;    
+    
+    $prenom = "a";
+    $nom = "a";
+    $courriel = "a";
+    $dateNaissance = "A";
+    $username = "a";
+    $password = "a";
+    $typeUsager = "a";
+    $confirmPass = "a";
+   
     // Vérifier si toutes les données sont fournies
     if (!empty($prenom) && !empty($nom) && !empty($courriel) && !empty($dateNaissance) && !empty($username) && !empty($password) && !empty($typeUsager)) {
 
@@ -30,6 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     $message = 'La méthode de requête n\'est pas valide.';
 }
-echo $nom . " " . $courriel . " " . $dateNaissance . " " . $username . " " . $password . " " . $typeUsager;    
+  
 echo $message;
 ?>
