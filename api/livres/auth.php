@@ -24,9 +24,10 @@ if(!isset($body->username) || $body->username == "" || !isset($body->password) |
 $user = false;
 
 try{
-    $stmt = $pdo->prepare("SELECT `username` FROM `Usager` WHERE `username`=:username AND `password`=PASSWORD(:password);");
+    $passwordHash = password_hash($body->password, PASSWORD_DEFAULT);
+    $stmt = $pdo->prepare("SELECT `username` FROM `Usager` WHERE `username`=:username AND `password`=:password;");
     $stmt->bindValue(":username", $body->username);
-    $stmt->bindValue(":password", $body->password);
+    $stmt->bindValue(":password", $passwordHash);
     $stmt->execute();
 
     $user = $stmt->fetch();
