@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__."/../../config.php";
 
-if(isset([$isbn])) {
+if(isset($isbn)) {
     
 
     $stmt = $pdo->prepare("UPDATE Critique SET est_signale = 'Oui' WHERE isbn = :isbn");
