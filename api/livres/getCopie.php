@@ -3,7 +3,7 @@ require_once __DIR__."/../../config.php";
 
 if(isset($isbn) ){
     $stmt = $pdo->prepare("SELECT COUNT(id_copie) as count FROM `Copie` WHERE `isbn_livre`=:isbn"
-    && `est_dispo`=1);
+    AND `est_dispo`=1);
     $stmt->bindParam(":isbn", $isbn);
     $stmt->execute();
 
