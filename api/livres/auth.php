@@ -1,6 +1,5 @@
 <?php
-require_once __DIR__."/../config.php";
-
+require_once __DIR__."/../../config.php";
 use Firebase\JWT\JWT;
 
 if(!isset($_SERVER["CONTENT_TYPE"]) || $_SERVER["CONTENT_TYPE"]!='application/json'){
