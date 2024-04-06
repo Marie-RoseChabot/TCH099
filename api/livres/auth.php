@@ -23,7 +23,7 @@ if(!isset($body->username) || $body->username == "" || !isset($body->password) |
 $user = false;
 
 try{
-    $stmt = $pdo->prepare("SELECT `id` FROM `users` WHERE `username`=:username AND `password`=PASSWORD(:password)");
+    $stmt = $pdo->prepare("SELECT `username` FROM `Usager` WHERE `username`=:username AND `password`=PASSWORD(:password)");
     $stmt->bindValue(":username", $body->username);
     $stmt->bindValue(":password", $body->password);
     $stmt->execute();
@@ -44,7 +44,7 @@ if($user){
         "aud" => "https://equipe305.tch099.ovh", // Audience du token
         "iat" => time(), // Temps où le JWT a été émis
         "exp" => time() + 3600, // Expiration du token (1 heure plus tard)
-        "user_id" => $user['id'],
+        "user_id" => $user['username'],
         "user_name" => $body->username,
     ];
 
