@@ -7,7 +7,7 @@ if(!isset($_SERVER["CONTENT_TYPE"]) ){
     exit;
 }
 
-($_SERVER["CONTENT_TYPE"]!='application/json'){
+if($_SERVER["CONTENT_TYPE"]!='application/json'){
     http_response_code(402);
     exit;
 }
