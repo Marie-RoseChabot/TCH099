@@ -32,7 +32,7 @@ try{
     $stmt->execute();
 
     $user = $stmt->fetch();
-    if ($user && password_verify($passwordHash)) {
+    if ($user && password_verify($body->password)) {
       
             $payload = [
                 "iss" => "https://equipe305.tch099.ovh/", // Émetteur du token
