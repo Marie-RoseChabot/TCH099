@@ -9,7 +9,7 @@ if(!isset($_SERVER["CONTENT_TYPE"]) || $_SERVER["CONTENT_TYPE"]!='application/js
 
 //Obtenir le corps de la requête
 $body = json_decode(file_get_contents("php://input"));
-echo($body);
+
 
 $response = [];
 
