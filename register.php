@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = 'Ce nom d\'utilisateur est déjà pris.';
     } else {
         // Hasher le mot de passe
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        $passwordHash = PASSWORD($password);
 
         // Insérer le nouvel utilisateur
         $stmt = $pdo->prepare('INSERT INTO Usager (`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`, `type_usager`) VALUES (?, ?, ?, ?, ?, ?, ?)');
