@@ -23,7 +23,7 @@ put('/api/livres/$isbn', '/api/livres/putLivres.php');
 post('/api/livres', '/api/livres/postLivre.php');
 post('/api/usager', '/api/livres/postUser.php');
 post('/api/auth','/api/livres/auth.php');
-get('/api/posts', '/api/posts.php');
+get('/api/posts', '/api/livres/posts.php');
 
 // Route introuvable
 any('/404','404.php');
