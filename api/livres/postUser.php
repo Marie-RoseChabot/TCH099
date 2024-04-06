@@ -14,10 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $body->password;
     $typeUsager = $body->typeUsager;
    
-    // Vérifier si toutes les données sont fournies
+   
     if (!empty($prenom) && !empty($nom) && !empty($courriel) && !empty($dateNaissance) && !empty($username) && !empty($password) && !empty($typeUsager)) {
 
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        echo $passwordHash;
         $stmt = $pdo->prepare('INSERT INTO Usager (`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`, `type_usager`) VALUES (?, ?, ?, ?, ?, ?, ?)');
         if ($stmt->execute([$username, $passwordHash, $courriel, $nom, $prenom, $dateNaissance, $typeUsager])) {
             header("Location: login.php");
