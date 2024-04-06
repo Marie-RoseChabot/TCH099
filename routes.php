@@ -20,7 +20,7 @@ get('/api/recherche/$motCle','/api/livres/getLivresRecherches.php');
 get('/api/email/$email','/api/livres/getNbEmail.php');
 get('/api/critique/$isbn','/api/livres/getCritiques.php');
 get('/api/user/$username','/api/livres/getNbUser.php');
-get('api/copie/$isbn','/api/livres/getCopie.php');
+get('api/copies/$isbn','/api/livres/getCopie.php');
 put('/api/livres/$isbn', '/api/livres/putLivres.php');
 put('/api/signalement/$isbn','/api/livres/putSignalement.php');
 post('/api/livres', '/api/livres/postLivre.php');
