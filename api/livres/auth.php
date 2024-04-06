@@ -61,7 +61,7 @@ if($user){
     http_response_code(200);
     echo json_encode($response);
 } else {
-    http_response_code(401);
+    http_response_code(403);
     $response['error'] = "Non autorisé";
     echo json_encode($response);
 }
