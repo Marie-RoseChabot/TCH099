@@ -5,7 +5,7 @@ if(isset($isbn) && filter_var($isbn, FILTER_VALIDATE_INT)){
     $stmt->bindParam(":isbn", $isbn);
     $stmt->execute();
 
-    $critiques = $stmt->fetch();
+    $critiques = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
     $critiques = ["error"=>"Code ISBN invalide"];
 }
