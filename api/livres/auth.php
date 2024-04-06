@@ -3,7 +3,7 @@ require_once __DIR__."/../../config.php";
 use Firebase\JWT\JWT;
 
 if(!isset($_SERVER["CONTENT_TYPE"]) || $_SERVER["CONTENT_TYPE"]!='application/json'){
-    http_response_code(400);
+    http_response_code(401);
     exit;
 }
 
