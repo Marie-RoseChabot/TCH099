@@ -13,7 +13,7 @@ if(isset($isbn) && filter_var($isbn, FILTER_VALIDATE_INT)){
 
 if($critiques){
     header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($livre);
+    echo json_encode($critiques);
     exit;
 } else {
     header("HTTP/1.0 404 Not Found");
