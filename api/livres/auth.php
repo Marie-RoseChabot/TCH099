@@ -28,7 +28,7 @@ try{
     echo $passwordHash;
     $stmt = $pdo->prepare("SELECT `username`, `password` FROM `Usager` WHERE `username`=:username");
     $stmt->bindValue(":username", $body->username);
-    $stmt->bindValue(":password", $passwordHash);
+
     $stmt->execute();
 
     $user = $stmt->fetch();
