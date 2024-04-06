@@ -75,7 +75,7 @@ function authentifier(){
     try {
         $decoded = JWT::decode($jwt, new Key($API_SECRET, 'HS256'));
         // Si le token est valide, on retourne l'id de l'usager qui a été stocké dans le Token
-        return $decoded->id_username;
+        return $decoded->user_id;
     } catch (\Firebase\JWT\ExpiredException $e) {
         // Gérer l'expiration du token
         throw new Exception('Token expiré!');
