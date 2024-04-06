@@ -8,10 +8,10 @@ if(isset($isbn) ){
     $stmt->execute();
 
     $copieCount = $stmt->fetch(PDO::FETCH_ASSOC);
-    $count = $copieCount['count'];
+    $Ccount = $copieCount['count'];
 } else {
-    $count = 0; 
+    $Ccount = 0; 
 }
 
-echo json_encode([$count]);
+echo json_encode([$Ccount]);
 ?>
