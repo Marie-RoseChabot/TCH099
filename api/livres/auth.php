@@ -25,13 +25,37 @@ $user = false;
 
 try{
     $passwordHash = password_hash($body->password, PASSWORD_DEFAULT);
-    echo $passwordHash;
-    $stmt = $pdo->prepare("SELECT `username` FROM `Usager` WHERE `username`=:username AND `password`=:password;");
+  
+    $stmt = $pdo->prepare("SELECT `id`, `password` FROM `users` WHERE `username`=:username");
     $stmt->bindValue(":username", $body->username);
     $stmt->bindValue(":password", $passwordHash);
     $stmt->execute();
 
     $user = $stmt->fetch();
+    if ($user && password_verify($passwordHash)) {
+      
+            $payload = [
+                "iss" => "https://equipe305.tch099.ovh/", // Émetteur du token
+                "aud" => "https://equipe305.tch099.ovh/", // Audience du token
+                "iat" => time(), // Temps où le JWT a été émis
+                "exp" => time() + 3600, // Expiration du token (1 heure plus tard)
+                "user_id" => $user['id'],
+                "user_name" => $body->username,
+            ];
+        
+            $jwt = JWT::encode($payload, $API_SECRET, 'HS256'); // Génère le token
+            $response['message'] = "Authentification réussie";
+            $response['token'] = $jwt;
+        
+            http_response_code(200);
+            echo json_encode($response);
+    
+                
+    } else {
+        http_response_code(401);
+        $response['error'] = "Non autorisé";
+        echo json_encode($response);
+    }
 
 } catch (PDOException $e){
     http_response_code(500);
@@ -41,26 +65,5 @@ try{
 }
 
 
-if($user){
-    $payload = [
-        "iss" => "https://equipe305.tch099.ovh/", // Émetteur du token
-        "aud" => "https://equipe305.tch099.ovh/", // Audience du token
-        "iat" => time(), // Temps où le JWT a été émis
-        "exp" => time() + 3600, // Expiration du token (1 heure plus tard)
-        "user_id" => $user['id'],
-        "user_name" => $body->username,
-    ];
-
-    $jwt = JWT::encode($payload, $API_SECRET, 'HS256'); // Génère le token
-    $response['message'] = "Authentification réussie";
-    $response['token'] = $jwt;
-
-    http_response_code(200);
-    echo json_encode($response);
-} else {
-    http_response_code(401);
-    $response['error'] = "Non autorisé";
-    echo json_encode($response);
-}
 
 ?>
