@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Inscription</title>
   </head>
   <body>
-    <main>
+    <main id="mainRegister">
       <form id="formRegister" class="formulaires" action="./register.php" method="post">
         <h2 id="enteteRegister">Entrez vos informations pour créer un compte</h2>
         <select name="typeCompte" id="typeCompte">          
@@ -91,11 +91,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           id="btnInscription"
           value="S'inscrire"
         />
-      </form>
-      <div class="connecter">Vous avez déjà un compte ? Connectez-vous <a href="./login.php">ici</a>!
+      <div class="connecter">Vous avez déjà un compte ? Connectez-vous <a href="./login.php"> ici </a> !
       <div><a href="./index.php">Retour au catalogue</a></div>
+      </form>
+      <div class="background"></div>
     </main>
-    
     </div>
   </body>
 </html>

@@ -180,7 +180,7 @@ ul {
   grid-area: critique;
   width: 2rem;
   height: 2rem;
-  margin-left: 2.50rem;
+  margin-left: 2.5rem;
   color: wheat;
   background: crimson;
   padding: 0.625rem 1.5rem;
@@ -259,7 +259,7 @@ ul {
 }
 
 /*
-*** register.php et login.php***
+*** register.php***
 */
 
 .formulairesAuthentification {
@@ -270,8 +270,72 @@ ul {
   background-color: crimson;
 }
 
-#enteteRegister {}
+#formRegister {
+  display: flex;
+  margin: auto;
+  padding: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-color: black;
+  border-width: 0.1rem;
+  max-width: 45rem;
+  background-color: crimson;
+  color: black;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+#mainRegister {
+  margin: auto;
+  padding-top: 5rem;
+  justify-content: center;
+  align-items: center;
+}
 
 /*
 *** login.php ***
 */
+#mainLogin {
+  margin: auto;
+  padding-top: 10rem;
+  justify-content: center;
+  align-items: center;
+}
+
+#formLogin {
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  max-width: 25rem;
+  background-color: crimson;
+  border-style: solid;
+  border-color: black;
+  border-width: 0.1rem;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+
+}
+
+.basPageLogin {
+  justify-content: start;
+}
+
+#formLogin a:link,
+#formLogin a:visited {
+  color: darkblue;
+}
+
+#formLogin a:hover {
+  color: beige;
+  transition: all 0.2s ease-in-out;
+  font-size: 1.05rem;
+}
+
+#formLogin a:active {
+  color: green;
+  transition: all 0.2s ease-in-out;
+  font-size: 0.9rem;
+}
