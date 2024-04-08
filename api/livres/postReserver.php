@@ -22,8 +22,9 @@ $stmt->execute();
 $copie = $stmt->fetch();
 
 if(isset($copie) && $copie != null) {
-    $stmt = $pdo->prepare('UPDATE Copie SET `est_dispo`=0 WHERE `id_copie`=:copie');
+    $stmt = $pdo->prepare('UPDATE Copie SET `est_dispo`=0 WHERE `id_copie`=:copie AND `isbn_livre`=:isbn' );
     $stmt->bindValue(":copie", $copie['id_copie']);
+    $stmt->bindValue(":isbn",$body->isbn);
     $stmt->execute();
 
     $stmt = $pdo->prepare("INSERT INTO `Emprunt` (`date_emprunt`, `date_retour`, `username_client`, `id_copie`, `date_retour_reel`) VALUES (:date_emprunt, :date_retour, :username_client, :id_copie, :date_retour_reel)");
