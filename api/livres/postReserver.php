@@ -16,13 +16,13 @@ try {
 
 $body = json_decode(file_get_contents("php://input"));
 
-$stmt = $pdo->prepare('SELECT id_copie FROM Copie WHERE `est_dispo`=1');
+$stmt = $pdo->prepare('SELECT id_copie FROM Copie WHERE `est_dispo`=1 AND `isbn_livre`=:isbn');
 $stmt->execute();
 
 $copie = $stmt->fetch();
 
 if(isset($copie) && $copie != null) {
-    $stmt = $pdo->prepare('UPDATE Copie SET `est_dispo`=0 WHERE `id_copie`=:copie AND `isbn_livre`=:isbn' );
+    $stmt = $pdo->prepare('UPDATE Copie SET `est_dispo`=0 WHERE `id_copie`=:copie ' );
     $stmt->bindValue(":copie", $copie['id_copie']);
     $stmt->bindValue(":isbn",$body->isbn);
     $stmt->execute();
