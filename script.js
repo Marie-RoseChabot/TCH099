@@ -22,15 +22,21 @@ const afficherLivre = function(listeLivre) {
             const articleChoisI = baliseArticle;
             const baliseParagraph = document.createElement('p');
             const baliseCritique = document.createElement('dialog');
+            const baliseBtnReserver = document.createElement('button');
             const baliseBtnCritique = document.createElement('button');
 
             while (parent.lastChild.id != 'parchemin') {
                 parent.removeChild(parent.lastChild);
             }
             articleChoisI.className = 'livreChoisi';
-            baliseArticle.append(baliseParagraph, baliseBtnCritique, baliseCritique);
+            baliseArticle.append(baliseParagraph, baliseBtnCritique, baliseBtnReserver, baliseCritique);
             baliseParagraph.textContent = livre.description_livre;
+            baliseBtnReserver.id = 'btnReserver';
+            baliseBtnReserver.textContent = 'Réserver';
+            baliseBtnReserver.className = 'btnLivreChoisi';
             baliseBtnCritique.id = 'btnCritique';
+            baliseBtnCritique.textContent = 'Critiquer';
+            baliseBtnCritique.className = 'btnLivreChoisi';
             baliseCritique.id = 'critique';
 
             parent.appendChild(articleChoisI);
