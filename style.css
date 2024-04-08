@@ -9,12 +9,14 @@
     "bas        bas         bas ";
   margin: 0rem;
 }
+
 .entete,
 .type,
 .onglet {
   color: wheat;
   background-color: crimson;
 }
+
 .entete {
   color: wheat;
   grid-area: entete;
@@ -26,6 +28,7 @@
   font-weight: bold;
   font-size: 4dvb;
 }
+
 .type {
   grid-area: type;
   color: wheat;
@@ -34,6 +37,7 @@
   font-size: 2dvb;
   padding-left: 1rem;
 }
+
 .type ul {
   display: flex;
   flex-wrap: wrap;
@@ -41,9 +45,11 @@
   justify-content: center;
   margin: 1rem;
 }
+
 .type li {
   padding: 0.2rem;
 }
+
 .principal .headerCategorie {
   border-radius: 0.75rem;
   border: 0.1rem solid wheat;
@@ -51,35 +57,45 @@
   padding-right: 0.1rem;
   box-shadow: inset 0rem 6.125rem 1rem -6rem whitesmoke;
 }
-.headerCategorie:hover, .categorie:hover {
+
+.headerCategorie:hover,
+.categorie:hover {
   cursor: pointer;
 }
+
 .categorie:hover {
   transform: scale(1.175);
 }
+
 .principal .categorie {
   font-size: 2.5dvb;
   opacity: 0;
 }
+
 .onglet {
   grid-area: onglet;
 }
-.onglet #submitRecherche{
+
+.onglet #submitRecherche {
   cursor: pointer;
 }
+
 h2 {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 1rem;
 }
+
 ul {
   list-style-type: none;
 }
+
 .type li {
   padding: 0.2rem;
 }
-.derriere{
+
+.derriere {
   background: wheat;
   border-radius: 0.75rem;
   border: none;
@@ -87,6 +103,7 @@ ul {
   cursor: pointer;
   outline-offset: 0.5rem;
 }
+
 .devant {
   display: block;
   padding: 0.5rem 1.5rem;
@@ -97,14 +114,17 @@ ul {
   transform: translateY(-0.3rem);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
+
 .derriere:active .devant {
   transform: translateY(-0.1rem);
 }
+
 .principal {
   grid-area: principal;
   display: flex;
   flex-wrap: wrap;
 }
+
 .principal .livre {
   display: flex;
   flex-direction: column;
@@ -114,11 +134,13 @@ ul {
   height: 20.5rem;
   width: 12.5rem;
 }
+
 .principal .livre:hover {
   transition: transform 0.25s;
   transform: scale(1.1);
   cursor: pointer;
 }
+
 .principal .livreChoisi {
   padding-left: 7.5rem;
   padding-top: 5rem;
@@ -130,9 +152,11 @@ ul {
     "img   titre  vide  reservation"
     "img   desc   desc  critique";
 }
+
 .principal .livreChoisi img {
   grid-area: img;
 }
+
 .principal .livreChoisi h4 {
   grid-area: titre;
   font-size: 3dvb;
@@ -142,13 +166,16 @@ ul {
   height: max-content;
   margin: 0;
 }
+
 .principal .livreChoisi p {
   grid-area: desc;
   margin: 0;
 }
+
 .principal .livreChoisi #reservation {
   grid-area: reservation;
 }
+
 .principal .livreChoisi #btnCritique {
   grid-area: critique;
   width: 2rem;
@@ -162,10 +189,12 @@ ul {
   border: 0.1rem solid crimson;
   cursor: pointer;
 }
-.principal .livreChoisi #btnCritique:hover{
-  transition : 0.5s;
+
+.principal .livreChoisi #btnCritique:hover {
+  transition: 0.5s;
   background: linear-gradient(90deg, wheat 0%, crimson 100%);
 }
+
 .principal h2 {
   width: 500rem;
   height: 2rem;
@@ -174,30 +203,36 @@ ul {
   padding-left: 1rem;
   margin-top: 0rem;
 }
+
 .principal img {
   height: 15.675rem;
   width: 10.925rem;
 }
+
 .principal h4 {
   display: flex;
   flex-wrap: wrap;
   margin-top: auto;
   margin-bottom: 1rem;
 }
+
 #dialogDescription {
   border-radius: 0.75rem;
   width: 15rem;
   background-color: wheat;
   outline-color: crimson;
 }
+
 #dialogDescription::backdrop {
   background-color: crimson;
   opacity: 0.1;
 }
+
 #description {
   margin-left: 1rem;
   margin-right: 1rem;
 }
+
 .bas {
   grid-area: bas;
   position: fixed;
@@ -219,19 +254,24 @@ ul {
   width: 100%;
   height: 100%;
   z-index: -1;
-  opacity: 0.75; /* Tu peux ajuster cette valeur pour changer le niveau de transparence */
+  opacity: 0.75;
+  /* Tu peux ajuster cette valeur pour changer le niveau de transparence */
 }
 
 /*
-*** register.php ***
+*** register.php et login.php***
 */
 
-#formRegister {
+.formulairesAuthentification {
   display: flex;
   flex-direction: column;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   max-width: 20rem;
+  background-color: crimson;
 }
-#enteteRegister {
-  
-}
+
+#enteteRegister {}
+
+/*
+*** login.php ***
+*/
