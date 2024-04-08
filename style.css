@@ -173,10 +173,6 @@ ul {
 }
 
 .principal .livreChoisi #reservation {
-  grid-area: reservation;
-}
-
-#btnReserver {
   grid-area: 'reservation';
 }
 

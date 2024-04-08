@@ -31,7 +31,7 @@ const afficherLivre = function(listeLivre) {
             articleChoisI.className = 'livreChoisi';
             baliseArticle.append(baliseParagraph, baliseBtnCritique, baliseBtnReserver, baliseCritique);
             baliseParagraph.textContent = livre.description_livre;
-            baliseBtnReserver.id = 'btnReserver';
+            baliseBtnReserver.id = 'reservation';
             baliseBtnReserver.textContent = 'Réserver';
             baliseBtnReserver.className = 'btnLivreChoisi';
             baliseBtnCritique.id = 'btnCritique';
