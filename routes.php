@@ -11,6 +11,7 @@ any('/demandeAjout.php', 'demandeAjout.php');
 
 // Routes de l'API (statiques et dynamique)
 get('/api/livres', '/api/livres/getLivres.php');
+get('/api/livresHistorique', '/api/livres/getLivresHistorique.php');
 get('/api/categories', '/api/livres/getCategorie.php');
 get('/api/types', '/api/livres/getTypes.php');
 get('/api/auteur/$id','/api/livres/getAuteurs.php');
