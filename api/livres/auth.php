@@ -8,7 +8,7 @@ if(!isset($_SERVER["CONTENT_TYPE"]) ){
 }
 
 
-if($_SERVER["CONTENT_TYPE"]!='application/json; charset=utf-8'){
+if($_SERVER["CONTENT_TYPE"]!='application/json; charset=UTF-8'){
     http_response_code(415);
     exit;
 }
