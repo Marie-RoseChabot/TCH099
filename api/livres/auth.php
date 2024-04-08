@@ -58,7 +58,7 @@ if($user){
 
     $jwt = JWT::encode($payload, $API_SECRET, 'HS256'); // Génère le token
    // $response['message'] = "Authentification réussie";
-    $response=$jwt;
+    $response['token'] = $jwt;
 
     http_response_code(200);
     echo json_encode($response);
