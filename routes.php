@@ -26,7 +26,7 @@ put('/api/signalement/$isbn','/api/livres/putSignalement.php');
 post('/api/livres', '/api/livres/postLivre.php');
 post('/api/usager', '/api/livres/postUser.php');
 post('/api/auth','/api/livres/auth.php');
-post('/api/reserver','/api/livres/postReserver');
+post('/api/reserver','/api/livres/postReserver.php');
 get('/api/posts', '/api/livres/posts.php');
 
 // Route introuvable
