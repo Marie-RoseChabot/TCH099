@@ -7,13 +7,15 @@ if(!isset($_SERVER["CONTENT_TYPE"]) ){
     exit;
 }
 
-if($_SERVER["CONTENT_TYPE"]!='application/json; charset=utf-8'){
+
+if($_SERVER["CONTENT_TYPE"]!='application/json; charset=UTF-8'){
     http_response_code(415);
     exit;
 }
 
 //Obtenir le corps de la requête
 $body = json_decode(file_get_contents("php://input"));
+
 
 
 $response = [];

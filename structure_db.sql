@@ -120,6 +120,7 @@ CREATE TABLE `Emprunt` (
   `id` int(10) NOT NULL,
   `date_emprunt` date NOT NULL,
   `date_retour` date NOT NULL,
+  'date_retour_reel' date,
   `username_client` varchar(25) DEFAULT NULL,
   `id_copie` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
