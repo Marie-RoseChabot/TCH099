@@ -176,9 +176,15 @@ ul {
   grid-area: reservation;
 }
 
-.principal .livreChoisi #btnCritique {
-  grid-area: critique;
-  width: 2rem;
+#btnReserver {
+  grid-area: 'reservation';
+}
+
+#btnCritique {
+  grid-area: 'critique';
+}
+
+.btnLivreChoisi {
   height: 2rem;
   margin-left: 2.5rem;
   color: wheat;
