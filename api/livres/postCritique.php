@@ -17,10 +17,19 @@ try {
 $body = json_decode(file_get_contents("php://input"));
 
 try{
-    $stmt = $pdo->prepare("INSERT INTO `Critique` 
-    (`etoiles`, `commentaire`, `est_signale`, `username_client`, `isbn`) 
-    VALUES (:isbn, :commentaire, 'Non',':user,Livre.isbn)
-    LEFT OUTER JOIN Livre on Livre.titre=:titre");
+    $stmt = $pdo->prepare("INSERT INTO Critique 
+    (etoiles, commentaire, est_signale, username_client, isbn) 
+SELECT 
+    :etoiles, 
+    :commentaire, 
+    'Non', 
+    :user, 
+    Livre.isbn 
+FROM 
+    Livre 
+WHERE 
+    Livre.titre = :titre
+");
     $stmt->bindValue(":etoiles", $body->note);
     $stmt->bindValue(":titre",$body->titre);
     $stmt->bindValue(":commentaire",$body->critique);
