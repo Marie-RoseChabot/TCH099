@@ -13,6 +13,7 @@ try {
 
 $stmt = $pdo->prepare('SELECT Livre.titre, Livre.url_image,Emprunt.date_emprunt
 FROM Emprunt
+WHERE $userid=Emprunt.username_client
 LEFT OUTER JOIN Copie ON Copie.id_copie = Emprunt.id_copie
 LEFT OUTER JOIN Livre ON Livre.isbn = Copie.isbn_livre
 ');
