@@ -22,7 +22,7 @@ $stmt->execute();
 $copie = $stmt->fetch();
 
 if(isset($copie) && $copie != null) {
-    $stmt = $pdo->prepare('UPDATE Copie SET `est_dispo`=1 WHERE `id_copie`=:copie');
+    $stmt = $pdo->prepare('UPDATE Copie SET `est_dispo`=0 WHERE `id_copie`=:copie');
     $stmt->bindValue(":copie", $copie['id_copie']);
     $stmt->execute();
 
