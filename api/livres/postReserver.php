@@ -28,7 +28,7 @@ if(isset($copie) && $copie != null) {
 
     $stmt = $pdo->prepare("INSERT INTO `Emprunt` (`date_emprunt`, `date_retour`, `username_client`, `id_copie`, `date_retour_reel`) VALUES (:date_emprunt, :date_retour, :username_client, :id_copie, :date_retour_reel)");
     $stmt->bindValue(":date_emprunt", $body->date_emprunt);
-    $date_retour = date('Y-m-d', strtotime($body->date_emprunbt . ' + 14 days'));
+    $date_retour = date('Y-m-d', strtotime($body->date_emprunt . ' + 14 days'));
     $stmt->bindValue(":date_retour", $date_retour);
     $stmt->bindValue(":date_retour_reel", null);
     $stmt->bindValue(":username_client", $userid);
