@@ -26,6 +26,7 @@ try {
     $stmt->bindValue(":user", $userid);
     $stmt->execute();
 
+    http_response_code(200);
     // $insertion = [];
     // header('Content-Type: application/json; charset=utf-8');
     // echo json_encode($insertion);
