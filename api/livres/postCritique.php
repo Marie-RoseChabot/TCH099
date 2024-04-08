@@ -23,8 +23,8 @@ try{
     LEFT OUTER JOIN Livre on Livre.titre=:titre");
     $stmt->bindValue(":etoiles", $body->note);
     $stmt->bindValue(":titre",$body->titre);
-    $stmt->bindValue(":commentaire",$body->critique)
-    $stmt->bindValue(":user",$userid)
+    $stmt->bindValue(":commentaire",$body->critique);
+    $stmt->bindValue(":user",$userid);
     $stmt->execute();
 
     
