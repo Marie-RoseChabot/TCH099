@@ -15,8 +15,29 @@ const afficherLivre = function(listeLivre) {
         baliseImage.src = livre.url_image;
         baliseImage.alt = "";
 
-        baliseArticle.addEventListener('click', () => {
-            selectLivre(livre, baliseArticle, parent);
+        baliseArticle.addEventListener('click', function() {
+            const articleChoisI = baliseArticle;
+            const baliseParagraph = document.createElement('p');
+            const baliseCritique = document.createElement('dialog');
+            const baliseBtnReserver = document.createElement('button');
+            const baliseBtnCritique = document.createElement('button');
+
+            while (parent.lastChild.id != 'parchemin') {
+                parent.removeChild(parent.lastChild);
+            }
+            articleChoisI.className = 'livreChoisi';
+            baliseArticle.append(baliseParagraph, baliseBtnCritique, baliseBtnReserver, baliseCritique);
+            baliseParagraph.textContent = livre.description_livre;
+            baliseBtnReserver.id = 'reservation';
+            baliseBtnReserver.textContent = 'Réserver';
+            baliseBtnReserver.className = 'btnLivreChoisi';
+            baliseBtnCritique.id = 'btnCritique';
+            baliseBtnCritique.textContent = 'Critiquer';
+            baliseBtnCritique.className = 'btnLivreChoisi';
+            baliseCritique.id = 'critique';
+
+            parent.appendChild(articleChoisI);
+            
         });
         parent.appendChild(baliseArticle);
     })

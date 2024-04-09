@@ -24,11 +24,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = 'Ce nom d\'utilisateur est déjà pris.';
     } else {
         // Hasher le mot de passe
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        //$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
         // Insérer le nouvel utilisateur
-        $stmt = $pdo->prepare('INSERT INTO Usager (`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`, `type_usager`) VALUES (?, ?, ?, ?, ?, ?, ?)');
-        if ($stmt->execute([$username, $passwordHash, $courriel, $nom, $prenom, $dateNaissance, $typeUsager])) {
+        $stmt = $pdo->prepare('INSERT INTO Usager (`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`, `type_usager`) VALUES (?, PASSWORD(?), ?, ?, ?, ?, ?)');
+        if ($stmt->execute([$username, $password, $courriel, $nom, $prenom, $dateNaissance, $typeUsager])) {
             header("Location: login.php");
             exit;
         } else {
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Inscription</title>
   </head>
   <body>
-    <main>
+    <main id="mainRegister">
       <form id="formRegister" class="formulaires" action="./register.php" method="post">
         <h2 id="enteteRegister">Entrez vos informations pour créer un compte</h2>
         <select name="typeCompte" id="typeCompte">          
@@ -91,11 +91,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           id="btnInscription"
           value="S'inscrire"
         />
-      </form>
-      <div class="connecter">Vous avez déjà un compte ? Connectez-vous <a href="./login.php">ici</a>!
+      <div class="connecter">Vous avez déjà un compte ? Connectez-vous <a href="./login.php"> ici </a> !
       <div><a href="./index.php">Retour au catalogue</a></div>
+      </form>
+      <div class="background"></div>
     </main>
-    
     </div>
   </body>
 </html>

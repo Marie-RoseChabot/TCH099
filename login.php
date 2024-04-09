@@ -37,11 +37,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Saisir le lien du css ici -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
     <title>Connexion</title>
   </head>
   <body>
-    <main>
+    <main id="mainLogin">
       <form id="formLogin" class="formulaires" action="./login.php" method="post">
         <h2>Identifiez-vous</h2>
         <!-- Si l'utilisateur entre son email, ça devrait quand même fonctionner -->
@@ -54,11 +55,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
           name="btnConnexion"
           id="btnConnexion"
           value="Se connecter"
-        />
+        />      
+        <div class="inscrire, basPageLogin">Vous n'avez pas de compte ? Inscrivez-vous <a href="./register.php">ici</a>!
+        <div class="basPageLogin"><a href="./index.php">Retour au catalogue</a></div>
       </form>
-      <div class="inscrire">Vous n'avez pas de compte ? Inscrivez-vous <a href="./register.php">ici</a>!
-      <div><a href="./index.php">Retour au catalogue</a></div>
+
       </div>
+      <div class="background"></div>
     </main>
   </body>
 </html>

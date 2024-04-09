@@ -7,6 +7,7 @@ if(!isset($_SERVER["CONTENT_TYPE"]) ){
     exit;
 }
 
+
 if($_SERVER["CONTENT_TYPE"]!='application/json; charset=utf-8'){
     http_response_code(415);
     exit;
@@ -14,6 +15,7 @@ if($_SERVER["CONTENT_TYPE"]!='application/json; charset=utf-8'){
 
 //Obtenir le corps de la requête
 $body = json_decode(file_get_contents("php://input"));
+
 
 
 $response = [];
@@ -55,7 +57,7 @@ if($user){
     ];
 
     $jwt = JWT::encode($payload, $API_SECRET, 'HS256'); // Génère le token
-    $response['message'] = "Authentification réussie";
+   // $response['message'] = "Authentification réussie";
     $response['token'] = $jwt;
 
     http_response_code(200);
