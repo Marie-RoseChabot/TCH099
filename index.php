@@ -80,40 +80,28 @@ $typeJson = json_encode($type);
             <span class="headerCategorie">Catégorie</span>
         </h2>
         <div class="background" id="parchemin"></div>
-        <!--<dialog id="dialogDescription"><p id="description"></p>
-    
-        <div class="onglet">
-        <ul>
-            <li><a href="./index.php">Catalogue</a></li>
-            <li>Réserver</li>
-            <li>Se connecter / S'inscrire</li>
-            <li><input type="text" id="recherche" placeholder="Recherche"><button type="submit" id="submitRecherche">Soumettre</button></li>
-        </ul>
-        <dialog id="bouton">
-          <button id="close">Fermer</button>
-          <button id="send" type="submit" onclick="addJeu()">Envoyer</button>
-          <p>Veuillez entrez les informations suivante pour donnez une critique a un livre</p>
-          <form id="backdrop">
-            <fieldset>
-              <select name="choix" id="choix">
-              <option value="option">Veuillez sélectionner le livre</option>
-              <option value="ccm">CCM</option> 
-              <option value="bauer">BAUER</option>
-              <option value="true">TRUE</option>
-              </select>
-              <label for="etoiles">Veuillez donnez votre avis entre 1 et 5 étoiles</label>
+        <p id="desc"></p>
+        <button id="btnCritique" style="display: none"></button>
+        <button id="btnReservation" style="display: none"></button>
+        <dialog id="dialogCritique">
+            <form method="post">
+            <h5 id="critiqueh5">Donnez votre avis sur le livre</h5>
+            <p>Veuillez donner votre avis entre 1 et 5 étoiles</p>
             <div class="rating">
-              <input type="range" min="0" max="5" step="1" value="0" class="slider" id="starRating">
-              <output for="starRating" id="output"></output>
-            </div>  
-            <label for="avis">Veuillez donnez votre avis écris</label>
-            <input type="text" id="avis" name="avis" />         
-            </fieldset>
-          </form>
+                <img src="/img/blankStar.png" class="star" data-value="1" data-on="off">
+                <img src="/img/blankStar.png" class="star" data-value="2" data-on="off">
+                <img src="/img/blankStar.png" class="star" data-value="3" data-on="off">
+                <img src="/img/blankStar.png" class="star" data-value="4" data-on="off">
+                <img src="/img/blankStar.png" class="star" data-value="5" data-on="off">
+                <input type="hidden" name="etoiles" id="inputEtoile"/>
+            </div>
+            <label for="avis">Veuillez donner votre avis écrit</label>
+            <input type="text"  id="avis" name="avis"/>
+            <button id="fermerDialog" onclick="document.getElementById('dialogCritique').close();videCritique();">Fermer</button>
+            <button id="envoyerCritique" type="submit">Envoyer</button>
+            </form>
         </dialog>
-        <button id="ouvrirDialog">Critique</button>
-    </div>
-        </dialog>-->
+        <div class="background" id="parchemin"></div>
     </main>
     <footer class="bas">
         <strong>© 2024 - Équipe E</strong>

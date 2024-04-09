@@ -32,7 +32,12 @@ if(isset($_GET["deconnexion"])){
     header("Location: index.php");
     $gPublic = 1;
     exit;
-}
+}/*
+if(isset($_GET['isbn'])) {
+    $isbn = $_GET['isbn'];
+    header("Location: /api/livres/" . urlencode($isbn));
+    exit;
+}*/
 $host =  parse_url($_SERVER["HTTP_HOST"], PHP_URL_HOST);
 if($host=="localhost"){
     //Code d'accès à la base de données locale

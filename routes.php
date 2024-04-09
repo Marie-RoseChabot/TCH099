@@ -23,6 +23,7 @@ get('/api/user/$username','/api/livres/getNbUser.php');
 put('/api/livres/$isbn', '/api/livres/putLivres.php');
 post('/api/livres', '/api/livres/postLivre.php');
 post('/api/usager', '/api/livres/postUser.php');
+post('/api/critiques', '/api/livres/postCritiques.php');
 post('/api/auth','/api/livres/auth.php');
 get('/api/posts', '/api/livres/posts.php');
 
