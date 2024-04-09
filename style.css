@@ -174,14 +174,32 @@ ul {
   margin: 0;
 }
 
-.principal .livreChoisi #reservation {
-  grid-area: 'reservation';
+.principal .livreChoisi #btnReservation {
+  grid-area: reservation;
+  width: 2rem;
+  height: 2rem;
+  margin-left: 2.50rem;
+  color: wheat;
+  background: crimson;
+  box-shadow: crimson 0rem 0rem 0rem 0rem;
+  border-radius: 3.125rem;
+  border: 0.1rem solid crimson;
+  cursor: pointer;
+  font-size: 0dvb;
 }
-
-#btnCritique {
-  grid-area: 'critique';
+.principal .livreChoisi #btnCritique {
+  grid-area: critique;
+  width: 2rem;
+  height: 2rem;
+  margin-left: 2.50rem;
+  color: wheat;
+  background: crimson;
+  box-shadow: crimson 0rem 0rem 0rem 0rem;
+  border-radius: 3.125rem;
+  border: 0.1rem solid crimson;
+  cursor: pointer;
+  font-size: 0dvb;
 }
-
 .btnLivreChoisi {
   height: 2rem;
   margin-left: 2.5rem;
@@ -194,7 +212,8 @@ ul {
   font-size: 0dvb;
 }
 
-.principal .livreChoisi #btnCritique:hover {
+.principal .livreChoisi #btnCritique:hover, 
+  .principal .livreChoisi #btnReservation:hover{
   transition: 0.5s;
   background: linear-gradient(90deg, wheat 0%, crimson 100%);
 }
@@ -206,6 +225,7 @@ ul {
   color: wheat;
   padding-left: 1rem;
   margin-top: 0rem;
+  margin-bottom: 0rem;
 }
 
 .principal img {

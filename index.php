@@ -97,7 +97,7 @@ $typeJson = json_encode($type);
             </div>
             <label for="avis">Veuillez donner votre avis écrit</label>
             <input type="text"  id="avis" name="avis"/>
-            <button id="fermerDialog" onclick="document.getElementById('dialogCritique').close();videCritique();">Fermer</button>
+            <button id="fermerDialog">Fermer</button>
             <button id="envoyerCritique" type="submit">Envoyer</button>
             </form>
         </dialog>

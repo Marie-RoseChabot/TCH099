@@ -15,36 +15,15 @@ const afficherLivre = function(listeLivre) {
         baliseImage.src = livre.url_image;
         baliseImage.alt = "";
 
-        baliseArticle.addEventListener('click', function() {
-            const articleChoisI = baliseArticle;
-            const baliseParagraph = document.createElement('p');
-            const baliseCritique = document.createElement('dialog');
-            const baliseBtnReserver = document.createElement('button');
-            const baliseBtnCritique = document.createElement('button');
-
-            while (parent.lastChild.id != 'parchemin') {
-                parent.removeChild(parent.lastChild);
-            }
-            articleChoisI.className = 'livreChoisi';
-            baliseArticle.append(baliseParagraph, baliseBtnCritique, baliseBtnReserver, baliseCritique);
-            baliseParagraph.textContent = livre.description_livre;
-            baliseBtnReserver.id = 'reservation';
-            baliseBtnReserver.textContent = 'Réserver';
-            baliseBtnReserver.className = 'btnLivreChoisi';
-            baliseBtnCritique.id = 'btnCritique';
-            baliseBtnCritique.textContent = 'Critiquer';
-            baliseBtnCritique.className = 'btnLivreChoisi';
-            baliseCritique.id = 'critique';
-
-            parent.appendChild(articleChoisI);
-            
+        baliseArticle.addEventListener('click', () => {
+            selectLivre(livre, baliseArticle, parent);            
         });
         parent.appendChild(baliseArticle);
     })
 }
 
 function selectLivre(livre, baliseArticle, parent) {
-    document.querySelector('.principal #filtreCategorie').style.marginBottom = '10rem';
+    document.getElementById('filtreCategorie').style.marginBottom = '10rem';
 
         const articleChoisi = baliseArticle;
         const baliseParagraph = document.getElementById('desc');
@@ -108,6 +87,12 @@ etoile.forEach((star) => {
             star.src = estPeser[index] ? '/img/filledStar.png' : '/img/blankStar.png';
         });
     });
+});
+
+document.querySelector('#fermerDialog').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('dialogCritique').close();
+    videCritique();
 });
 
 document.querySelector('#envoyerCritique').addEventListener('click', (e) => {
@@ -243,7 +228,7 @@ const afficherCategorie = function(listeCategorie) {
 const rechercheSoumettre = document.getElementById('submitRecherche');
 const rechercheMot = document.getElementById("recherche");
 rechercheSoumettre.onclick = function() {
-    document.querySelector('.principal #filtreCategorie').style.marginBottom = '0rem';
+    document.getElementById('filtreCategorie').style.marginBottom = '0rem';
     document.querySelector('#dialogCritique').close();
     console.log("test");
     const motCle = rechercheMot.value.toUpperCase();
@@ -294,7 +279,7 @@ const scrollCategorie = function() {
                 cat.style.opacity = 1;
             }, delai);
             cat.onclick = function() {
-                document.querySelector('.principal #filtreCategorie').style.marginBottom = '0rem';
+                document.getElementById('filtreCategorie').style.marginBottom = '0rem';
                 document.querySelector('#dialogCritique').close();
                 cat.style.transition = 'font-size 0.175s';
                 cat.style.fontSize = '2.25dvb';
