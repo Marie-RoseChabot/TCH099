@@ -6,11 +6,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   $password = $_POST['motDePasse'];
   
   if(str_contains($username, "@")){
-    $stmtEmail = $pdo->prepare('SELECT * FROM Usager WHERE courriel = ? AND PASSWORD(?)');
+    $stmtEmail = $pdo->prepare('SELECT * FROM Usager WHERE courriel = ? AND password = PASSWORD(?)');
     $stmtEmail->execute([$username,$password]);
     $user = $stmtEmail->fetch();
   } else {
-    $stmtUsername = $pdo->prepare('SELECT * FROM Usager WHERE username = ? AND PASSWORD(?)');
+    $stmtUsername = $pdo->prepare('SELECT * FROM Usager WHERE username = ? AND password = PASSWORD(?)');
     $stmtUsername->execute([$username,$password]);
     $user = $stmtUsername->fetch();
   }
