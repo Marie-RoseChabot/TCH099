@@ -6,17 +6,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   $password = $_POST['motDePasse'];
   
   if(str_contains($username, "@")){
-    $stmtEmail = $pdo->prepare('SELECT * FROM Usager WHERE courriel = ?');
-    $stmtEmail->execute([$username]);
+    $stmtEmail = $pdo->prepare('SELECT * FROM Usager WHERE courriel = ? AND PASSWORD(?)');
+    $stmtEmail->execute([$username,$password]);
     $user = $stmtEmail->fetch();
   } else {
-    $stmtUsername = $pdo->prepare('SELECT * FROM Usager WHERE username = ?');
-    $stmtUsername->execute([$username]);
+    $stmtUsername = $pdo->prepare('SELECT * FROM Usager WHERE username = ? AND PASSWORD(?)');
+    $stmtUsername->execute([$username,$password]);
     $user = $stmtUsername->fetch();
   }
 
 
-  if($user && password_verify($password, $user['password'])){
+  if($user){
     $_SESSION['usager'] = $user;
     $connecte = 1;
     header("Location: /index.php");
