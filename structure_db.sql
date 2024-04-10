@@ -93,8 +93,8 @@ CREATE TABLE `Critique` (
   `etoiles` int(1) NOT NULL,
   `commentaire` varchar(255) NOT NULL,
   `est_signale` varchar(3) NOT NULL,
-  `username_client` varchar(25) NOT NULL
-  `isbn` bigint(30) NOT NULL,
+  `username_client` varchar(25) NOT NULL,
+  `isbn_livre` bigint(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -120,7 +120,7 @@ CREATE TABLE `Emprunt` (
   `id` int(10) NOT NULL,
   `date_emprunt` date NOT NULL,
   `date_retour` date NOT NULL,
-  'date_retour_reel' date,
+  `date_retour_reel` date,
   `username_client` varchar(25) DEFAULT NULL,
   `id_copie` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -278,7 +278,8 @@ ALTER TABLE `Copie`
 --
 ALTER TABLE `Critique`
   ADD PRIMARY KEY (`id_critique`),
-  ADD KEY `username_client` (`username_client`);
+  ADD KEY `username_client` (`username_client`),
+  ADD KEY `isbn_livre` (`isbn_livre`);
 
 --
 -- Index pour la table `Demande`
@@ -429,7 +430,8 @@ ALTER TABLE `Copie`
 -- Contraintes pour la table `Critique`
 --
 ALTER TABLE `Critique`
-  ADD CONSTRAINT `Critique_ibfk_1` FOREIGN KEY (`username_client`) REFERENCES `Usager` (`username`);
+  ADD CONSTRAINT `Critique_ibfk_1` FOREIGN KEY (`username_client`) REFERENCES `Usager` (`username`),
+  ADD CONSTRAINT `Critique_ibfk_2` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`);
 
 --
 -- Contraintes pour la table `Demande`
@@ -483,3 +485,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
