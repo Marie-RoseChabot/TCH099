@@ -69,6 +69,10 @@ try {
 
 function authentifier(){
     global $API_SECRET;
+
+    if(isset($_SESSION["user_id"])){
+        return $_SESSION["user_id"];
+         }
     //On récupère toutes les entêtes de la requête
     $headers = getallheaders();
     //On s'intéresse spécifiquement à l'entête Authorization
