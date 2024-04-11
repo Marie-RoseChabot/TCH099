@@ -58,6 +58,68 @@ function selectLivre(livre, baliseArticle, parent) {
             }               
         });
         parent.appendChild(articleChoisi);
+
+        // On get les critiques pour ce livre
+        fetch('/api/critique/' + livre.isbn, 
+        {method: "GET"})
+        .then((response) => {
+            if(!response.ok){
+                throw new Error("Erreur HTTP: " + response.statusText);
+            }
+            return response.json();
+        })
+        .then(() => {
+            if(data.error)
+                throw new Error("Erreur reçue du serveur : " + data.error);
+
+            // On stocke le tableaux de critiques dans la variable critiquesLivre
+            const critiquesLivre = data;
+        })
+        .catch((error) => 
+            console.error("Erreur lors de l'obtention des critiques : " + error.message)
+        );
+
+
+
+        // Création de la section contenant les critiques du livre
+        const sectionCritiques = document.createElement("section");
+        sectionCritiques.className = "affichageCritiques";
+
+        // Création de la balise de titre de la section
+        const titreCritiques = document.createElement("h5");
+        titreCritiques.className = "baliseTitreCritiques"
+        titreCritiques.textContent = "Évaluation";
+        sectionCritiques.appendChild(titreCritiques)
+
+        // Création du div contenant la note du livre sur 5 étoiles
+        const divNote = document.createElement("div");
+        divNote.className = "conteneurNote";
+
+
+
+        // Calcul de la note moyenne donnée au livre
+        let sommeNotes = 0;
+        let nbrNotes = critiquesLivre.length;
+        let moyenneNotes = 0;
+        // if(nbrNotes == 0){
+            critiquesLivre.forEach((element) => {
+                somme += element.etoiles;
+            })
+            moyenneNotes = somme/nbrNotes;
+
+        const titreNote = document.createElement("h6");
+        titreNote.textContent = "Note générale";
+
+        const paragrapheNote = document.createElement("p");
+        paragrapheNote.textContent = moyenneNotes + "/5"
+        sectionCritiques.append(titreNote);
+        // }
+        divNote.append(titreNote);
+        
+        parent.appendChild(sectionCritiques)
+
+
+
 }
 
 const etoile = document.querySelectorAll('.star');
