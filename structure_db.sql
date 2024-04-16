@@ -90,8 +90,8 @@ CREATE TABLE `Demande` (
 DROP TABLE IF EXISTS `Critique`;
 CREATE TABLE `Critique` (
   `id_critique` int(10) NOT NULL,
-  `etoiles` int(1) NOT NULL,
-  `commentaire` varchar(255) NOT NULL,
+  `etoiles` int(1) NOT NULL CHECK (etoiles BETWEEN 1 AND 5),
+  `commentaire` varchar(255),
   `est_signale` varchar(3) NOT NULL,
   `username_client` varchar(25) NOT NULL,
   `isbn_livre` bigint(30) NOT NULL
