@@ -9,24 +9,13 @@ if(!isset($_SERVER["CONTENT_TYPE"]) || $_SERVER["CONTENT_TYPE"]!='application/js
 $body = json_decode(file_get_contents("php://input"));
 
 
-if(isset($body->type)){
-    $stmt = $pdo->prepare("SELECT id_type FROM `Categorie` WHERE  `nom`=:type");
-    $stmt->bindValue(":type", $body->type);
-    
-    $stmt->execute();
 
-    if($stmt->rowCount() > 0) {
-        $id_type = $stmt->fetchColumn();
-    } else {
-        $id_type = null;
-    }
-}
 
 
 try{
     $stmt = $pdo->prepare("INSERT INTO `Type_Livre` (`isbn_livre`,`id_type` ) VALUES (:isbn, :id_type"));
     $stmt->bindValue(":isbn", $body->isbn);
-    $stmt->bindValue(":id_type", $id_type);
+    $stmt->bindValue(":id_type", $body->id);
     $stmt->execute();
 
     $insertion = ["isbn"=>$body->isbn, "id_type"=>$id_type];
