@@ -29,6 +29,8 @@ put('/api/signalement/$isbn','/api/livres/putSignalement.php');
 post('/api/Nouveaulivres', '/api/livres/postLivre.php');
 post('/api/usager', '/api/livres/postUser.php');
 post('/api/critiques', '/api/livres/postCritiques.php');
+post('/api/type', '/api/livres/postType.php');
+
 post('/api/auth','/api/livres/auth.php');
 post('/api/reserver','/api/livres/postReserver.php');
 post('/api/critique','/api/livres/postCritique.php');
