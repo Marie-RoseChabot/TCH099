@@ -15,15 +15,29 @@ if(!isset($body->titre) || $body->titre == ""){
     exit;
 }
 
+if(isset($body->prenom)&&isset($body->nom)){
+    $stmt = $pdo->prepare("SELECT id FROM `Auteur` WHERE `nom`=:nom AND `prenom`=:prenom");
+    $stmt->bindValue(":nom", $body->nom);
+    $stmt->bindValue(":prenom", $body->prenom);
+    $stmt->execute();
+
+    if($stmt->rowCount() > 0) {
+        $id_auteur = $stmt->fetchColumn();
+    } else {
+        $id_auteur = null;
+    }
+
+}
+
 try{
-    $stmt = $pdo->prepare("INSERT INTO `Livre` (`isbn`, `titre`, `maison_edition`, `annee`, `url_image`, `description_livre`, `id_auteur`) VALUES (:isbn, :titre, :maison_edition, :annee, :url_image, :description_livre, :id_auteur)");
+    $stmt = $pdo->prepare("INSERT INTO `Livre` (`isbn`, `titre`, `maison_edition`, `annee`, `url_image`, `description_livre`, `id_auteur`,`accepte`) VALUES (:isbn, :titre, :maison_edition, :annee, :url_image, :description_livre, :id_auteur,'Non')");
     $stmt->bindValue(":isbn", $body->isbn);
     $stmt->bindValue(":titre", $body->titre);
     $stmt->bindValue(":maison_edition", $body->maison_edition);
     $stmt->bindValue(":annee", $body->annee);
     $stmt->bindValue(":url_image", $body->url_image);
     $stmt->bindValue(":description_livre", $body->description_livre);
-    $stmt->bindValue(":id_auteur", $body->id_auteur);
+    $stmt->bindValue(":id_auteur", $id_auteur);
     $stmt->execute();
 
     $insertion = ["isbn"=>$body->isbn, "titre"=>$body->titre, "maison_edition"=>$body->maison_edition, "annee"=>$body->annee, "url_image"=>$body->url_image, "description_livre"=>$body->description_livre, "id_auteur"=>$body->id_auteur];
