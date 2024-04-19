@@ -24,7 +24,7 @@ if(isset($body->type)){
 
 
 try{
-    $stmt = $pdo->prepare("INSERT INTO `Type_Livre` (`isbn_livre`,`id_type` ) VALUES (:isbn, :id_type");
+    $stmt = $pdo->prepare("INSERT INTO `Type_Livre` (`isbn_livre`,`id_type` ) VALUES (:isbn, :id_type"));
     $stmt->bindValue(":isbn", $body->isbn);
     $stmt->bindValue(":id_type", $id_type);
     $stmt->execute();
