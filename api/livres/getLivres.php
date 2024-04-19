@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__."/../../config.php";
-$stmt = $pdo->prepare("SELECT * FROM Livre WHERE `Accepte`='Oui'");
+$stmt = $pdo->prepare("SELECT * FROM Livre ");
 $stmt->execute();
 
 $livres = $stmt->fetchAll();
