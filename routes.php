@@ -30,6 +30,7 @@ post('/api/Nouveaulivres', '/api/livres/postLivre.php');
 post('/api/usager', '/api/livres/postUser.php');
 post('/api/critiques', '/api/livres/postCritiques.php');
 post('/api/type', '/api/livres/postType.php');
+post('/api/categorie', '/api/livres/postCategorie.php');
 
 post('/api/auth','/api/livres/auth.php');
 post('/api/reserver','/api/livres/postReserver.php');
