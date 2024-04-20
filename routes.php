@@ -3,8 +3,8 @@
 require_once __DIR__.'/router.php';
 
 // Routes statiques
-get('/', 'index.php');
-get('/index.php', 'index.php');
+any('/', 'index.php');
+any('/index.php', 'index.php');
 any('/login.php', 'login.php');
 any('/register.php', 'register.php');
 any('/demandeAjout.php', 'demandeAjout.php');

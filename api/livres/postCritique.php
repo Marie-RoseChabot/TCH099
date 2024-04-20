@@ -36,8 +36,7 @@ WHERE
     $stmt->bindValue(":user",$userid);
     $stmt->execute();
 
-    
-    $insertion = [];
+    $insertion = ["note"=>$body->note, "critique"=>$body->critique, "titre"=>$body->titre];
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($insertion);
 } catch (PDOException $e){
