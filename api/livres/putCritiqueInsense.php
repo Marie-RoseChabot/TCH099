@@ -1,8 +1,7 @@
 <?php
 require_once __DIR__."/../../config.php";
 
-echo($_SERVER["CONTENT_TYPE"]);
-if(!isset($_SERVER["CONTENT_TYPE"]) || $_SERVER["CONTENT_TYPE"]!='application/json;'){
+if(!isset($_SERVER["CONTENT_TYPE"]) || $_SERVER["CONTENT_TYPE"]!='application/json; charset=utf-8'){
     http_response_code(400);
     exit;
 }
