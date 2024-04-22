@@ -178,7 +178,7 @@ ul {
   grid-area: reservation;
   width: 2rem;
   height: 2rem;
-  margin-left: 2.50rem;
+  margin-left: 2.5rem;
   color: wheat;
   background: crimson;
   box-shadow: crimson 0rem 0rem 0rem 0rem;
@@ -191,7 +191,7 @@ ul {
   grid-area: critique;
   width: 2rem;
   height: 2rem;
-  margin-left: 2.50rem;
+  margin-left: 2.5rem;
   color: wheat;
   background: crimson;
   box-shadow: crimson 0rem 0rem 0rem 0rem;
@@ -212,8 +212,8 @@ ul {
   font-size: 0dvb;
 }
 
-.principal .livreChoisi #btnCritique:hover, 
-  .principal .livreChoisi #btnReservation:hover{
+.principal .livreChoisi #btnCritique:hover,
+.principal .livreChoisi #btnReservation:hover {
   transition: 0.5s;
   background: linear-gradient(90deg, wheat 0%, crimson 100%);
 }
@@ -354,7 +354,6 @@ ul {
   border-color: black;
   border-width: 0.1rem;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-
 }
 
 .basPageLogin {
@@ -377,3 +376,7 @@ ul {
   transition: all 0.2s ease-in-out;
   font-size: 0.9rem;
 }
+
+/*
+*** demandeAjout.php***
+*/

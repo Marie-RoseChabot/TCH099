@@ -35,6 +35,8 @@ post('/api/categorie', '/api/livres/postCategorie.php');
 post('/api/auth','/api/livres/auth.php');
 post('/api/reserver','/api/livres/postReserver.php');
 post('/api/critique','/api/livres/postCritique.php');
+post('/api/demandeAjoutLivre', '/api/livres/postDemandeAjoutLivre.php');
+
 
 // Route introuvable
 any('/404','404.php');

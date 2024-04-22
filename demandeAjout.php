@@ -1,3 +1,13 @@
+<?php
+require_once __DIR__.'/config.php';
+
+
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
@@ -44,7 +54,6 @@
             
         </select>
         <button type="submit" id="soumettre">Soumettre</button>
-        <button type="reset" id="restart">Recommencer</button>
-        <button type="button" id="quit">Quitter</button>
+        <a href = "./index.php"><button type="button" id="quit">Quitter</button></a>
     </form>
 </body>

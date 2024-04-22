@@ -54,6 +54,7 @@ $typeJson = json_encode($type);
     <div class="onglet">
 
         <p><a href="./index.php">Catalogue</a></p>
+        <p><a href="./demandeAjout.php">Demande d'ajout de livre</a></p>
         <?php
         // Ce qui s'affiche si l'utilisateur est connecté
         if(isset($_SESSION["usager"])){
