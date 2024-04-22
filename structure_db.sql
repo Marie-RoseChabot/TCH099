@@ -293,6 +293,8 @@ ALTER TABLE `Demande`
   ADD KEY `username_editeur` (`username_editeur`),
   ADD KEY `id_critique` (`id_critique`);
 
+  
+
 --
 -- Index pour la table `Employe`
 --
