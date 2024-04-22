@@ -158,104 +158,105 @@ etoile.forEach((star) => {
   });
 });
 
-document.querySelector("#fermerDialog").addEventListener("click", (e) => {
-  e.preventDefault();
-  document.getElementById("dialogCritique").close();
-  videCritique();
-});
-document.getElementById("btnReservation").addEventListener("click", (e) => {
-  if (!permission) {
-    window.location.href = "http://localhost:8000/login.php";
-    alert("Vous n'etes pas connecté pour faire cette action!");
-  } else if (!checkCopie(livreChoisiPourEventListener.isbn)) {
-    alert("Il n'y a plus de copie de ce livre en ce moment"); //when dispo??
-  } else {
+const initButtons = function() {
+  document.querySelector("#fermerDialog").addEventListener("click", (e) => {
     e.preventDefault();
-    const date = new Date();
-    const annee = date.getFullYear();
-    const mois = String(date.getMonth() + 1).padStart(2, 0);
-    const jour = String(date.getDay()).padStart(2, 0);
-    const date_emprunt = `${annee}-${mois}-${jour}`;
-    const reservation = {
-      date_emprunt: date_emprunt,
-      isbn: livreChoisiPourEventListener.isbn,
-    };
-    fetch("/api/reserver", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(reservation),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(
-            "La requete a échoué avec le statut " + response.status
-          );
-        }
-        return response.json();
-      })
-      .then((data) => {
-        reservation.date_emprunt = data.date_emprunt;
-        reservation.isbn = Number(data.isbn);
-        document.getElementById("inputReserve").value = date_emprunt;
-        alert(
-          "Réservation est faite! Vous avez 14 jours pour réclamer ce livre"
-        );
-      })
-      .catch((error) => {
-        alert("Erreur lors de l'ajout du critique: " + error);
-        console.error("Erreur lors de la requête: ", error);
-      });
-  }
-});
-
-document.querySelector("#envoyerCritique").addEventListener("click", (e) => {
-  e.preventDefault();
-  if (document.getElementById("commentaire").value == "") {
-    alert("Avis est vide!");
-  } else if (!estPeser[0]) {
-    alert("Le rating n'a pas été choisi!");
-  } else {
-    var nbEtoile = estPeser.reduce((compte, i) => {
-      return i ? compte + i : compte;
-    });
-    const critique = {
-      critique: document.getElementById("commentaire").value,
-      note: nbEtoile,
-      titre: livreChoisiPourEventListener.titre,
-    };
-    document.querySelector("#dialogCritique").close();
+    document.getElementById("dialogCritique").close();
     videCritique();
-    fetch("/api/critique", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(critique),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(
-            "La requete a échoué avec le statut " + response.status
+  });
+  document.getElementById("btnReservation").addEventListener("click", (e) => {
+    if (!permission) {
+      window.location.href = "http://localhost:8000/login.php";
+      alert("Vous n'etes pas connecté pour faire cette action!");
+    } else if (!checkCopie(livreChoisiPourEventListener.isbn)) {
+      alert("Il n'y a plus de copie de ce livre en ce moment"); //when dispo??
+    } else {
+      e.preventDefault();
+      const date = new Date();
+      const annee = date.getFullYear();
+      const mois = String(date.getMonth() + 1).padStart(2, 0);
+      const jour = String(date.getDay()).padStart(2, 0);
+      const date_emprunt = `${annee}-${mois}-${jour}`;
+      const reservation = {
+        date_emprunt: date_emprunt,
+        isbn: livreChoisiPourEventListener.isbn,
+      };
+      fetch("/api/reserver", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reservation),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(
+              "La requete a échoué avec le statut " + response.status
+            );
+          }
+          return response.json();
+        })
+        .then((data) => {
+          reservation.date_emprunt = data.date_emprunt;
+          reservation.isbn = Number(data.isbn);
+          document.getElementById("inputReserve").value = date_emprunt;
+          alert(
+            "Réservation est faite! Vous avez 14 jours pour réclamer ce livre"
           );
-        }
-        return response.json();
-      })
-      .then((data) => {
-        critique.critique = data.critique;
-        critique.note = Number(data.note);
-        critique.titre = data.titre;
+        })
+        .catch((error) => {
+          alert("Erreur lors de l'ajout du critique: " + error);
+          console.error("Erreur lors de la requête: ", error);
+        });
+    }
+  });
 
-        alert("Critque à été envoyé!!!!!");
-      })
-      .catch((error) => {
-        alert("Erreur lors de l'ajout du critique: " + error);
-        console.error("Erreur lors de la requête: ", error);
+  document.querySelector("#envoyerCritique").addEventListener("click", (e) => {
+    e.preventDefault();
+    if (document.getElementById("commentaire").value == "") {
+      alert("Avis est vide!");
+    } else if (!estPeser[0]) {
+      alert("Le rating n'a pas été choisi!");
+    } else {
+      var nbEtoile = estPeser.reduce((compte, i) => {
+        return i ? compte + i : compte;
       });
-  }
-});
+      const critique = {
+        critique: document.getElementById("commentaire").value,
+        note: nbEtoile,
+        titre: livreChoisiPourEventListener.titre,
+      };
+      document.querySelector("#dialogCritique").close();
+      videCritique();
+      fetch("/api/critique", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(critique),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(
+              "La requete a échoué avec le statut " + response.status
+            );
+          }
+          return response.json();
+        })
+        .then((data) => {
+          critique.critique = data.critique;
+          critique.note = Number(data.note);
+          critique.titre = data.titre;
 
+          alert("Critque à été envoyé!!!!!");
+        })
+        .catch((error) => {
+          alert("Erreur lors de l'ajout du critique: " + error);
+          console.error("Erreur lors de la requête: ", error);
+        });
+    }
+  });
+}
 const checkCopie = function (isbn) {
   fetch("/api/copies/", {
     method: "GET",
@@ -343,42 +344,44 @@ const afficherCategorie = function (listeCategorie) {
   });
 };
 
-const rechercheSoumettre = document.getElementById("submitRecherche");
-const rechercheMot = document.getElementById("recherche");
-rechercheSoumettre.onclick = function () {
-  document.getElementById("filtreCategorie").style.marginBottom = "0rem";
-  document.querySelector("#dialogCritique").close();
-  console.log("test");
-  const motCle = rechercheMot.value.toUpperCase();
-  var filtreRecherche = [];
-  var article = document.querySelectorAll("article");
-  article.forEach((item) => {
-    if (item.className != "livreChoisi") {
-      item.remove();
-    } else if (item.className == "livreChoisi") {
-      item.style.display = "none";
-    }
-  });
-  listeLivre.forEach((livre) => {
-    if (livre.titre.toUpperCase().indexOf(motCle) > -1) {
-      filtreRecherche.push(livre);
-    } else if (String(livre.isbn).indexOf(motCle) > -1) {
-      filtreRecherche.push(livre);
-    }
-  });
-
-  listeAuteur.forEach((auteur) => {
-    if (auteur.nom.toUpperCase().indexOf(motCle) > -1) {
-      listeLivre.forEach((livre) => {
-        if (auteur.id == livre.id_auteur) {
-          filtreRecherche.push(livre);
-        }
-      });
-    }
-  });
-
-  afficherLivre(filtreRecherche);
-};
+const initRecherche = function() {
+  const rechercheSoumettre = document.getElementById("submitRecherche");
+  const rechercheMot = document.getElementById("recherche");
+  rechercheSoumettre.onclick = function () {
+    document.getElementById("filtreCategorie").style.marginBottom = "0rem";
+    document.querySelector("#dialogCritique").close();
+    console.log("test");
+    const motCle = rechercheMot.value.toUpperCase();
+    var filtreRecherche = [];
+    var article = document.querySelectorAll("article");
+    article.forEach((item) => {
+      if (item.className != "livreChoisi") {
+        item.remove();
+      } else if (item.className == "livreChoisi") {
+        item.style.display = "none";
+      }
+    });
+    listeLivre.forEach((livre) => {
+      if (livre.titre.toUpperCase().indexOf(motCle) > -1) {
+        filtreRecherche.push(livre);
+      } else if (String(livre.isbn).indexOf(motCle) > -1) {
+        filtreRecherche.push(livre);
+      }
+    });
+  
+    listeAuteur.forEach((auteur) => {
+      if (auteur.nom.toUpperCase().indexOf(motCle) > -1) {
+        listeLivre.forEach((livre) => {
+          if (auteur.id == livre.id_auteur) {
+            filtreRecherche.push(livre);
+          }
+        });
+      }
+    });
+  
+    afficherLivre(filtreRecherche);
+  };
+}
 
 const scrollCategorie = function () {
   const spanCat = document.querySelector(".headerCategorie");
@@ -462,71 +465,72 @@ const unscrollCategorie = function () {
     }, 750);
   });
 };
+/*
+const initDemande = function() {
+  // Gestionnaire d'événements pour le formulaire de demande d'ajout de livre
+  const formulaireAjoutLivre = document.getElementById("formAjout");
+  const soumettreButton = document.getElementById("soumettre");
 
-// Gestionnaire d'événements pour le formulaire de demande d'ajout de livre
-const formulaireAjoutLivre = document.getElementById("formAjout");
-const soumettreButton = document.getElementById("soumettre");
+  if (formulaireAjoutLivre) {
+    formulaireAjoutLivre.addEventListener("submit", (event) => {
+      event.preventDefault();
+      soumettreDemande();
+    });
 
-if (formulaireAjoutLivre) {
-  formulaireAjoutLivre.addEventListener("submit", (event) => {
-    event.preventDefault();
-    soumettreDemande();
-  });
+    quitterButton.addEventListener("click", () => {
+      retourAccueil();
+    });
+  }
 
-  quitterButton.addEventListener("click", () => {
-    retourAccueil();
-  });
-}
-
-if (estEditeur) {
-  function soumettreDemande() {
-    const isbn = document.getElementById("isbn").value;
-    const titre = document.getElementById("titre").value;
-    const auteur = document.getElementById("auteur").value;
-    const urlImage = document.getElementById("urlImage").value;
-    const type = document.getElementById("type").value;
-    const categorie = document.getElementById("categorie").value;
-
-    // Vérifier si l'utilisateur est un éditeur (auteur) *****idUtilisateurActuel doit être changer
-    if (utilisateurEstEditeur(idUtilisateurActuel)) {
-      // Envoyer la demande d'ajout de livre à l'API
-      const demandeAjout = { isbn, titre, auteur, urlImage, type, categorie };
-      fetch("/api/demandeAjout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(demandeAjout),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(
-              "La requête a échoué avec le statut " + response.status
+  if (estEditeur) {
+    function soumettreDemande() {
+      const isbn = document.getElementById("isbn").value;
+      const titre = document.getElementById("titre").value;
+      const auteur = document.getElementById("auteur").value;
+      const urlImage = document.getElementById("urlImage").value;
+      const type = document.getElementById("type").value;
+      const categorie = document.getElementById("categorie").value;
+    
+      // Vérifier si l'utilisateur est un éditeur (auteur) *****idUtilisateurActuel doit être changer
+      if (utilisateurEstEditeur(idUtilisateurActuel)) {
+        // Envoyer la demande d'ajout de livre à l'API
+        const demandeAjout = { isbn, titre, auteur, urlImage, type, categorie };
+        fetch("/api/demandeAjout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(demandeAjout),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                "La requête a échoué avec le statut " + response.status
+              );
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // Afficher un message de succès à l'utilisateur
+            alert("Demande d'ajout de livre envoyée avec succès !");
+            // Réinitialiser le formulaire
+            formulaireAjoutLivre.reset();
+          })
+          .catch((error) => {
+            alert(
+              "Erreur lors de l'envoi de la demande d'ajout de livre : " + error
             );
-          }
-          return response.json();
-        })
-        .then((data) => {
-          // Afficher un message de succès à l'utilisateur
-          alert("Demande d'ajout de livre envoyée avec succès !");
-          // Réinitialiser le formulaire
-          formulaireAjoutLivre.reset();
-        })
-        .catch((error) => {
-          alert(
-            "Erreur lors de l'envoi de la demande d'ajout de livre : " + error
-          );
-          console.error("Erreur lors de la requête : ", error);
-        });
-    } else {
-      alert("Vous n'êtes pas autorisé à effectuer cette action !");
+            console.error("Erreur lors de la requête : ", error);
+          });
+      } else {
+        alert("Vous n'êtes pas autorisé à effectuer cette action !");
+      }
     }
   }
-}
+}*/
 
 function renderCritiques() {
-    const table = document.querySelector('.critique');
-    const tbody = table.querySelector('tbody');
+    const tbody = document.querySelector('tbody');
     tbody.innerHTML = '';
     critiques.forEach((critique) => {
         tbody.innerHTML += `
@@ -541,6 +545,11 @@ function renderCritiques() {
         </tr>
         `;
     });
+    if (critiques != "") {
+      document.getElementById('critiqueVide').style.visibility = 'hidden';
+    } else {
+      document.getElementById('critiqueVide').style.visibility = 'visible';
+    }
     attachEvent();
 }
 

@@ -25,13 +25,17 @@ $critiquesJson = json_encode($critiques);
     
         <h2>Signalements de critiques inappropriées</h2>
         <table class=critique>
-            <tr>    
-                <th>Titre</th>
-                <th>Commentaire</th>
-                <th>Signalement</th>
-            </tr>
+            <thead>
+                <tr>    
+                    <th>Titre</th>
+                    <th>Commentaire</th>
+                    <th>Signalement</th>
+                </tr>
+            </thead>
             <tbody>
+            </tbody>
         </table>
+        <p id="critiqueVide">Aucun critique incensée à vérifier!</p>
     </div>
     <script type="text/javascript" src="./script.js"></script>
     <script>renderCritiques();</script>
