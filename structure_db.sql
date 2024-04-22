@@ -74,7 +74,7 @@ CREATE TABLE `Demande` (
   `date_demande` date NOT NULL,
   `id_auteur` int(10) NOT NULL,
   `isbn_livre` bigint(30) NOT NULL,
-  `nomprenom_editeur` varchar(25) NOT NULL,
+  `username_editeur` varchar(25) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -286,7 +286,7 @@ ALTER TABLE `Demande`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_auteur` (`id_auteur`),
   ADD KEY `isbn_livre` (`isbn_livre`),
-  ADD KEY `nomprenom_editeur` (`nomprenom_editeur`);
+  ADD KEY `username_editeur` (`username_editeur`);
 
 
   
@@ -437,7 +437,7 @@ ALTER TABLE `Critique`
 --
 ALTER TABLE `Demande`
   ADD CONSTRAINT `Demande_ibfk_1` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`),
-  ADD CONSTRAINT `Demande_ibfk_2` FOREIGN KEY (`nomprenom_editeur`) REFERENCES `Auteur` (`nom`, `prenom`),
+  ADD CONSTRAINT `Demande_ibfk_2` FOREIGN KEY (`username_editeur`) REFERENCES `Usager` (`username`),
   ADD CONSTRAINT `Demande_ibfk_3` FOREIGN KEY (`id_auteur`) REFERENCES `Auteur` (`id`);
 
 --
