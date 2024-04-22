@@ -213,7 +213,7 @@ const initButtons = function() {
 
   document.querySelector("#envoyerCritique").addEventListener("click", (e) => {
     e.preventDefault();
-    if (document.getElementById("commentaire").value == "") {
+    if (document.getElementById("critique").value == "") {
       alert("Avis est vide!");
     } else if (!estPeser[0]) {
       alert("Le rating n'a pas été choisi!");
@@ -222,7 +222,7 @@ const initButtons = function() {
         return i ? compte + i : compte;
       });
       const critique = {
-        critique: document.getElementById("commentaire").value,
+        critique: document.getElementById("critique").value,
         note: nbEtoile,
         titre: livreChoisiPourEventListener.titre,
       };
@@ -272,7 +272,7 @@ const checkCopie = function (isbn) {
 };
 
 const videCritique = function () {
-  document.getElementById("commentaire").value = "";
+  document.getElementById("critique").value = "";
   for (let i = 0 + 1; i < estPeser.length; i++) {
     etoile.forEach((star) => {
       star.src = "/img/blankStar.png";
@@ -565,7 +565,7 @@ function attachEvent() {
                 const critiqueIndex = critiques.findIndex((c) => c.id_critique == critiqueId);
                 backup = critiques[critiqueIndex];
                 renderCritiques();
-                fetch("/api/putCritiquesInsenses/" + critiqueId, {
+                fetch(critiquesApiUrl + critiqueId, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -595,7 +595,7 @@ function attachEvent() {
         btn.addEventListener('click', () => {
             if(confirm('Voulez-vous vraiment supprimer cette critique?')) {
                 const critiqueId = btn.parentElement.parentElement.getAttribute('class');
-                fetch("/api/deleteCritiquesInsenses/" + critiqueId, {
+                fetch(critiquesApiUrl + critiqueId, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json'

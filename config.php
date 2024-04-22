@@ -26,18 +26,15 @@ if(isset($_SESSION["usager"])) {
 } else {
     $gUserId = 0;
 }
-
+if (isset($_POST["critique"])) {
+    $userid;
+}
 if(isset($_GET["deconnexion"])){
     unset($_SESSION["usager"]);
     header("Location: index.php");
     $gPublic = 1;
     exit;
-}/*
-if(isset($_GET['isbn'])) {
-    $isbn = $_GET['isbn'];
-    header("Location: /api/livres/" . urlencode($isbn));
-    exit;
-}*/
+}
 $host =  parse_url($_SERVER["HTTP_HOST"], PHP_URL_HOST);
 if($host=="localhost"){
     //Code d'accès à la base de données locale
@@ -73,6 +70,9 @@ function authentifier(){
     if(isset($_SESSION["user_id"])){
         return $_SESSION["user_id"];
          }
+    if(isset($_SESSION["usager"])) {
+        return $_SESSION["usager"];
+    }
     //On récupère toutes les entêtes de la requête
     $headers = getallheaders();
     //On s'intéresse spécifiquement à l'entête Authorization

@@ -110,8 +110,8 @@ $typeJson = json_encode($type);
                 <input type="hidden" name="etoiles" id="etoiles"/>
                 <input type="hidden" />
             </div>
-            <label for="commentaire">Veuillez donner votre avis écrit</label>
-            <textarea id="commentaire" name="commentaire" rows="2" cols="50">
+            <label for="critique">Veuillez donner votre avis écrit</label>
+            <textarea id="critique" name="critique" rows="2" cols="50">
                 Entrée votre avis ici...
             </textarea>
             <button id="fermerDialog">Fermer</button>

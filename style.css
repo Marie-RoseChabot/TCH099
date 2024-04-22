@@ -242,7 +242,7 @@ ul {
   flex-direction: row;
   align-content: space-around;
 }
-.principal #commentaire {
+.principal #critique {
   transform: translateY(0.75rem);
 }
 .principal dialog img {

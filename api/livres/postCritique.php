@@ -8,7 +8,7 @@ try {
     $userid = authentifier();
 } catch(Exception $e) {
     $response = [];
-    http_response_code(401);
+    http_response_code(400);
     $response['error'] = "Non autorisé";
     echo json_encode($response);
     exit;

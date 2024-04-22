@@ -61,7 +61,9 @@ try {
         <label for="urlImage">Image du livre : </label>
         <input type="url" name="urlImage" id="urlImage"><br>
         <label for="description">Description : </label>
-        <input type="text" name="description" id="description"><br>
+        <textarea name="description" id="description" rows="4" cols="50">
+            Description ici!
+        </textarea><br>
         <label for="type">Type : </label>
         <select name="type" id="type">
             <option value="">Veuillez choisir un type de livre</option>

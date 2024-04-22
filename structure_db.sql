@@ -96,7 +96,7 @@ CREATE TABLE `Critique` (
   `commentaire` varchar(255),
   `est_signale` varchar(3) NOT NULL,
   `username_client` varchar(25) NOT NULL,
-  `isbn_livre` bigint(30) NOT NULL
+  `isbn` bigint(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -407,6 +407,13 @@ ALTER TABLE `Paiement`
 --
 ALTER TABLE `Type`
   MODIFY `id_type` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `Critique`
+--
+ALTER TABLE `Critique`
+  MODIFY `id_critique` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- Contraintes pour les tables déchargées
 --
