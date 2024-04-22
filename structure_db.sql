@@ -73,8 +73,13 @@ CREATE TABLE `Demande` (
   `id` int(10) NOT NULL,
   `date_demande` date NOT NULL,
   `id_auteur` int(10) NOT NULL,
+  `annee` int(4) NOT NULL,
   `isbn_livre` bigint(30) NOT NULL,
-  `username_editeur` varchar(25) NOT NULL
+  `titre` varchar(25) NOT NULL,
+  `url_image` text NOT NULL,
+  `description` text NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `categorie` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -286,7 +291,7 @@ ALTER TABLE `Demande`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_auteur` (`id_auteur`),
   ADD KEY `isbn_livre` (`isbn_livre`),
-  ADD KEY `username_editeur` (`username_editeur`);
+  ADD KEY `titre` (`titre`);
 
 
   
@@ -435,10 +440,10 @@ ALTER TABLE `Critique`
 --
 -- Contraintes pour la table `Demande`
 --
-ALTER TABLE `Demande`
-  ADD CONSTRAINT `Demande_ibfk_1` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`),
-  ADD CONSTRAINT `Demande_ibfk_2` FOREIGN KEY (`username_editeur`) REFERENCES `Usager` (`username`),
-  ADD CONSTRAINT `Demande_ibfk_3` FOREIGN KEY (`id_auteur`) REFERENCES `Auteur` (`id`);
+-- ALTER TABLE `Demande`
+--   ADD CONSTRAINT `Demande_ibfk_1` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`),
+--   ADD CONSTRAINT `Demande_ibfk_2` FOREIGN KEY (`username_editeur`) REFERENCES `Usager` (`username`),
+--   ADD CONSTRAINT `Demande_ibfk_3` FOREIGN KEY (`id_auteur`) REFERENCES `Auteur` (`id`);
 
 --
 -- Contraintes pour la table `Employe`
