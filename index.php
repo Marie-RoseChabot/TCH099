@@ -54,16 +54,19 @@ $typeJson = json_encode($type);
     <div class="onglet">
 
         <p><a href="./index.php">Catalogue</a></p>
-        <p><a href="./demandeAjout.php">Demande d'ajout de livre</a></p>
+        
         <?php
         // Ce qui s'affiche si l'utilisateur est connecté
         if(isset($_SESSION["usager"])){
             if($_SESSION["type"] == "employe"){
                 echo "<p><a href = './portailEmploye.php'>Portail Employé</a></p>";
+            } else if($_SESSION["type"] == "editeur") {
+                echo "<p><a href= './demandeAjout.php'>Demande d'ajout de livre</a></p>";
             }
             echo "<p>Réserver</p>";
             echo '<a href = "./index.php?deconnexion"> Se déconnecter</a>';
         }
+        
 
         // Ce qui s'affiche s'il n'est pas connecté
         else{
