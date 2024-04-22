@@ -3,16 +3,6 @@ require_once __DIR__.'/config.php';
 
 // Vérification de l'authentification de l'utilisateur éditeur
 try {
-
-    $userId = $POST[`type_usager`];
-
-    // Vérification du type d'utilisateur dans la base de données
-    $stmt = $pdo->prepare('SELECT type_usager FROM Usager WHERE type_usager = ?');
-    $stmt->execute([$userId]);
-    $userType = $stmt->fetchColumn();
-
-    // Vérification si l'utilisateur est un éditeur
-    if ($userType == "editeur") {
       
     // Si l'utilisateur est un éditeur, nous continuons avec le traitement de la demande d'ajout de livre
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -36,7 +26,7 @@ try {
         echo json_encode($response);
         exit;
     }
-}
+
 } catch (Exception $e) {
     // En cas d'erreur lors de l'authentification ou de toute autre exception, nous renvoyons une réponse d'erreur
     $response = array(

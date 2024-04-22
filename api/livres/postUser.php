@@ -16,6 +16,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
    
     if (!empty($prenom) && !empty($nom) && !empty($courriel) && !empty($dateNaissance) && !empty($username) && !empty($password) && !empty($typeUsager)) {
+        if($typeUsager == "editeur") {
+            $stmt = $pdo->prepare('INSERT INTO Auteur (`nom`, `prenom`, `date_naissance`, `date_deces`) VALUES (?, ?, ?, NULL)');
+            $stmt->execute([$nom, $prenom, $dateNaissance]);
+        }
 
         $stmt = $pdo->prepare('INSERT INTO Usager (`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`, `type_usager`) VALUES (?, PASSWORD(?), ?, ?, ?, ?, ?)');
         if ($stmt->execute([$username, $password, $courriel, $nom, $prenom, $dateNaissance, $typeUsager])) {
