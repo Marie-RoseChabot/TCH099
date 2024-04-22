@@ -32,25 +32,32 @@ $demandesJson = json_encode($demandes);
     
         <h2>Signalements de critiques inappropriées</h2>
         <table class=critique>
-            <tr>    
-                <th>Titre</th>
-                <th>Commentaire</th>
-                <th>Signalement</th>
-            </tr>
+            <thead>
+                <tr>    
+                    <th>Titre</th>
+                    <th>Commentaire</th>
+                    <th>Signalement</th>
+                </tr>
+            </thead>
             <tbody>
+            </tbody>
         </table>
+        <p id="critiqueVide">Aucune critique insensée à vérifier!</p>
 
         <h2>Demandes d'ajout de livre</h2>
         <table class=demande>
-            <tr>
-                <th>Titre</th>
-                <th>Auteur</th>
-                <th>Année</th>
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Auteur</th>
+                    <th>Année</th>
                 <th>Description</th>
                 <th>Catégorie</th>
-                <th>Type</th>
-            </tr>
+                    <th>Type</th>
+                </tr>
+            </thead>
             <tbody>
+            </tbody>
     </div>
     <script type="text/javascript" src="./script.js"></script>
     <script>

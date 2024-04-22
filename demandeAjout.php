@@ -100,4 +100,7 @@ try {
     </form>
     <div class="background"></div>
 </main>
+<script type="text/javascript" src="./script.js">
+    initDemande();
+</script>
 </body>

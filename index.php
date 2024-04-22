@@ -111,7 +111,9 @@ $typeJson = json_encode($type);
                 <input type="hidden" />
             </div>
             <label for="commentaire">Veuillez donner votre avis écrit</label>
-            <input type="text"  id="commentaire" name="commentaire"/>
+            <textarea id="commentaire" name="commentaire" rows="2" cols="50">
+                Entrée votre avis ici...
+            </textarea>
             <button id="fermerDialog">Fermer</button>
             <button id="envoyerCritique" type="submit">Envoyer</button>
             </form>
@@ -127,9 +129,12 @@ $typeJson = json_encode($type);
         afficherType(listeType);
         afficherCategorie(listeCategorie);
         scrollCategorie();
+        initButtons();
+        initRecherche();
+        //initDemande();
     </script>
-    <script>
+    <!--<script>
       let estEditeur = <?php echo $permission; ?> ; 
-    </script>
+    </script>--?
     <script type="text/javascript" src="./scripts.js" defer async></script>
 </body>

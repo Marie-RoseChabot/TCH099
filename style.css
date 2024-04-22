@@ -242,6 +242,9 @@ ul {
   flex-direction: row;
   align-content: space-around;
 }
+.principal #commentaire {
+  transform: translateY(0.75rem);
+}
 .principal dialog img {
   width: 2.5rem;
   height: 2.5rem;
@@ -394,4 +397,11 @@ ul {
   background-color: crimson;
   color: black;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+/*
+---- Portail Employe ----
+*/
+
+.tabCritique {
+
 }
