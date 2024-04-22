@@ -58,6 +58,9 @@ $typeJson = json_encode($type);
         <?php
         // Ce qui s'affiche si l'utilisateur est connecté
         if(isset($_SESSION["usager"])){
+            if($_SESSION["type"] == "employe"){
+                echo "<p><a href = './portailEmploye.php'>Portail Employé</a></p>";
+            }
             echo "<p>Réserver</p>";
             echo '<a href = "./index.php?deconnexion"> Se déconnecter</a>';
         }

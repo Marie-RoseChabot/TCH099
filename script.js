@@ -1,4 +1,5 @@
 const livresApiUrl = "/api/livres/";
+const critiquesApiUrl = "/api/critiquesInsenses/";
 
 const afficherLivre = function (listeLivre) {
   listeLivre.forEach((livre) => {
@@ -522,3 +523,96 @@ if (estEditeur) {
     }
   }
 }
+
+function renderCritiques() {
+    const table = document.querySelector('.critique');
+    const tbody = table.querySelector('tbody');
+    tbody.innerHTML = '';
+    critiques.forEach((critique) => {
+        tbody.innerHTML += `
+        <tr class="${critique.id_critique}">
+            <td>${critique.titre}</td>
+            <td>${critique.commentaire}</td>
+            <td>${critique.etoiles}</td>
+            <td>
+                <button class="garder-btn">Garder</button>
+                <button class="delete-btn">Supprimer</button>
+            </td>
+        </tr>
+        `;
+    });
+    attachEvent();
+}
+
+function attachEvent() {
+    const garderBtn = document.querySelectorAll('.garder-btn');
+    const deleteBtn = document.querySelectorAll('.delete-btn');
+
+    garderBtn.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // do something
+            if(confirm('Voulez-vous vraiment garder cette critique?')) {
+                const critiqueId = btn.parentElement.parentElement.getAttribute('class');
+                const critiqueIndex = critiques.findIndex((c) => c.id_critique == critiqueId);
+                backup = critiques[critiqueIndex];
+                renderCritiques();
+                fetch(critiquesApiUrl + critiqueId, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('La requête a échoué avec le statut ' + response.status);
+                    }
+                    return response.json(); // Convertir la réponse en JSON
+                })
+                .then(data => {
+                    critiques = critiques.filter((c)=>(c.id_critique!=critiqueId));
+                    renderCritiques();
+                })
+                .catch(error => {
+                    critiques[critiqueIndex] = backup;
+                    alert("Erreur lors de la modification de la critique: "+error);
+                    renderCritiques();
+                    console.error('Erreur lors de la requête:', error);
+                });
+            }
+        });
+    });
+
+    deleteBtn.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if(confirm('Voulez-vous vraiment supprimer cette critique?')) {
+                const critiqueId = btn.parentElement.parentElement.getAttribute('class');
+                fetch(critiquesApiUrl + critiqueId, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('La requête a échoué avec le statut ' + response.status);
+                    }
+                    return response.json(); // Convertir la réponse en JSON
+                })
+                .then(data => {
+                    if(data.error){
+                        throw new Error('Erreur lors de la suppression: '+data.error);
+                    }
+                    critiques = critiques.filter((c)=>(c.id_critique!=critiqueId));
+                    renderCritiques();
+                })
+                .catch(error => {
+                    alert("Erreur lors de la suppression de la critique: "+error);
+                    console.error('Erreur lors de la requête:', error);
+                });
+            }
+        });
+    });
+}
+
+
+    
