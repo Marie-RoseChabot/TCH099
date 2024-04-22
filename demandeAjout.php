@@ -1,10 +1,23 @@
+<?php
+require_once __DIR__.'/config.php';
+
+
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="style.css" />
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
 <title>Ajout de livre</title>
 </head>
 <body>
-    <form action="./" id="formAjout">
+<main id="mainAjout">
+    <form action="./demandeAjout.php" id="formAjout" method="post">
         <label for="isbn">ISBN : </label>
         <input type="text" name="isbn" id="isbn"><br>
         <label for="titre">Titre : </label>
@@ -15,7 +28,7 @@
         <input type="text" name="urlImage" id="urlImage"><br>
         <label for="type">Type : </label>
         <select name="type" id="type">
-            <option value="">Veuillez choisir une catégorie</option>
+            <option value="">Veuillez choisir un type de livre</option>
             <option value="albums">Albums</option>
             <option value="bd">Bande dessinée</option>
             <option value="contes">Contes</option>
@@ -28,7 +41,9 @@
             <option value="poesie">Poésie</option>
             <option value="romans">Romans</option>
         </select><br>
+        <label for="categorie">Catégorie : </label>
         <select name="categorie" id="categorie">
+        <option value="">Veuillez choisir une catégorie</option>
             <option value="aventure">Aventure</option>
             <option value="biographique">Biographique</option>
             <option value="jeunesse">Jeunesse</option>
@@ -44,7 +59,8 @@
             
         </select>
         <button type="submit" id="soumettre">Soumettre</button>
-        <button type="reset" id="restart">Recommencer</button>
-        <button type="button" id="quit">Quitter</button>
+        <a href = "./index.php"><button type="button" id="quit">Quitter</button></a>
     </form>
+    <div class="background"></div>
+</main>
 </body>

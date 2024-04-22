@@ -3,8 +3,8 @@
 require_once __DIR__.'/router.php';
 
 // Routes statiques
-get('/', 'index.php');
-get('/index.php', 'index.php');
+any('/', 'index.php');
+any('/index.php', 'index.php');
 any('/login.php', 'login.php');
 any('/register.php', 'register.php');
 any('/demandeAjout.php', 'demandeAjout.php');
@@ -36,6 +36,8 @@ post('/api/categorie', '/api/livres/postCategorie.php');
 post('/api/auth','/api/livres/auth.php');
 post('/api/reserver','/api/livres/postReserver.php');
 post('/api/critique','/api/livres/postCritique.php');
+post('/api/demandeAjoutLivre', '/api/livres/postDemandeAjoutLivre.php');
+
 
 delete('/api/critiquesInsenses/$id' , '/api/livres/deleteCritiqueInsense.php');
 put('/api/critiquesInsenses/$id' , '/api/livres/putCritiqueInsense.php');

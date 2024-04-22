@@ -54,6 +54,7 @@ $typeJson = json_encode($type);
     <div class="onglet">
 
         <p><a href="./index.php">Catalogue</a></p>
+        <p><a href="./demandeAjout.php">Demande d'ajout de livre</a></p>
         <?php
         // Ce qui s'affiche si l'utilisateur est connecté
         if(isset($_SESSION["usager"])){
@@ -86,20 +87,28 @@ $typeJson = json_encode($type);
         <p id="desc"></p>
         <button id="btnCritique" style="display: none"></button>
         <button id="btnReservation" style="display: none"></button>
+        <?php
+            if (!isset($_SESSION["usager"])) {
+                echo "<script>const permission = false;</script>";
+            } else {
+                echo "<script>const permission = true;</script>";
+            }
+        ?>
         <dialog id="dialogCritique">
             <form method="post">
             <h5 id="critiqueh5">Donnez votre avis sur le livre</h5>
             <p>Veuillez donner votre avis entre 1 et 5 étoiles</p>
             <div class="rating">
-                <img src="/img/blankStar.png" class="star" data-value="1" data-on="off">
-                <img src="/img/blankStar.png" class="star" data-value="2" data-on="off">
-                <img src="/img/blankStar.png" class="star" data-value="3" data-on="off">
-                <img src="/img/blankStar.png" class="star" data-value="4" data-on="off">
-                <img src="/img/blankStar.png" class="star" data-value="5" data-on="off">
-                <input type="hidden" name="etoiles" id="inputEtoile"/>
+                <img src="/img/blankStar.png" class="star" data-value="1">
+                <img src="/img/blankStar.png" class="star" data-value="2">
+                <img src="/img/blankStar.png" class="star" data-value="3">
+                <img src="/img/blankStar.png" class="star" data-value="4">
+                <img src="/img/blankStar.png" class="star" data-value="5">
+                <input type="hidden" name="etoiles" id="etoiles"/>
+                <input type="hidden" />
             </div>
-            <label for="avis">Veuillez donner votre avis écrit</label>
-            <input type="text"  id="avis" name="avis"/>
+            <label for="commentaire">Veuillez donner votre avis écrit</label>
+            <input type="text"  id="commentaire" name="commentaire"/>
             <button id="fermerDialog">Fermer</button>
             <button id="envoyerCritique" type="submit">Envoyer</button>
             </form>

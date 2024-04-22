@@ -178,7 +178,7 @@ ul {
   grid-area: reservation;
   width: 2rem;
   height: 2rem;
-  margin-left: 2.50rem;
+  margin-left: 2.5rem;
   color: wheat;
   background: crimson;
   box-shadow: crimson 0rem 0rem 0rem 0rem;
@@ -191,7 +191,7 @@ ul {
   grid-area: critique;
   width: 2rem;
   height: 2rem;
-  margin-left: 2.50rem;
+  margin-left: 2.5rem;
   color: wheat;
   background: crimson;
   box-shadow: crimson 0rem 0rem 0rem 0rem;
@@ -212,8 +212,8 @@ ul {
   font-size: 0dvb;
 }
 
-.principal .livreChoisi #btnCritique:hover, 
-  .principal .livreChoisi #btnReservation:hover{
+.principal .livreChoisi #btnCritique:hover,
+.principal .livreChoisi #btnReservation:hover {
   transition: 0.5s;
   background: linear-gradient(90deg, wheat 0%, crimson 100%);
 }
@@ -300,14 +300,6 @@ ul {
 *** register.php***
 */
 
-.formulairesAuthentification {
-  display: flex;
-  flex-direction: column;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  max-width: 20rem;
-  background-color: crimson;
-}
-
 #formRegister {
   display: flex;
   margin: auto;
@@ -354,7 +346,6 @@ ul {
   border-color: black;
   border-width: 0.1rem;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-
 }
 
 .basPageLogin {
@@ -376,4 +367,31 @@ ul {
   color: green;
   transition: all 0.2s ease-in-out;
   font-size: 0.9rem;
+}
+
+/*
+*** demandeAjout.php***
+*/
+
+#mainAjout {
+  margin: auto;
+  padding-top: 5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+#formAjout {
+  display: flex;
+  margin: auto;
+  padding: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-color: black;
+  border-width: 0.1rem;
+  max-width: 45rem;
+  background-color: crimson;
+  color: black;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
