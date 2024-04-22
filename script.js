@@ -477,46 +477,48 @@ if (formulaireAjoutLivre) {
   });
 }
 
-function soumettreDemande() {
-  const isbn = document.getElementById("isbn").value;
-  const titre = document.getElementById("titre").value;
-  const auteur = document.getElementById("auteur").value;
-  const urlImage = document.getElementById("urlImage").value;
-  const type = document.getElementById("type").value;
-  const categorie = document.getElementById("categorie").value;
+if (estEditeur) {
+  function soumettreDemande() {
+    const isbn = document.getElementById("isbn").value;
+    const titre = document.getElementById("titre").value;
+    const auteur = document.getElementById("auteur").value;
+    const urlImage = document.getElementById("urlImage").value;
+    const type = document.getElementById("type").value;
+    const categorie = document.getElementById("categorie").value;
 
-  // Vérifier si l'utilisateur est un éditeur (auteur) *****idUtilisateurActuel doit être changer
-  if (utilisateurEstEditeur(idUtilisateurActuel)) {
-    // Envoyer la demande d'ajout de livre à l'API
-    const demandeAjout = { isbn, titre, auteur, urlImage, type, categorie };
-    fetch("/api/demandeAjout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(demandeAjout),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(
-            "La requête a échoué avec le statut " + response.status
+    // Vérifier si l'utilisateur est un éditeur (auteur) *****idUtilisateurActuel doit être changer
+    if (utilisateurEstEditeur(idUtilisateurActuel)) {
+      // Envoyer la demande d'ajout de livre à l'API
+      const demandeAjout = { isbn, titre, auteur, urlImage, type, categorie };
+      fetch("/api/demandeAjout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(demandeAjout),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(
+              "La requête a échoué avec le statut " + response.status
+            );
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Afficher un message de succès à l'utilisateur
+          alert("Demande d'ajout de livre envoyée avec succès !");
+          // Réinitialiser le formulaire
+          formulaireAjoutLivre.reset();
+        })
+        .catch((error) => {
+          alert(
+            "Erreur lors de l'envoi de la demande d'ajout de livre : " + error
           );
-        }
-        return response.json();
-      })
-      .then((data) => {
-        // Afficher un message de succès à l'utilisateur
-        alert("Demande d'ajout de livre envoyée avec succès !");
-        // Réinitialiser le formulaire
-        formulaireAjoutLivre.reset();
-      })
-      .catch((error) => {
-        alert(
-          "Erreur lors de l'envoi de la demande d'ajout de livre : " + error
-        );
-        console.error("Erreur lors de la requête : ", error);
-      });
-  } else {
-    alert("Vous n'êtes pas autorisé à effectuer cette action !");
+          console.error("Erreur lors de la requête : ", error);
+        });
+    } else {
+      alert("Vous n'êtes pas autorisé à effectuer cette action !");
+    }
   }
 }

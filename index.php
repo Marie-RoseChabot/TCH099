@@ -122,4 +122,8 @@ $typeJson = json_encode($type);
         afficherCategorie(listeCategorie);
         scrollCategorie();
     </script>
+    <script>
+      let estEditeur = <?php echo $permission; ?> ; 
+    </script>
+    <script type="text/javascript" src="./scripts.js" defer async></script>
 </body>
