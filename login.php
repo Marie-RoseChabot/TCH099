@@ -19,6 +19,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   if($user){
     $_SESSION['usager'] = $user['username'];
     $_SESSION['type'] = $user['type_usager'];
+    if($user['type_usager'] == "editeur"){
+      $stmtId = $pdo->prepare('SELECT * FROM Auteur WHERE nom = ? AND prenom = ?');
+      $stmtId->execute([$user['nom'],$user['prenom']]);
+      $id = $stmtId->fetch();
+      $_SESSION['id'] = $id['id'];
+    }
     $connecte = 1;
     header("Location: /index.php");
     exit;

@@ -565,7 +565,7 @@ function attachEvent() {
                 const critiqueIndex = critiques.findIndex((c) => c.id_critique == critiqueId);
                 backup = critiques[critiqueIndex];
                 renderCritiques();
-                fetch(critiquesApiUrl + critiqueId, {
+                fetch("/api/putCritiquesInsenses/" + critiqueId, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -595,7 +595,7 @@ function attachEvent() {
         btn.addEventListener('click', () => {
             if(confirm('Voulez-vous vraiment supprimer cette critique?')) {
                 const critiqueId = btn.parentElement.parentElement.getAttribute('class');
-                fetch(critiquesApiUrl + critiqueId, {
+                fetch("/api/deleteCritiquesInsenses/" + critiqueId, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json'

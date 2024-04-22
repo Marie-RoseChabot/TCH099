@@ -36,6 +36,19 @@ $critiquesJson = json_encode($critiques);
             </tbody>
         </table>
         <p id="critiqueVide">Aucun critique incensée à vérifier!</p>
+
+        <h2>Demandes d'ajout de livre</h2>
+        <table class=demande>
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Auteur</th>
+                    <th>Catégorie</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
     </div>
     <script type="text/javascript" src="./script.js"></script>
     <script>renderCritiques();</script>
