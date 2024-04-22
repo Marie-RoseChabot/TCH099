@@ -623,5 +623,74 @@ function attachEvent() {
     });
 }
 
+function renderDemandes() {
+    const table = document.querySelector('.demande');
+    const tbody = table.querySelector('tbody');
+    tbody.innerHTML = '';
+    demandes.forEach((demande) => {
+        tbody.innerHTML += `
+        <tr class="${demande.id}">
+            <td>${demande.titre}</td>
+            <td>${demande.id_auteur}</td>
+            <td>${demande.annee}</td>
+            <td>${demande.description}</td>
+            <td>${demande.type}</td>
+            <td>${demande.categorie}</td>
+            <td>
+                <button class="accepter-btn">Accepter</button>
+                <button class="refuser-btn">Refuser</button>
+            </td>
+        </tr>
+        `;
+    });
+    attachEventDemandes();
+}
+
+function attachEventDemandes() {
+    const accepterBtn = document.querySelectorAll('.accepter-btn');
+    const refuserBtn = document.querySelectorAll('.refuser-btn');
+
+    accepterBtn.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Add your logic here for when the accepter button is clicked
+            if(confirm('Voulez-vous vraiment accepter cette demande?')) {
+                const demandeId = btn.parentElement.parentElement.getAttribute('class');
+                
+            }
+        });
+    });
+
+    refuserBtn.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if(confirm('Voulez-vous vraiment refuser cette demande?')) {
+                const demandeId = btn.parentElement.parentElement.getAttribute('class');
+                fetch("/api/deleteDemande/" + demandeId, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('La requête a échoué avec le statut ' + response.status);
+                    }
+                    return response.json(); // Convertir la réponse en JSON
+                })
+                .then(data => {
+                    if(data.error){
+                        throw new Error('Erreur lors de la suppression: '+data.error);
+                    }
+                    demandes = demandes.filter((d)=>(d.id!=demandeId));
+                    renderDemandes();
+                })
+                .catch(error => {
+                    alert("Erreur lors de la suppression de la demande: "+error);
+                    console.error('Erreur lors de la requête:', error);
+                });
+            }
+        });
+    });
+}
+
 
     

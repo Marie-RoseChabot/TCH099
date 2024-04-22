@@ -205,7 +205,6 @@ CREATE TABLE `Livre` (
   `url_image` text NOT NULL,
   `description_livre` text DEFAULT NULL,
   `id_auteur` int(10) DEFAULT NULL,
-  `accepte` varchar(3) DEFAULT 'Non'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

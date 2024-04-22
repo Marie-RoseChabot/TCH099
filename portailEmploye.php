@@ -6,6 +6,12 @@ $stmt->execute();
 $critiques = $stmt->fetchAll();
 
 $critiquesJson = json_encode($critiques);
+
+$stmt = $pdo->prepare('SELECT * FROM Demande');
+$stmt->execute();
+$demandes = $stmt->fetchAll();
+
+$demandesJson = json_encode($demandes);
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,6 +20,7 @@ $critiquesJson = json_encode($critiques);
     <title>Portail Employé(e)</title>
     <script>
         let critiques = <?= $critiquesJson ?>;
+        let demandes = <?= $demandesJson ?>;
     </script>
 </head>
 <body>
@@ -35,7 +42,7 @@ $critiquesJson = json_encode($critiques);
             <tbody>
             </tbody>
         </table>
-        <p id="critiqueVide">Aucun critique incensée à vérifier!</p>
+        <p id="critiqueVide">Aucune critique insensée à vérifier!</p>
 
         <h2>Demandes d'ajout de livre</h2>
         <table class=demande>
@@ -43,7 +50,9 @@ $critiquesJson = json_encode($critiques);
                 <tr>
                     <th>Titre</th>
                     <th>Auteur</th>
-                    <th>Catégorie</th>
+                    <th>Année</th>
+                <th>Description</th>
+                <th>Catégorie</th>
                     <th>Type</th>
                 </tr>
             </thead>
@@ -51,6 +60,9 @@ $critiquesJson = json_encode($critiques);
             </tbody>
     </div>
     <script type="text/javascript" src="./script.js"></script>
-    <script>renderCritiques();</script>
+    <script>
+    renderCritiques();
+    renderDemandes();
+</script>
 </body>
 </html>
