@@ -25,7 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Hasher le mot de passe
         //$passwordHash = password_hash($password, PASSWORD_DEFAULT);
-
+        if($typeUsager == "editeur") {
+          $stmt = $pdo->prepare('INSERT INTO Auteur (`nom`, `prenom`, `date_naissance`, `date_deces`) VALUES (?, ?, ?, NULL)');
+          $stmt->execute([$nom, $prenom, $dateNaissance]);
+      }
         // Insérer le nouvel utilisateur
         $stmt = $pdo->prepare('INSERT INTO Usager (`username`, `password`, `courriel`, `nom`, `prenom`, `date_naissance`, `type_usager`) VALUES (?, PASSWORD(?), ?, ?, ?, ?, ?)');
         if ($stmt->execute([$username, $password, $courriel, $nom, $prenom, $dateNaissance, $typeUsager])) {
