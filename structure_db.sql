@@ -74,7 +74,7 @@ CREATE TABLE `Demande` (
   `date_demande` date NOT NULL,
   `id_auteur` int(10) NOT NULL,
   `isbn_livre` bigint(30) NOT NULL,
-  `username_editeur` varchar(25) NOT NULL,
+  `username_editeur` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
