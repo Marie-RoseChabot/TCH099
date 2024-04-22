@@ -41,8 +41,6 @@ post('/api/demandeAjoutLivre', '/api/livres/postDemandeAjoutLivre.php');
 delete('/api/deleteCritiquesInsenses/$id' , '/api/livres/deleteCritiqueInsense.php');
 put('/api/putCritiquesInsenses/$id' , '/api/livres/putCritiqueInsense.php');
 
-delete('/api/deleteDemande/$id' , '/api/livres/deleteDemande.php');
-
 // Route introuvable
 any('/404','404.php');
 ?>
