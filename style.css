@@ -300,14 +300,6 @@ ul {
 *** register.php***
 */
 
-.formulairesAuthentification {
-  display: flex;
-  flex-direction: column;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  max-width: 20rem;
-  background-color: crimson;
-}
-
 #formRegister {
   display: flex;
   margin: auto;
@@ -380,3 +372,26 @@ ul {
 /*
 *** demandeAjout.php***
 */
+
+#mainAjout {
+  margin: auto;
+  padding-top: 5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+#formAjout {
+  display: flex;
+  margin: auto;
+  padding: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-color: black;
+  border-width: 0.1rem;
+  max-width: 45rem;
+  background-color: crimson;
+  color: black;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
