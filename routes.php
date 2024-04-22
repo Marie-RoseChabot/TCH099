@@ -8,6 +8,7 @@ get('/index.php', 'index.php');
 any('/login.php', 'login.php');
 any('/register.php', 'register.php');
 any('/demandeAjout.php', 'demandeAjout.php');
+any('/portailEmploye.php', 'portailEmploye.php');
 
 // Routes de l'API (statiques et dynamique)
 get('/api/livres', '/api/livres/getLivres.php');
@@ -35,6 +36,9 @@ post('/api/categorie', '/api/livres/postCategorie.php');
 post('/api/auth','/api/livres/auth.php');
 post('/api/reserver','/api/livres/postReserver.php');
 post('/api/critique','/api/livres/postCritique.php');
+
+delete('/api/critiquesInsenses/$id' , '/api/livres/deleteCritiqueInsense.php');
+put('/api/critiquesInsenses/$id' , '/api/livres/putCritiqueInsense.php');
 
 // Route introuvable
 any('/404','404.php');

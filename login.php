@@ -17,7 +17,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
   if($user){
-    $_SESSION['usager'] = $user;
+    $_SESSION['usager'] = $user['username'];
+    $_SESSION['type'] = $user['type_usager'];
     $connecte = 1;
     header("Location: /index.php");
     exit;
