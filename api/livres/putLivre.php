@@ -5,7 +5,7 @@ require_once __DIR__."/../../config.php";
 
 if(isset($isbn)) {
 
-    $stmt = $pdo->prepare("UPDATE `Livre` SET `accepter`='Oui' WHERE `isbn`=:isbn");
+    $stmt = $pdo->prepare("UPDATE `Livre` SET `accepte`='Oui' WHERE `isbn`=:isbn");
     $stmt->bindValue(":isbn", $isbn);
     $stmt->execute();
 
