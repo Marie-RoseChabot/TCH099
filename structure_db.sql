@@ -204,7 +204,7 @@ CREATE TABLE `Livre` (
   `annee` int(4) DEFAULT NULL,
   `url_image` text NOT NULL,
   `description_livre` text DEFAULT NULL,
-  `id_auteur` int(10) DEFAULT NULL,
+  `id_auteur` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -281,7 +281,7 @@ ALTER TABLE `Copie`
 ALTER TABLE `Critique`
   ADD PRIMARY KEY (`id_critique`),
   ADD KEY `username_client` (`username_client`),
-  ADD KEY `isbn_livre` (`isbn_livre`);
+  ADD KEY `isbn` (`isbn`);
 
 --
 -- Index pour la table `Demande`
@@ -441,7 +441,7 @@ ALTER TABLE `Copie`
 --
 ALTER TABLE `Critique`
   ADD CONSTRAINT `Critique_ibfk_1` FOREIGN KEY (`username_client`) REFERENCES `Usager` (`username`),
-  ADD CONSTRAINT `Critique_ibfk_2` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`);
+  ADD CONSTRAINT `Critique_ibfk_2` FOREIGN KEY (`isbn`) REFERENCES `Livre` (`isbn`);
 
 --
 -- Contraintes pour la table `Demande`
