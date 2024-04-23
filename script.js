@@ -561,7 +561,7 @@ const initDemande = function () {
     }
   }
 };
-
+//afficher les critiques dans le portail employé
 function renderCritiques() {
   const tbody = document.querySelector("tbody");
   tbody.innerHTML = "";
@@ -585,7 +585,7 @@ function renderCritiques() {
   }
   attachEvent();
 }
-
+//ajout des événements aux boutons garder et supprimer liés aux critiques
 function attachEvent() {
   const garderBtn = document.querySelectorAll(".garder-btn");
   const deleteBtn = document.querySelectorAll(".delete-btn");
@@ -663,7 +663,7 @@ function attachEvent() {
     });
   });
 }
-
+//afficher les demandes d'ajout de livre dans le portail employé
 function renderDemandes() {
   const table = document.querySelector(".demande");
   const tbody = table.querySelector("tbody");
@@ -686,7 +686,7 @@ function renderDemandes() {
   });
   attachEventDemandes();
 }
-
+//ajout des événements aux boutons accepter et refuser liés aux demandes d'ajout de livre
 function attachEventDemandes() {
   const accepterBtn = document.querySelectorAll(".accepter-btn");
   const refuserBtn = document.querySelectorAll(".refuser-btn");

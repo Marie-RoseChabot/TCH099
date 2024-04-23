@@ -111,9 +111,7 @@ $typeJson = json_encode($type);
                 <input type="hidden" />
             </div>
             <label for="critique">Veuillez donner votre avis écrit</label>
-            <textarea id="critique" name="critique" rows="2" cols="50">
-                Entrée votre avis ici...
-            </textarea>
+            <textarea id="critique" name="critique" rows="2" cols="50"></textarea>
             <button id="fermerDialog">Fermer</button>
             <button id="envoyerCritique" type="submit">Envoyer</button>
             </form>
