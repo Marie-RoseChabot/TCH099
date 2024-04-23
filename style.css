@@ -204,7 +204,7 @@ ul {
   font-size: 0dvb;
 }
 
-.livreChoisi .affichageCritiques h5 {
+.livreChoisi .baliseTitreCritiques {
   grid-area: titreEval;
   font-size: 3dvb;
   border-right: 0.1rem solid crimson;
