@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__.'/config.php';
 
-$stmt = $pdo->prepare('SELECT * FROM Critique LEFT JOIN Livre ON Critique.isbn_livre = Livre.isbn WHERE est_signale = "oui"');
+$stmt = $pdo->prepare('SELECT * FROM Critique LEFT JOIN Livre ON Critique.isbn = Livre.isbn WHERE est_signale = "oui"');
 $stmt->execute();
 $critiques = $stmt->fetchAll();
 
