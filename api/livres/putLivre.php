@@ -3,7 +3,7 @@ require_once __DIR__."/../../config.php";
 
 
 
-if(isset($id)) {
+if(isset($isbn)) {
 
     $stmt = $pdo->prepare("UPDATE `Livre` SET `accepter`='Oui' WHERE `isbn`=:isbn");
     $stmt->bindValue(":isbn", $isbn);
