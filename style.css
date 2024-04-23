@@ -149,8 +149,10 @@ ul {
   display: grid;
   gap: 1rem;
   grid-template-areas:
-    "img   titre  reservation"
-    "img   desc   critique";
+    "img        titre     reservation"
+    "img        desc      critique"
+    "titreEval  etoiles   etoiles"
+    "article    article   article";
 }
 
 .principal .livreChoisi img {
@@ -187,6 +189,7 @@ ul {
   cursor: pointer;
   font-size: 0dvb;
 }
+
 .principal .livreChoisi #btnCritique {
   grid-area: critique;
   width: 2rem;
@@ -200,6 +203,23 @@ ul {
   cursor: pointer;
   font-size: 0dvb;
 }
+
+.livreChoisi .affichageCritiques h5 {
+  grid-area: titreEval;
+  font-size: 3dvb;
+  border-right: 0.1rem solid crimson;
+  border-bottom: 0.1rem solid crimson;
+  width: max-content;
+  height: max-content;
+  margin: 0;
+  padding-right: 0.25rem;
+}
+
+.livreChoisi .affichageCritique .divCritiques {
+  grid-area: article;
+  display: flex;
+}
+
 .btnLivreChoisi {
   height: 2rem;
   margin-left: 2.5rem;
@@ -234,6 +254,7 @@ ul {
   margin: 0;
   cursor: pointer;
 }
+
 .principal .rating {
   width: 40rem;
   height: 5rem;
@@ -242,9 +263,11 @@ ul {
   flex-direction: row;
   align-content: space-around;
 }
+
 .principal #critique {
   transform: translateY(0.75rem);
 }
+
 .principal dialog img {
   width: 2.5rem;
   height: 2.5rem;
@@ -398,10 +421,9 @@ ul {
   color: black;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
+
 /*
 ---- Portail Employe ----
 */
 
-.tabCritique {
-
-}
+.tabCritique {}
