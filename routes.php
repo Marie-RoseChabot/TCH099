@@ -38,6 +38,9 @@ post('/api/reserver','/api/livres/postReserver.php');
 post('/api/critique','/api/livres/postCritique.php');
 post('/api/demandeAjoutLivre', '/api/livres/postDemandeAjoutLivre.php');
 
+delete('/api/deleteLivre/$isbn' , '/api/livres/deleteLivre.php');
+put('/api/Livre/$isbn' , '/api/livres/putLivre.php');
+
 
 delete('/api/deleteCritiquesInsenses/$id' , '/api/livres/deleteCritiqueInsense.php');
 put('/api/putCritiquesInsenses/$id' , '/api/livres/putCritiqueInsense.php');
