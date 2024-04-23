@@ -17,6 +17,8 @@ $demandesJson = json_encode($demandes);
 <html>
 <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
     <title>Portail Employé(e)</title>
     <script>
         let critiques = <?= $critiquesJson ?>;
@@ -24,11 +26,11 @@ $demandesJson = json_encode($demandes);
     </script>
 </head>
 <body>
-    <head>
+    <head id="headEmploye">
         <a href="./index.php">Retour au Catalogue</a>
         <h1>Bienvenue au Portail Employé(e)</h1>
     </head>
-    <div class="container">
+    <div class="containerEmploye">
         <?php
             echo "<p>Bonjour, " .$_SESSION['usager']. ". Voici les signalements et les demandes d'ajout</p>";
         ?>
@@ -62,7 +64,7 @@ $demandesJson = json_encode($demandes);
             <tbody>
             </tbody>
     </div>
-    
+    <div class="background"></div>
     <script type="text/javascript" src="./script.js"></script>
     <script>
     renderCritiques();

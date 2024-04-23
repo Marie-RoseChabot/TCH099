@@ -426,4 +426,24 @@ ul {
 ---- Portail Employe ----
 */
 
-.tabCritique {}
+#headEmploye {
+  margin: auto;
+  padding-top: 5rem;
+  justify-content: center;
+  align-items: center;
+}
+.containerEmploye {
+  display: flex;
+  margin: auto;
+  padding: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-color: black;
+  border-width: 0.1rem;
+  max-width: 45rem;
+  background-color: crimson;
+  color: black;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
