@@ -25,6 +25,7 @@ get('/api/user/$username','/api/livres/getNbUser.php');
 get('/api/copies/$isbn', '/api/livres/getCopie.php');
 get('/api/typeCompte', '/api/livres/getTypeCompte.php');
 get('/api/critiquesinsense','/api/livres/getCritiquesInsense.php');
+get('/api/nouveauLivre','/api/livres/getNouveauLivre.php');
 put('/api/livres/$isbn', '/api/livres/putLivres.php');
 put('/api/signalement/$isbn','/api/livres/putSignalement.php');
 post('/api/Nouveaulivres', '/api/livres/postLivre.php');
