@@ -204,7 +204,7 @@ ul {
   font-size: 0dvb;
 }
 
-.livreChoisi .baliseTitreCritiques {
+.affichageCritiques .baliseTitreCritiques {
   grid-area: titreEval;
   font-size: 3dvb;
   border-right: 0.1rem solid crimson;
@@ -215,9 +215,10 @@ ul {
   padding-right: 0.25rem;
 }
 
-.livreChoisi .affichageCritique .divCritiques {
+.affichageCritique .divCritiques {
   grid-area: article;
   display: flex;
+  flex-direction: rows;
 }
 
 .btnLivreChoisi {
@@ -432,6 +433,7 @@ ul {
   justify-content: center;
   align-items: center;
 }
+
 .containerEmploye {
   display: flex;
   margin: auto;

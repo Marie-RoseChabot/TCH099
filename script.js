@@ -69,7 +69,8 @@ function selectLivre(livre, baliseArticle, parent) {
   parent.appendChild(articleChoisi);
 
   // On trouve la section contenant les critiques du livre et on la rend visible
-  const sectionCritiques = document.querySelector("section.affichageCritiques");
+  const sectionCritiques = document.querySelector(".affichageCritiques");
+  articleChoisi.appendChild(sectionCritiques);
   sectionCritiques.style.display = "block";
 
   // On trouve la balise de titre de la section
@@ -78,7 +79,7 @@ function selectLivre(livre, baliseArticle, parent) {
   // titreCritiques.textContent = "Évaluations";
   // sectionCritiques.appendChild(titreCritiques);
   // On trouve le div qui contiendra chaque article de critique
-  const divCritiques = document.querySelector("div.divCritiques");
+  const divCritiques = document.querySelector(".divCritiques");
   // sectionCritiques.append(divCritiques);
 
   // On get les critiques pour ce livre
@@ -96,7 +97,7 @@ function selectLivre(livre, baliseArticle, parent) {
       // On affiche chaque critique pour ce livre, s'il y en a
       if (Array.isArray(data) && data.length > 0) {
         data.forEach((critique) => {
-          const articleCritique = document.querySelector("");
+          const articleCritique = document.createElement("article");
           const spanEtoiles = document.createElement("span");
           spanEtoiles.textContent = critique.etoiles + "/5\u2605";
           articleCritique.appendChild(spanEtoiles);
@@ -109,11 +110,11 @@ function selectLivre(livre, baliseArticle, parent) {
         });
       }
     })
-    .catch((error) =>
+    .catch((error) => (
       console.error(
         "Erreur lors de l'obtention des critiques : " + error.message
       )
-    );
+    ));
   /*
   // Création du div contenant la note du livre sur 5 étoiles
   const divNote = document.createElement("div");
@@ -180,8 +181,8 @@ const initButtons = function () {
     if (!permission) {
       window.location.href = "http://localhost:8000/login.php";
       alert("Vous n'etes pas connecté pour faire cette action!");
-    } else if (!checkCopie(livreChoisiPourEventListener.isbn)) {
-      alert("Il n'y a plus de copie de ce livre en ce moment"); //when dispo??
+    } else if (checkCopie(livreChoisiPourEventListener.isbn)) {
+      alert("Il n'y a plus de copie de ce livre en ce moment");
     } else {
       e.preventDefault();
       const date = new Date();
@@ -478,15 +479,15 @@ const unscrollCategorie = function () {
   });
 };
 
-const initDemande = function () {
+/*const initDemande = function () {
   // Gestionnaire d'événements pour le formulaire de demande d'ajout de livre
   const formulaireAjoutLivre = document.getElementById("formAjout");
   const soumettreButton = document.getElementById("soumettre");
 
   if (formulaireAjoutLivre) {
-    formulaireAjoutLivre.addEventListener("submit", (e) => {
-      e.preventDefault();
-      soumettreDemande();
+    formulaireAjoutLivre.addEventListener("submit", () => {
+      //e.preventDefault();
+      //soumettreDemande();
     });
 
     quitterButton.addEventListener("click", () => {
@@ -560,8 +561,8 @@ const initDemande = function () {
       }
     }
   }
-};
-//afficher les critiques dans le portail employé
+};*/
+
 function renderCritiques() {
   const tbody = document.querySelector("tbody");
   tbody.innerHTML = "";
@@ -693,7 +694,6 @@ function attachEventDemandes() {
 
   accepterBtn.forEach((btn) => {
     btn.addEventListener("click", () => {
-      // Add your logic here for when the accepter button is clicked
       if (confirm("Voulez-vous vraiment accepter cette demande?")) {
         const demandeId = btn.parentElement.parentElement.getAttribute("class");
       }

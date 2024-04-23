@@ -133,5 +133,8 @@ $typeJson = json_encode($type);
         initRecherche();
         //initDemande();
     </script>
-    
+    <!--<script>
+      let estEditeur = <?php echo $permission; ?> ; 
+    </script>--?
+    <script type="text/javascript" src="./scripts.js" defer async></script>
 </body>
