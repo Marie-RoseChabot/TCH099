@@ -70,7 +70,7 @@ function authentifier(){
     if(isset($_SESSION["user_id"])){
         return $_SESSION["user_id"];
          }
-    if(isset($_SESSION["usager"])) {
+    else if(isset($_SESSION["usager"])) {
         return $_SESSION["usager"];
     }
     //On récupère toutes les entêtes de la requête

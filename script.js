@@ -68,21 +68,18 @@ function selectLivre(livre, baliseArticle, parent) {
   });
   parent.appendChild(articleChoisi);
 
-  // Création de la section contenant les critiques du livre
-  const sectionCritiques = document.createElement("section");
-  sectionCritiques.className = "affichageCritiques";
+  // On trouve la section contenant les critiques du livre et on la rend visible
+  const sectionCritiques = document.querySelector("section.affichageCritiques");
+  sectionCritiques.style.display = "block";
 
-  articleChoisi.appendChild(sectionCritiques);
-
-  // Création de la balise de titre de la section
-  const titreCritiques = document.createElement("h5");
-  titreCritiques.className = "baliseTitreCritiques";
-  titreCritiques.textContent = "Évaluations";
-  sectionCritiques.appendChild(titreCritiques);
-  // Création du div qui contiendra chaque article de critique
-  const divCritiques = document.createElement("div");
-  divCritiques.className = "divCritiques";
-  sectionCritiques.append(divCritiques);
+  // On trouve la balise de titre de la section
+  // const titreCritiques = document.createElement("h5");
+  // titreCritiques.className = "baliseTitreCritiques";
+  // titreCritiques.textContent = "Évaluations";
+  // sectionCritiques.appendChild(titreCritiques);
+  // On trouve le div qui contiendra chaque article de critique
+  const divCritiques = document.querySelector("div.divCritiques");
+  // sectionCritiques.append(divCritiques);
 
   // On get les critiques pour ce livre
   fetch("/api/critique/" + livre.isbn, { method: "GET" })
@@ -99,7 +96,7 @@ function selectLivre(livre, baliseArticle, parent) {
       // On affiche chaque critique pour ce livre, s'il y en a
       if (Array.isArray(data) && data.length > 0) {
         data.forEach((critique) => {
-          const articleCritique = document.createElement("article");
+          const articleCritique = document.querySelector("");
           const spanEtoiles = document.createElement("span");
           spanEtoiles.textContent = critique.etoiles + "/5\u2605";
           articleCritique.appendChild(spanEtoiles);
@@ -588,7 +585,7 @@ function renderCritiques() {
   }
   attachEvent();
 }
-
+//ajout des événements aux boutons garder et supprimer liés aux critiques
 function attachEvent() {
   const garderBtn = document.querySelectorAll(".garder-btn");
   const deleteBtn = document.querySelectorAll(".delete-btn");
@@ -666,7 +663,7 @@ function attachEvent() {
     });
   });
 }
-
+//afficher les demandes d'ajout de livre dans le portail employé
 function renderDemandes() {
   const table = document.querySelector(".demande");
   const tbody = table.querySelector("tbody");
@@ -689,7 +686,7 @@ function renderDemandes() {
   });
   attachEventDemandes();
 }
-
+//ajout des événements aux boutons accepter et refuser liés aux demandes d'ajout de livre
 function attachEventDemandes() {
   const accepterBtn = document.querySelectorAll(".accepter-btn");
   const refuserBtn = document.querySelectorAll(".refuser-btn");

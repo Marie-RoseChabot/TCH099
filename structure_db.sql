@@ -428,7 +428,7 @@ ALTER TABLE `Critique`
 -- Contraintes pour la table `Categorie_Livre`
 --
 ALTER TABLE `Categorie_Livre`
-  ADD CONSTRAINT `Categorie_Livre_ibfk_1` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`),
+  ADD CONSTRAINT `Categorie_Livre_ibfk_1` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`) ON DELETE CASCADE,
   ADD CONSTRAINT `Categorie_Livre_ibfk_2` FOREIGN KEY (`id_categorie`) REFERENCES `Categorie` (`id_categorie`);
 
 --
@@ -469,7 +469,7 @@ ALTER TABLE `Emprunt`
 -- Contraintes pour la table `Type_Livre`
 --
 ALTER TABLE `Type_Livre`
-  ADD CONSTRAINT `Type_Livre_ibfk_1` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`),
+  ADD CONSTRAINT `Type_Livre_ibfk_1` FOREIGN KEY (`isbn_livre`) REFERENCES `Livre` (`isbn`) ON DELETE CASCADE,
   ADD CONSTRAINT `Type_Livre_ibfk_2` FOREIGN KEY (`id_type`) REFERENCES `Type` (`id_type`);
 
 --

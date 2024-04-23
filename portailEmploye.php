@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__.'/config.php';
 
-$stmt = $pdo->prepare('SELECT * FROM Critique LEFT JOIN Livre ON Critique.isbn_livre = Livre.isbn WHERE est_signale = "oui"');
+$stmt = $pdo->prepare('SELECT * FROM Critique LEFT JOIN Livre ON Critique.isbn = Livre.isbn WHERE est_signale = "oui"');
 $stmt->execute();
 $critiques = $stmt->fetchAll();
 
@@ -17,6 +17,8 @@ $demandesJson = json_encode($demandes);
 <html>
 <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
     <title>Portail Employé(e)</title>
     <script>
         let critiques = <?= $critiquesJson ?>;
@@ -24,8 +26,11 @@ $demandesJson = json_encode($demandes);
     </script>
 </head>
 <body>
-    <div class="container">
+    <head id="headEmploye">
+        <a href="./index.php">Retour au Catalogue</a>
         <h1>Bienvenue au Portail Employé(e)</h1>
+    </head>
+    <div class="containerEmploye">
         <?php
             echo "<p>Bonjour, " .$_SESSION['usager']. ". Voici les signalements et les demandes d'ajout</p>";
         ?>
@@ -59,6 +64,7 @@ $demandesJson = json_encode($demandes);
             <tbody>
             </tbody>
     </div>
+    <div class="background"></div>
     <script type="text/javascript" src="./script.js"></script>
     <script>
     renderCritiques();
