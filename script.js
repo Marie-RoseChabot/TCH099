@@ -181,7 +181,7 @@ const initButtons = function () {
     if (!permission) {
       window.location.href = "http://localhost:8000/login.php";
       alert("Vous n'etes pas connecté pour faire cette action!");
-    } else if (checkCopie(livreChoisiPourEventListener.isbn)) {
+    } else if (!checkCopie(livreChoisiPourEventListener.isbn)) {
       alert("Il n'y a plus de copie de ce livre en ce moment");
     } else {
       e.preventDefault();
@@ -270,7 +270,7 @@ const initButtons = function () {
     }
   });
 };
-const checkCopie = function (isbn) {
+const checkCopie = function () {
   fetch("/api/copies/", {
     method: "GET",
   })
