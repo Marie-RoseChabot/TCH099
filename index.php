@@ -111,19 +111,19 @@ $typeJson = json_encode($type);
                 <input type="hidden" />
             </div>
             <label for="critique">Veuillez donner votre avis écrit</label>
-            <textarea id="critique" name="critique" rows="2" cols="50">
-                Entrée votre avis ici...
-            </textarea>
+            <textarea id="critique" name="critique" rows="2" cols="50"></textarea>
             <button id="fermerDialog">Fermer</button>
             <button id="envoyerCritique" type="submit">Envoyer</button>
             </form>
         </dialog>
+        <section class="affichageCritiques" style="display: none"><h5 class="baliseTitreCritiques">Évaluations</h5><div class="divCritiques"></div></section>
         <div class="background" id="parchemin"></div>
     </main>
     <footer class="bas">
         <strong>© 2024 - Équipe E</strong>
     </footer>
     <script type="text/javascript" src="./script.js"></script>
+    <link rel="stylesheet" href="style.css" />
     <script>
         afficherLivre(listeLivre);
         afficherType(listeType);
