@@ -45,7 +45,6 @@ post('/api/auth','/api/livres/auth.php');
 
 post('/api/reserver','/api/livres/postReserver.php');
 
-post('/api/demandeAjoutLivre', '/api/livres/postDemandeAjoutLivre.php');
 
 delete('/api/deleteLivre/$isbn' , '/api/livres/deleteLivre.php');
 put('/api/Livre/$isbn' , '/api/livres/putLivre.php');
