@@ -1,45 +1,3 @@
-<?php
-require_once __DIR__.'/config.php';
-
-// Vérification de l'authentification de l'utilisateur éditeur
-try {
-      $id = $_SESSION['id'];
-    // Si l'utilisateur est un éditeur, nous continuons avec le traitement de la demande d'ajout de livre
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Récupération des données du formulaire
-        $isbn = $_POST['isbn'];
-        $titre = $_POST['titre'];
-        $auteur = $_POST['auteur'];
-        $annee = $_POST['annee'];
-        $urlImage = $_POST['urlImage'];
-        $description = $_POST['description'];
-        $type = $_POST['type'];
-        $categorie = $_POST['categorie'];
-        
-
-        // Insertion des données dans la base de données (exemple)
-        $stmt = $pdo->prepare('INSERT INTO Demande (`date_demande`, `id_auteur`, `annee`, `isbn_livre`, `titre`, `url_image`, `description`, `type`, `categorie`) VALUES (CURRENT_DATE(), ?, ?, ?, ?, ?, ?, ?, ?)');
-        $stmt->execute([$id, $annee, $isbn, $titre, $urlImage, $description, $type, $categorie]);
-
-        exit;
-    }
-
-} catch (Exception $e) {
-    // En cas d'erreur lors de l'authentification ou de toute autre exception, nous renvoyons une réponse d'erreur
-    $response = array(
-        "success" => false,
-        "message" => "Erreur lors de la demande d'ajout de livre : " . $e->getMessage()
-    );
-    echo json_encode($response);
-    exit;
-}
-?>
-
-
-
-
-
-
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
@@ -49,19 +7,23 @@ try {
 </head>
 <body>
 <main id="mainAjout">
-    <form action="./demandeAjout.php" id="formAjout" method="post">
+    <form id="formAjout" method="post">
         <label for="isbn">ISBN : </label>
         <input type="number" name="isbn" id="isbn"><br>
         <label for="titre">Titre : </label>
         <input type="text" name="titre" id="titre"><br>
-        <label for="auteur">Auteur : </label>
-        <input type="text" name="auteur" id="auteur"><br>
+        <label for="maison_edition">Maison d'édition : </label>
+        <input type="text" name="maison_edition" id="maison_edition"><br>
+        <label for="nom">Nom d'auteur : </label>
+        <input type="text" name="nom" id="nom"><br>
+        <label for="prenom">Prénom d'auteur : </label>
+        <input type="text" name="prenom" id="prenom"><br>
         <label for="annee">Année : </label>
         <input type="number" name="annee" id="annee"><br>
-        <label for="urlImage">Image du livre : </label>
-        <input type="url" name="urlImage" id="urlImage"><br>
-        <label for="description">Description : </label>
-        <textarea name="description" id="description" rows="4" cols="50">
+        <label for="url_image">Image du livre : </label>
+        <input type="url" name="url_image" id="url_image"><br>
+        <label for="description_livre">Description : </label>
+        <textarea name="description_livre" id="description_livre" rows="4" cols="50">
             Description ici!
         </textarea><br>
         <label for="type">Type : </label>

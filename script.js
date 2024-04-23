@@ -465,15 +465,15 @@ const unscrollCategorie = function () {
     }, 750);
   });
 };
-/*
+
 const initDemande = function() {
   // Gestionnaire d'événements pour le formulaire de demande d'ajout de livre
   const formulaireAjoutLivre = document.getElementById("formAjout");
   const soumettreButton = document.getElementById("soumettre");
 
   if (formulaireAjoutLivre) {
-    formulaireAjoutLivre.addEventListener("submit", (event) => {
-      event.preventDefault();
+    formulaireAjoutLivre.addEventListener("submit", (e) => {
+      e.preventDefault();
       soumettreDemande();
     });
 
@@ -486,19 +486,25 @@ const initDemande = function() {
     function soumettreDemande() {
       const isbn = document.getElementById("isbn").value;
       const titre = document.getElementById("titre").value;
-      const auteur = document.getElementById("auteur").value;
-      const urlImage = document.getElementById("urlImage").value;
+      const maison = document.getElementById("maison_edition").value;
+      const annee = document.getElementById("annee").value;
+      const nom = document.getElementById("nom").value;
+      const prenom = document.getElementById("prenom").value;
+      const urlImage = document.getElementById("url_image").value;
+      const desc = document.getElementById("description_livre").value;
       const type = document.getElementById("type").value;
       const categorie = document.getElementById("categorie").value;
     
       // Vérifier si l'utilisateur est un éditeur (auteur) *****idUtilisateurActuel doit être changer
       if (utilisateurEstEditeur(idUtilisateurActuel)) {
         // Envoyer la demande d'ajout de livre à l'API
-        const demandeAjout = { isbn, titre, auteur, urlImage, type, categorie };
-        fetch("/api/demandeAjout", {
+        const demandeAjout = { "isbn": isbn, "titre": titre, "maison_edition": maison, 
+                              "nom": nom, "prenom": prenom, "url_image": urlImage,
+                                "annee": annee, "description_livre": desc };
+        fetch("/api/Nouveaulivres", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
           },
           body: JSON.stringify(demandeAjout),
         })
@@ -511,23 +517,31 @@ const initDemande = function() {
             return response.json();
           })
           .then((data) => {
+            demandeAjout.isbn = Number(data.isbn);
+            demandeAjout.titre = data.titre;
+            demandeAjout.maison_edition = date.maison_edition;
+            demandeAjout.annee = Number(data.annee);
+            demandeAjout.nom = data.nom;
+            demandeAjout.prenom = data.prenom;
+            demandeAjout.url_image = data.url_image;
+            demandeAjout.description_livre = data.description_livre;
             // Afficher un message de succès à l'utilisateur
-            alert("Demande d'ajout de livre envoyée avec succès !");
+            alert("Demande d'ajout de livre envoyée avec succès!");
             // Réinitialiser le formulaire
             formulaireAjoutLivre.reset();
           })
           .catch((error) => {
             alert(
-              "Erreur lors de l'envoi de la demande d'ajout de livre : " + error
+              "Erreur lors de l'envoi de la demande d'ajout de livre: " + error
             );
-            console.error("Erreur lors de la requête : ", error);
+            console.error("Erreur lors de la requête: ", error);
           });
       } else {
-        alert("Vous n'êtes pas autorisé à effectuer cette action !");
+        alert("Vous n'êtes pas autorisé à effectuer cette action!");
       }
     }
   }
-}*/
+}
 
 function renderCritiques() {
     const tbody = document.querySelector('tbody');
