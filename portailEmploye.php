@@ -24,8 +24,11 @@ $demandesJson = json_encode($demandes);
     </script>
 </head>
 <body>
-    <div class="container">
+    <head>
+        <a href="./index.php">Retour au Catalogue</a>
         <h1>Bienvenue au Portail Employé(e)</h1>
+    </head>
+    <div class="container">
         <?php
             echo "<p>Bonjour, " .$_SESSION['usager']. ". Voici les signalements et les demandes d'ajout</p>";
         ?>
@@ -59,6 +62,7 @@ $demandesJson = json_encode($demandes);
             <tbody>
             </tbody>
     </div>
+    
     <script type="text/javascript" src="./script.js"></script>
     <script>
     renderCritiques();
