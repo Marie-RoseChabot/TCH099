@@ -1,3 +1,42 @@
+<?php
+require_once __DIR__.'/config.php';
+$gPublic = true;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $prenom = $_POST['prenom'];
+    $nom = $_POST['nom'];
+    $isbn_livre = $_POST["isbn"];
+    $titre = $_POST["titre"];
+    $maison_edition = $_POST["maison_edition"];
+    $annee = $_POST["annee"];
+    $url_image = $_POST["url_image"];
+    $description = $_POST["description_livre"];
+    $categorie = $_POST["categorie"];
+    $type = $_POST["type"];
+    $date = date('Y-m-d', time());
+
+    $stmt = $pdo->prepare("SELECT id FROM `Auteur` WHERE `nom`=:nom AND `prenom`=:prenom");
+    $stmt->bindValue(":nom", $nom);
+    $stmt->bindValue(":prenom", $prenom);
+    $stmt->execute();
+
+    if($stmt->rowCount() > 0) {
+        $id_auteur = $stmt->fetchColumn();
+    } else {
+        $id_auteur = null;
+    }
+
+    $stmt = $pdo->prepare('INSERT INTO Demande (`date_demande`, `id_auteur`, `annee`, `maison_edition`, `isbn_livre`, `titre`, `url_image`, `description`, `type`, `categorie`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    if ($stmt->execute([$date, $id_auteur, $annee, $maison_edition, $isbn_livre, $titre, $url_image, $description, $type, $categorie])) {
+        header("Location: index.php");
+        exit;
+    } else {
+       echo 'Erreur lors de la création de la demande';
+    }
+}
+?>
+
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
@@ -64,7 +103,7 @@
     </form>
     <div class="background"></div>
 </main>
-<script type="text/javascript" src="./script.js">
+<!--<script type="text/javascript" src="./script.js">
     initDemande();
-</script>
+</script>-->
 </body>

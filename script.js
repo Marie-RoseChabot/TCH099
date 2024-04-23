@@ -481,15 +481,15 @@ const unscrollCategorie = function () {
   });
 };
 
-const initDemande = function () {
+/*const initDemande = function () {
   // Gestionnaire d'événements pour le formulaire de demande d'ajout de livre
   const formulaireAjoutLivre = document.getElementById("formAjout");
   const soumettreButton = document.getElementById("soumettre");
 
   if (formulaireAjoutLivre) {
-    formulaireAjoutLivre.addEventListener("submit", (e) => {
-      e.preventDefault();
-      soumettreDemande();
+    formulaireAjoutLivre.addEventListener("submit", () => {
+      //e.preventDefault();
+      //soumettreDemande();
     });
 
     quitterButton.addEventListener("click", () => {
@@ -563,7 +563,7 @@ const initDemande = function () {
       }
     }
   }
-};
+};*/
 
 function renderCritiques() {
   const tbody = document.querySelector("tbody");

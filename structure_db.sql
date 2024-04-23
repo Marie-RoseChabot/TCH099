@@ -74,6 +74,7 @@ CREATE TABLE `Demande` (
   `date_demande` date NOT NULL,
   `id_auteur` int(10) NOT NULL,
   `annee` int(4) NOT NULL,
+  `maison_edition` varchar(35) NOT NULL,
   `isbn_livre` bigint(30) NOT NULL,
   `titre` varchar(25) NOT NULL,
   `url_image` text NOT NULL,
