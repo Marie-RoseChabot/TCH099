@@ -270,8 +270,8 @@ const initButtons = function () {
     }
   });
 };
-const checkCopie = function () {
-  fetch("/api/copies/", {
+const checkCopie = function (isbn) {
+  fetch("/api/copies/"+isbn, {
     method: "GET",
   })
     .then((response) => {
