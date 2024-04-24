@@ -7,7 +7,7 @@ $critiques = $stmt->fetchAll();
 
 $critiquesJson = json_encode($critiques);
 
-$stmt = $pdo->prepare('SELECT * FROM Demande');
+$stmt = $pdo->prepare("SELECT * FROM Livre WHERE accepte = 'non'");
 $stmt->execute();
 $demandes = $stmt->fetchAll();
 
