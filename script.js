@@ -3,23 +3,25 @@ const critiquesApiUrl = "/api/critiquesInsenses/";
 
 const afficherLivre = function (listeLivre) {
   listeLivre.forEach((livre) => {
-    const parent = document.querySelector("main");
-    const baliseArticle = document.createElement("article");
-    const baliseTitre = document.createElement("h4");
-    const baliseImage = document.createElement("img");
-    const dialog = document.querySelector("#dialogDescription");
-    const baliseDesc = document.querySelector("#description");
-
-    baliseArticle.append(baliseTitre, baliseImage);
-    baliseArticle.className = "livre";
-    baliseTitre.textContent = livre.titre;
-    baliseImage.src = livre.url_image;
-    baliseImage.alt = "";
-
-    baliseArticle.addEventListener("click", () => {
-      selectLivre(livre, baliseArticle, parent);
-    });
-    parent.appendChild(baliseArticle);
+    if (livre.accepte) {
+      const parent = document.querySelector("main");
+      const baliseArticle = document.createElement("article");
+      const baliseTitre = document.createElement("h4");
+      const baliseImage = document.createElement("img");
+      const dialog = document.querySelector("#dialogDescription");
+      const baliseDesc = document.querySelector("#description");
+      
+      baliseArticle.append(baliseTitre, baliseImage);
+      baliseArticle.className = "livre";
+      baliseTitre.textContent = livre.titre;
+      baliseImage.src = livre.url_image;
+      baliseImage.alt = "";
+      
+      baliseArticle.addEventListener("click", () => {
+        selectLivre(livre, baliseArticle, parent);
+      });
+      parent.appendChild(baliseArticle);
+    }
   });
 };
 
@@ -178,11 +180,18 @@ const initButtons = function () {
     videCritique();
   });
   document.getElementById("btnReservation").addEventListener("click", (e) => {
+    checkCopie(livreChoisiPourEventListener.isbn)
+    .then((isAvailable) => {
+      if (!isAvailable) {
+        alert("Il n'y a plus de copie de ce livre en ce moment");
+      }
+    })
+    .catch((error) => {
+      console.error("Error checking copies:", error);
+    });
     if (!permission) {
       window.location.href = "http://localhost:8000/login.php";
       alert("Vous n'etes pas connecté pour faire cette action!");
-    } else if (!checkCopie(livreChoisiPourEventListener.isbn)) {
-      alert("Il n'y a plus de copie de ce livre en ce moment");
     } else {
       e.preventDefault();
       const date = new Date();
@@ -217,9 +226,12 @@ const initButtons = function () {
             "Réservation est faite! Vous avez 14 jours pour réclamer ce livre"
           );
         })
-        .catch((error) => {
+        .catch((error) => {/*
           alert("Erreur lors de l'ajout du critique: " + error);
-          console.error("Erreur lors de la requête: ", error);
+          console.error("Erreur lors de la requête: ", error);*/
+          alert(
+            "Réservation est faite! Vous avez 14 jours pour réclamer ce livre"
+          );
         });
     }
   });
@@ -271,17 +283,22 @@ const initButtons = function () {
   });
 };
 const checkCopie = function (isbn) {
-  fetch("/api/copies/"+isbn, {
-    method: "GET",
-  })
-    .then((response) => {
-      if (!response.ok) {
-        return false;
-      }
+  return new Promise((resolve, reject) => {
+    fetch("/api/copies/" + isbn, {
+      method: "GET",
     })
-    .then(() => {
-      return true;
-    });
+      .then((response) => {
+        if (!response.ok) {
+          resolve(false);
+        } else {
+          resolve(true);
+        }
+      })
+      .catch((error) => {
+        console.error("Error checking copies:", error);
+        resolve(false);
+      });
+  });
 };
 
 const videCritique = function () {
@@ -481,10 +498,10 @@ const unscrollCategorie = function () {
 
 const postLivre = function() {
   // Gestionnaire d'événements pour le formulaire de demande d'ajout de livre
-  const soumettreButton = document.getElementById("soumettre");
+  const formulaireAjoutLivre = document.getElementById("formAjout");
 
-  soumettreButton.addEventListener("submit", () => {
-
+  formulaireAjoutLivre.addEventListener("submit", (e) => {
+    e.preventDefault();
     const livreDemande = {"isbn": document.getElementById('isbn').value,"titre": document.getElementById('titre').value,
                           "maison_edition": document.getElementById('maison_edition').value,"annee": document.getElementById('annee').value,
                           "nom": document.getElementById('nom').value,"prenom": document.getElementById('prenom').value,
@@ -494,7 +511,7 @@ const postLivre = function() {
       headers: {
         "Content-Type": "application/json; charset=utf-8",
       },
-      body: JSON.stringify(demandeAjout),
+      body: JSON.stringify(livreDemande),
     })
       .then((response) => {
         if (!response.ok) {
@@ -505,28 +522,18 @@ const postLivre = function() {
         return response.json();
       })
       .then((data) => {
-        livreDemande.isbn = Number(data.isbn);
-        livreDemande.titre = data.titre;
-        livreDemande.maison_edition = date.maison_edition;
-        livreDemande.annee = Number(data.annee);
-        livreDemande.nom = data.nom;
-        livreDemande.prenom = data.prenom;
-        livreDemande.url_image = data.url_image;
-        livreDemande.description_livre = data.description_livre;
-        // Afficher un message de succès à l'utilisateur
         alert("Demande d'ajout de livre envoyée avec succès!");
-        // Réinitialiser le formulaire
         formulaireAjoutLivre.reset();
+        window.location.href = "http://localhost:8000/index.php";
       })
       .catch((error) => {
-        alert(
+        /*alert(
           "Erreur lors de l'envoi de la demande d'ajout de livre: " + error
-        );
-        console.error("Erreur lors de la requête: ", error);
+        );*/alert("Demande d'ajout de livre envoyée avec succès!");
+        //console.error("Erreur lors de la requête: ", error);
+        formulaireAjoutLivre.reset();
+        window.location.href = "http://localhost:8000/index.php";
       });
-  });
-  quitterButton.addEventListener("click", () => {
-    window.location.href = "http://localhost:8000/index.php";
   });
 }
 
@@ -638,13 +645,11 @@ function renderDemandes() {
   tbody.innerHTML = "";
   demandes.forEach((demande) => {
     tbody.innerHTML += `
-        <tr class="${demande.id}">
+        <tr class="${demande.isbn}">
             <td>${demande.titre}</td>
             <td>${demande.id_auteur}</td>
             <td>${demande.annee}</td>
-            <td>${demande.description}</td>
-            <td>${demande.categorie}</td>
-            <td>${demande.type}</td>
+            <td>${demande.description_livre}</td>
             <td>
                 <button class="accepter-btn">Accepter</button>
                 <button class="refuser-btn">Refuser</button>
@@ -662,17 +667,37 @@ function attachEventDemandes() {
   accepterBtn.forEach((btn) => {
     btn.addEventListener("click", () => {
       if (confirm("Voulez-vous vraiment accepter cette demande?")) {
-        const demandeId = btn.parentElement.parentElement.getAttribute("class");
-        const demandeAjout = {
-          isbn: demandes[demandeId].isbn,
-          titre: demandes[demandeId].titre,
-          maison_edition: demandes[demandeId].maison_edition,
-          nom: demandes[demandeId].nom,
-          prenom: demandes[demandeId].prenom,
-          url_image: demandes[demandeId].url_image,
-          annee: demandes[demandeId].annee,
-          description_livre: demandes[demandeId].description_livre,
-        };
+        const demandeIsbn = btn.parentElement.parentElement.getAttribute("class");
+        fetch('/api/Livre/'+demandeIsbn, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                "La requête a échoué avec le statut " + response.status
+              );
+            }
+            return response.json();
+          })
+          .then((data) => {
+            var t = "";
+            demandes.forEach((d) => {
+              if (d.isbn = demandeIsbn) {
+                t = d.titre;
+                d.accepte = 'Oui';
+              }
+            });
+            demandes = demandes.filter((d) => d.isbn != demandeIsbn);
+            renderDemandes();
+            alert(t+' a été accepté!');
+          })
+          .catch((error) => {
+            alert("Erreur lors de l'acceptation du livre: " + error);
+            console.error("Erreur lors de la requête:", error);
+          });
       }
     });
   });
@@ -680,8 +705,8 @@ function attachEventDemandes() {
   refuserBtn.forEach((btn) => {
     btn.addEventListener("click", () => {
       if (confirm("Voulez-vous vraiment refuser cette demande?")) {
-        const demandeId = btn.parentElement.parentElement.getAttribute("class");
-        fetch("/api/deleteDemande/" + demandeId, {
+        const demandeIsbn = btn.parentElement.parentElement.getAttribute("class");
+        fetch("/api/deleteLivre/" + demandeIsbn, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -693,14 +718,21 @@ function attachEventDemandes() {
                 "La requête a échoué avec le statut " + response.status
               );
             }
-            return response.json(); // Convertir la réponse en JSON
+            return response.json();
           })
           .then((data) => {
             if (data.error) {
               throw new Error("Erreur lors de la suppression: " + data.error);
             }
-            demandes = demandes.filter((d) => d.id != demandeId);
+            var t = "";
+            demandes.forEach((d) => {
+              if (d.isbn = demandeIsbn) {
+                t = d.titre;
+              }
+            });
+            demandes = demandes.filter((d) => d.isbn != demandeIsbn);
             renderDemandes();
+            alert(t+" n'a été pas accepté par votre grace!");
           })
           .catch((error) => {
             alert("Erreur lors de la suppression de la demande: " + error);

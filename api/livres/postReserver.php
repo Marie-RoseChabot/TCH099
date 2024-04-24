@@ -38,7 +38,9 @@ if(isset($copie) && $copie != null) {
     $stmt->bindValue(":id_copie", $copie['id_copie']); 
     $stmt->execute();
 
-    echo "OK";
+    if (isset($_SERVER["user_id"])) {
+        echo "OK";
+    }
     http_response_code(200);
 } else {
     echo "NOT ok";

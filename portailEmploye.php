@@ -57,8 +57,6 @@ $demandesJson = json_encode($demandes);
                     <th>Auteur</th>
                     <th>Année</th>
                 <th>Description</th>
-                <th>Catégorie</th>
-                    <th>Type</th>
                 </tr>
             </thead>
             <tbody>

@@ -69,7 +69,7 @@ function authentifier(){
 
     if(isset($_SESSION["user_id"])){
         return $_SESSION["user_id"];
-         }
+    }
     else if(isset($_SESSION["usager"])) {
         return $_SESSION["usager"];
     }

@@ -56,15 +56,18 @@
             <option value="suspense">Suspense</option>
             <option value="action">Action</option>
             <option value="tragedie">Tragédie</option>
-            
         </select>
         <input type="hidden" name="type_usager" value="editeur">
         <button type="submit" id="soumettre">Soumettre</button>
-        <a href = "./index.php"><button type="button" id="quit">Quitter</button></a>
+        <button type="button" id="quit">Quitter</button>
     </form>
     <div class="background"></div>
 </main>
-<script type="text/javascript" src="./script.js">
+<script type="text/javascript" src="./script.js"></script>
+<script>
     postLivre();
+    document.getElementById("quit").addEventListener("click", () => {
+        window.location.href = "./index.php";
+    });
 </script>
 </body>

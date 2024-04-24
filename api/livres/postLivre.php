@@ -10,7 +10,7 @@ if(!isset($_SERVER["CONTENT_TYPE"]) || $_SERVER["CONTENT_TYPE"]!='application/js
 $body = json_decode(file_get_contents("php://input"));
 
 if(!isset($body->titre) || $body->titre == ""){
-    http_response_code(401);
+    http_response_code(400);
     echo "Le titre est obligatoire";
     exit;
 }
