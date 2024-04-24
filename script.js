@@ -2,9 +2,8 @@ const livresApiUrl = "/api/livres/";
 const critiquesApiUrl = "/api/critiquesInsenses/";
 
 const afficherLivre = function (listeLivre) {
-  listeLivre.forEach((livre) => {
-    if (livre.accepte) {
-      const parent = document.querySelector("main");
+  listeLivre.forEach((livre) => {      const parent = document.querySelector("main");
+
       const baliseArticle = document.createElement("article");
       const baliseTitre = document.createElement("h4");
       const baliseImage = document.createElement("img");
@@ -21,7 +20,6 @@ const afficherLivre = function (listeLivre) {
         selectLivre(livre, baliseArticle, parent);
       });
       parent.appendChild(baliseArticle);
-    }
   });
 };
 
@@ -461,7 +459,7 @@ const scrollCategorie = function () {
           }
         });
         categorieLivre.forEach((livreId) => {
-          if (livreId.id_categorie == index + 1) {
+          if (livreId.id_categorie == index) {
             for (let i = 0; i < listeLivre.length; i++) {
               if (listeLivre[i].isbn == livreId.isbn_livre) {
                 filtreCategorie.push(listeLivre[i]);
