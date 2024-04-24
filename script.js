@@ -401,9 +401,9 @@ const initRecherche = function () {
       }
     });
     listeLivre.forEach((livre) => {
-      if (livre.titre.toUpperCase().indexOf(motCle) > -1) {
+      if (livre.titre.toUpperCase().indexOf(motCle) > 0) {
         filtreRecherche.push(livre);
-      } else if (String(livre.isbn).indexOf(motCle) > -1) {
+      } else if (String(livre.isbn).indexOf(motCle) > 0) {
         filtreRecherche.push(livre);
       }
     });
