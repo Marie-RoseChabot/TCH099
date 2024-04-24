@@ -71,52 +71,61 @@ function selectLivre(livre, baliseArticle, parent) {
   parent.appendChild(articleChoisi);
 
   // On trouve la section contenant les critiques du livre et on la rend visible
-  const sectionCritiques = document.querySelector(".affichageCritiques");
-  articleChoisi.appendChild(sectionCritiques);
-  sectionCritiques.style.display = "block";
 
-  // On trouve la balise de titre de la section
-  // const titreCritiques = document.createElement("h5");
-  // titreCritiques.className = "baliseTitreCritiques";
-  // titreCritiques.textContent = "Évaluations";
-  // sectionCritiques.appendChild(titreCritiques);
-  // On trouve le div qui contiendra chaque article de critique
-  const divCritiques = document.querySelector(".divCritiques");
-  // sectionCritiques.append(divCritiques);
 
-  // On get les critiques pour ce livre
-  fetch("/api/critique/" + livre.isbn, { method: "GET" })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Erreur HTTP: " + response.statusText);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      if (data.error)
-        throw new Error("Erreur reçue du serveur : " + data.error);
+  if (document.querySelectorAll(".livreChoisi .affichageCritiques").length == 0) {
+    const sectionCritiques = document.createElement("section");
+    sectionCritiques.className = "affichageCritiques";
+    articleChoisi.appendChild(sectionCritiques);
+    sectionCritiques.style.display = "block";
 
-      // On affiche chaque critique pour ce livre, s'il y en a
-      if (Array.isArray(data) && data.length > 0) {
-        data.forEach((critique) => {
-          const articleCritique = document.createElement("article");
-          const spanEtoiles = document.createElement("span");
-          spanEtoiles.textContent = critique.etoiles + "/5\u2605";
-          articleCritique.appendChild(spanEtoiles);
-          if (critique.commentaire != null) {
-            const baliseCommentaire = document.createElement("p");
-            baliseCommentaire.textContent = critique.commentaire;
-            articleCritique.appendChild(baliseCommentaire);
-          }
-          divCritiques.appendChild(articleCritique);
-        });
-      }
-    })
-    .catch((error) => (
-      console.error(
-        "Erreur lors de l'obtention des critiques : " + error.message
-      )
-    ));
+    // On crée la balise de titre de la section
+    const titreCritiques = document.createElement("h5");
+    titreCritiques.className = "baliseTitreCritiques";
+    titreCritiques.textContent = "Évaluations";
+    sectionCritiques.appendChild(titreCritiques);
+
+    // On trouve le div qui contiendra chaque article de critique
+    const divCritiques = document.createElement("div");
+    divCritiques.className = "divCritiques"
+    sectionCritiques.appendChild(divCritiques);
+
+    // On get les critiques pour ce livre
+    fetch("/api/critique/" + livre.isbn, { method: "GET" })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erreur HTTP: " + response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.error)
+          throw new Error("Erreur reçue du serveur : " + data.error);
+
+        // On affiche chaque critique pour ce livre, s'il y en a
+        if (Array.isArray(data) && data.length > 0) {
+          data.forEach((critique) => {
+            const articleCritique = document.createElement("article");
+            articleCritique.className = "articleCritique";
+            const spanEtoiles = document.createElement("span");
+            spanEtoiles.textContent = critique.etoiles + "/5\u2605";
+            articleCritique.appendChild(spanEtoiles);
+            if (critique.commentaire != null) {
+              const baliseCommentaire = document.createElement("p");
+              baliseCommentaire.textContent = critique.commentaire;
+              articleCritique.appendChild(baliseCommentaire);
+            }
+            divCritiques.appendChild(articleCritique);
+          });
+        }
+      })
+      .catch((error) => (
+        console.error(
+          "Erreur lors de l'obtention des critiques : " + error.message
+        )
+      ));
+  }
+
   /*
   // Création du div contenant la note du livre sur 5 étoiles
   const divNote = document.createElement("div");

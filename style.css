@@ -204,7 +204,7 @@ ul {
   font-size: 0dvb;
 }
 
-.affichageCritiques .baliseTitreCritiques {
+.baliseTitreCritiques {
   grid-area: titreEval;
   font-size: 3dvb;
   border-right: 0.1rem solid crimson;
@@ -213,13 +213,17 @@ ul {
   height: max-content;
   margin: 0;
   padding-right: 0.25rem;
+  margin-bottom: 1rem;
 }
 
-.affichageCritique .divCritiques {
+.divCritiques {
   grid-area: article;
-  display: flex;
-  flex-direction: rows;
 }
+
+.divCritiques .articleCritique {
+  padding-bottom: 1rem;
+}
+
 
 .btnLivreChoisi {
   height: 2rem;
