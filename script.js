@@ -479,89 +479,56 @@ const unscrollCategorie = function () {
   });
 };
 
-/*const initDemande = function () {
+const postLivre = function() {
   // Gestionnaire d'événements pour le formulaire de demande d'ajout de livre
-  const formulaireAjoutLivre = document.getElementById("formAjout");
   const soumettreButton = document.getElementById("soumettre");
 
-  if (formulaireAjoutLivre) {
-    formulaireAjoutLivre.addEventListener("submit", () => {
-      //e.preventDefault();
-      //soumettreDemande();
-    });
+  soumettreButton.addEventListener("submit", () => {
 
-    quitterButton.addEventListener("click", () => {
-      retourAccueil();
-    });
-  }
-
-  if (estEditeur) {
-    function soumettreDemande() {
-      const isbn = document.getElementById("isbn").value;
-      const titre = document.getElementById("titre").value;
-      const maison = document.getElementById("maison_edition").value;
-      const annee = document.getElementById("annee").value;
-      const nom = document.getElementById("nom").value;
-      const prenom = document.getElementById("prenom").value;
-      const urlImage = document.getElementById("url_image").value;
-      const desc = document.getElementById("description_livre").value;
-      const type = document.getElementById("type").value;
-      const categorie = document.getElementById("categorie").value;
-
-      // Vérifier si l'utilisateur est un éditeur (auteur) *****idUtilisateurActuel doit être changer
-      if (utilisateurEstEditeur(idUtilisateurActuel)) {
-        // Envoyer la demande d'ajout de livre à l'API
-        const demandeAjout = {
-          isbn: isbn,
-          titre: titre,
-          maison_edition: maison,
-          nom: nom,
-          prenom: prenom,
-          url_image: urlImage,
-          annee: annee,
-          description_livre: desc,
-        };
-        fetch("/api/Nouveaulivres", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json; charset=utf-8",
-          },
-          body: JSON.stringify(demandeAjout),
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error(
-                "La requête a échoué avec le statut " + response.status
-              );
-            }
-            return response.json();
-          })
-          .then((data) => {
-            demandeAjout.isbn = Number(data.isbn);
-            demandeAjout.titre = data.titre;
-            demandeAjout.maison_edition = date.maison_edition;
-            demandeAjout.annee = Number(data.annee);
-            demandeAjout.nom = data.nom;
-            demandeAjout.prenom = data.prenom;
-            demandeAjout.url_image = data.url_image;
-            demandeAjout.description_livre = data.description_livre;
-            // Afficher un message de succès à l'utilisateur
-            alert("Demande d'ajout de livre envoyée avec succès!");
-            // Réinitialiser le formulaire
-            formulaireAjoutLivre.reset();
-          })
-          .catch((error) => {
-            alert(
-              "Erreur lors de l'envoi de la demande d'ajout de livre: " + error
-            );
-            console.error("Erreur lors de la requête: ", error);
-          });
-      } else {
-        alert("Vous n'êtes pas autorisé à effectuer cette action!");
-      }
-    }
-  }
-};*/
+    const livreDemande = {"isbn": document.getElementById('isbn').value,"titre": document.getElementById('titre').value,
+                          "maison_edition": document.getElementById('maison_edition').value,"annee": document.getElementById('annee').value,
+                          "nom": document.getElementById('nom').value,"prenom": document.getElementById('prenom').value,
+                          "url_image": document.getElementById('url_image').value,"description_livre": document.getElementById('description_livre').value};
+    fetch("/api/Nouveaulivres", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: JSON.stringify(demandeAjout),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            "La requête a échoué avec le statut " + response.status
+          );
+        }
+        return response.json();
+      })
+      .then((data) => {
+        livreDemande.isbn = Number(data.isbn);
+        livreDemande.titre = data.titre;
+        livreDemande.maison_edition = date.maison_edition;
+        livreDemande.annee = Number(data.annee);
+        livreDemande.nom = data.nom;
+        livreDemande.prenom = data.prenom;
+        livreDemande.url_image = data.url_image;
+        livreDemande.description_livre = data.description_livre;
+        // Afficher un message de succès à l'utilisateur
+        alert("Demande d'ajout de livre envoyée avec succès!");
+        // Réinitialiser le formulaire
+        formulaireAjoutLivre.reset();
+      })
+      .catch((error) => {
+        alert(
+          "Erreur lors de l'envoi de la demande d'ajout de livre: " + error
+        );
+        console.error("Erreur lors de la requête: ", error);
+      });
+  });
+  quitterButton.addEventListener("click", () => {
+    window.location.href = "http://localhost:8000/index.php";
+  });
+}
 
 function renderCritiques() {
   const tbody = document.querySelector("tbody");
@@ -676,8 +643,8 @@ function renderDemandes() {
             <td>${demande.id_auteur}</td>
             <td>${demande.annee}</td>
             <td>${demande.description}</td>
-            <td>${demande.type}</td>
             <td>${demande.categorie}</td>
+            <td>${demande.type}</td>
             <td>
                 <button class="accepter-btn">Accepter</button>
                 <button class="refuser-btn">Refuser</button>
@@ -696,6 +663,16 @@ function attachEventDemandes() {
     btn.addEventListener("click", () => {
       if (confirm("Voulez-vous vraiment accepter cette demande?")) {
         const demandeId = btn.parentElement.parentElement.getAttribute("class");
+        const demandeAjout = {
+          isbn: demandes[demandeId].isbn,
+          titre: demandes[demandeId].titre,
+          maison_edition: demandes[demandeId].maison_edition,
+          nom: demandes[demandeId].nom,
+          prenom: demandes[demandeId].prenom,
+          url_image: demandes[demandeId].url_image,
+          annee: demandes[demandeId].annee,
+          description_livre: demandes[demandeId].description_livre,
+        };
       }
     });
   });

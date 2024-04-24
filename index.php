@@ -131,10 +131,5 @@ $typeJson = json_encode($type);
         scrollCategorie();
         initButtons();
         initRecherche();
-        //initDemande();
     </script>
-    <!--<script>
-      let estEditeur = <?php echo $permission; ?> ; 
-    </script>--?
-    <script type="text/javascript" src="./scripts.js" defer async></script>
 </body>
