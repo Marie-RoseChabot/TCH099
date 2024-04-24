@@ -116,7 +116,7 @@ $typeJson = json_encode($type);
             <button id="envoyerCritique" type="submit">Envoyer</button>
             </form>
         </dialog>
-        <section class="affichageCritiques" style="display: none"><h5 class="baliseTitreCritiques">Évaluations</h5><div class="divCritiques"></div></section>
+        <!-- <section class="affichageCritiques" style="display: none"><h5 class="baliseTitreCritiques">Évaluations</h5><div class="divCritiques"></div></section> -->
         <div class="background" id="parchemin"></div>
     </main>
     <footer class="bas">
